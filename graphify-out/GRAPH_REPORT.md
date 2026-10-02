@@ -1,9 +1,9 @@
 # Graphify Knowledge Graph Report
 
 ## 📌 Project Architecture Overview
-- **Root Directory:** `c:\Users\Administrator\Documents\Projetos\Construtor de PDFs do Montanha`
-- **Total Indexable Files:** 144
-- **Total Relationships:** 412
+- **Root Directory:** `C:\Users\Administrator\Documents\Projetos\Montanha PDF Studio`
+- **Total Indexable Files:** 267
+- **Total Relationships:** 754
 
 ## 🏛️ Key Modules ("God Nodes")
 - **`.lovable/plan/plano-página-em-branco-com-ponto-preto-centralizado-2026-08-29.md`** (0.9 KB)
@@ -11,11 +11,11 @@
 - **`.output/nitro.json`** (0.5 KB)
 - **`.output/package-lock.json`** (0.0 KB)
 - **`.output/package.json`** (0.1 KB)
-- **`.output/public/assets/html2canvas-BFwWOwdq.js`** (0.1 KB)
-- **`.output/public/assets/index-DLKCRAot.js`** (338.2 KB) — Exporta: `__vite__mapDeps, m, v, which, y`
+- **`.output/public/assets/ecosystem-auth-service-CK-mYwqZ.js`** (216.4 KB) — Exporta: `c, l, i, o, s`
+- **`.output/public/assets/html2canvas-DFJKcUVm.js`** (0.1 KB)
+- **`.output/public/assets/index-vyIUkLZb.js`** (409.2 KB) — Exporta: `__vite__mapDeps, m, v, which, y`
 - **`.output/public/assets/index.es-BnroMYBe.js`** (147.9 KB) — Exporta: `vt, yt, o, s, e`
-- **`.output/public/assets/pdf-_PInTGxF.js`** (420.8 KB) — Exporta: `S, C, w, T, E`
-- **`.output/public/assets/purify.es-BVMDmQta.js`** (26.2 KB) — Exporta: `e, t, n, r, i`
+- **`.output/public/assets/master-admin-HfMuyARx.js`** (24.1 KB)
 
 ## 🔗 Dependency Map
 ### `.output/server/index.mjs`
@@ -31,16 +31,19 @@
   Imports: `../../_runtime.mjs`, `./react-collection+[...].mjs`, `../radix-ui__primitive.mjs`
 
 ### `.output/server/_libs/@radix-ui/react-slider+[...].mjs`
-  Imports: `../../_runtime.mjs`, `./react-collection+[...].mjs`, `./react-dialog+[...].mjs`, `../radix-ui__number.mjs`, `../radix-ui__primitive.mjs`, `../radix-ui__react-direction.mjs`
+  Imports: `../../_runtime.mjs`, `./react-dialog+[...].mjs`, `./react-collection+[...].mjs`, `../radix-ui__number.mjs`, `../radix-ui__primitive.mjs`, `../radix-ui__react-direction.mjs`
+
+### `.output/server/_libs/@supabase/storage-js+[...].mjs`
+  Imports: `node:buffer`, `base64-arraybuffer`, `base64-arraybuffer`, `@supabase/supabase-js`, `@supabase/storage-js`, `@supabase/supabase-js`, `@supabase/storage-js`, `@supabase/supabase-js`, `@supabase/storage-js`
 
 ### `.output/server/_libs/@tanstack/react-router+[...].mjs`
-  Imports: `../../_runtime.mjs`, `../@radix-ui/react-collection+[...].mjs`, `../tanstack__history.mjs`, `../@radix-ui/react-dialog+[...].mjs`, `node:stream`, `node:stream/web`
+  Imports: `../../_runtime.mjs`, `../@radix-ui/react-dialog+[...].mjs`, `../@radix-ui/react-collection+[...].mjs`, `../tanstack__history.mjs`, `node:stream`, `node:stream/web`
 
 ### `.output/server/_libs/@tanstack/router-core+[...].mjs`
-  Imports: `../../_runtime.mjs`, `./react-router+[...].mjs`
+  Imports: `../supabase__realtime-js+unenv.mjs`, `./react-router+[...].mjs`
 
 ### `.output/server/_libs/canvg+[...].mjs`
-  Imports: `../_runtime.mjs`, `./@tanstack/router-core+[...].mjs`, `./babel__runtime.mjs`, `node:process`
+  Imports: `../_runtime.mjs`, `./supabase__realtime-js+unenv.mjs`, `./babel__runtime.mjs`, `node:process`
 
 ### `.output/server/_libs/dompurify.mjs`
   Imports: `../_runtime.mjs`
@@ -52,7 +55,7 @@
   Imports: `../_runtime.mjs`
 
 ### `.output/server/_libs/jspdf.mjs`
-  Imports: `./@tanstack/router-core+[...].mjs`, `./babel__runtime.mjs`, `./fflate.mjs`, `./fast-png+iobuffer+pako.mjs`
+  Imports: `./supabase__realtime-js+unenv.mjs`, `./babel__runtime.mjs`, `./fflate.mjs`, `./fast-png+iobuffer+pako.mjs`
 
 ### `.output/server/_libs/lucide-react.mjs`
   Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`
@@ -64,24 +67,174 @@
   Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`
 
 ### `.output/server/_libs/radix-ui__react-label.mjs`
-  Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`, `./@radix-ui/react-dialog+[...].mjs`
+  Imports: `../_runtime.mjs`, `./@radix-ui/react-dialog+[...].mjs`, `./@radix-ui/react-collection+[...].mjs`
 
 ### `.output/server/_libs/radix-ui__react-switch.mjs`
-  Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`, `./@radix-ui/react-dialog+[...].mjs`, `./radix-ui__primitive.mjs`, `./@radix-ui/react-slider+[...].mjs`
+  Imports: `../_runtime.mjs`, `./@radix-ui/react-dialog+[...].mjs`, `./@radix-ui/react-collection+[...].mjs`, `./radix-ui__primitive.mjs`, `./@radix-ui/react-slider+[...].mjs`
+
+### `.output/server/_libs/supabase__auth-js.mjs`
+  Imports: `./@radix-ui/react-dialog+[...].mjs`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/supabase-js`, `@supabase/auth-js`, `@supabase/supabase-js`, `@supabase/auth-js`, `react-native`, `react-native`
+
+### `.output/server/_libs/supabase__functions-js.mjs`
+  Imports: `./@radix-ui/react-dialog+[...].mjs`, `@supabase/functions-js`, `@supabase/functions-js`, `@supabase/functions-js`, `@supabase/functions-js`, `@supabase/supabase-js`, `@supabase/functions-js`, `@supabase/supabase-js`, `@supabase/supabase-js`
+
+### `.output/server/_libs/supabase__postgrest-js.mjs`
+  Imports: `@supabase/postgrest-js`, `@supabase/supabase-js`, `@supabase/postgrest-js`, `@supabase/supabase-js`, `@supabase/postgrest-js`, `@supabase/supabase-js`, `@supabase/postgrest-js`
+
+### `.output/server/_libs/supabase__realtime-js+unenv.mjs`
+  Imports: `../_runtime.mjs`, `./supabase__phoenix.mjs`, `@supabase/supabase-js`, `@supabase/realtime-js`, `@supabase/supabase-js`, `@supabase/realtime-js`
+
+### `.output/server/_libs/supabase__supabase-js.mjs`
+  Imports: `./supabase__functions-js.mjs`, `./supabase__postgrest-js.mjs`, `./supabase__realtime-js+unenv.mjs`, `./@supabase/storage-js+[...].mjs`, `./supabase__auth-js.mjs`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@react-native-async-storage/async-storage`, `@supabase/supabase-js`, `@react-native-async-storage/async-storage`, `expo-secure-store`, `aes-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@opentelemetry/api`, `@supabase/supabase-js`
 
 ### `.output/server/_libs/tanstack__react-query.mjs`
   Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`
 
-### `.output/server/_ssr/router-B5ohwvT5.mjs`
-  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `../_libs/tanstack__query-core.mjs`, `../_libs/tanstack__react-query.mjs`, `../_libs/zod.mjs`, `node:process`
+### `.output/server/_ssr/ecosystem-auth-service-Br6gnGNF.mjs`
+  Imports: `../_libs/supabase__supabase-js.mjs`, `node:process`
 
-### `.output/server/_ssr/routes-DDsKy6GP.mjs`
-  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@radix-ui/react-dialog+[...].mjs`, `../_libs/lucide-react.mjs`, `../_libs/class-variance-authority+clsx.mjs`, `../_libs/tailwind-merge.mjs`, `../_libs/radix-ui__react-label.mjs`, `../_libs/@radix-ui/react-slider+[...].mjs`, `../_libs/radix-ui__react-switch.mjs`, `../_libs/html2canvas.mjs`, `../_libs/jspdf.mjs`
+### `.output/server/_ssr/label-BMBi1IQG.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/class-variance-authority+clsx.mjs`, `../_libs/tailwind-merge.mjs`, `../_libs/radix-ui__react-label.mjs`
 
-### `.output/server/_ssr/server-BioODZSi.mjs`
+### `.output/server/_ssr/master-admin-iT7hiqDs.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/supabase__supabase-js.mjs`, `./ecosystem-auth-service-Br6gnGNF.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/lucide-react.mjs`, `node:process`
+
+### `.output/server/_ssr/router-BDof3ZDE.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/lucide-react.mjs`, `./label-BMBi1IQG.mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `../_libs/tanstack__query-core.mjs`, `../_libs/tanstack__react-query.mjs`, `../_libs/zod.mjs`, `node:process`
+
+### `.output/server/_ssr/routes-BfMtpX23.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-dialog+[...].mjs`, `./ecosystem-auth-service-Br6gnGNF.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/lucide-react.mjs`, `./label-BMBi1IQG.mjs`, `../_libs/@radix-ui/react-slider+[...].mjs`, `../_libs/radix-ui__react-switch.mjs`, `../_libs/html2canvas.mjs`, `../_libs/jspdf.mjs`
+
+### `.output/server/_ssr/server-D-zBReKy.mjs`
   Imports: `../_libs/h3-v2+rou3+srvx.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `../_libs/tanstack__history.mjs`, `../_libs/@tanstack/router-core+[...].mjs`, `./createCsrfMiddleware-B2To0gPJ.mjs`, `node:process`, `node:async_hooks`
 
 ### `.output/server/_ssr/start-RKGGYzjZ.mjs`
+  Imports: `./createCsrfMiddleware-B2To0gPJ.mjs`, `./ssr.mjs`
+
+### `.vercel/output/functions/__server.func/index.mjs`
+  Imports: `./_libs/h3+rou3+srvx.mjs`, `./_libs/h3-v2+rou3+srvx.mjs`
+
+### `.vercel/output/functions/__server.func/_chunks/ssr-renderer.mjs`
+  Imports: `../_libs/h3+rou3+srvx.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/@radix-ui/react-collection+[...].mjs`
+  Imports: `../../_runtime.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/@radix-ui/react-dialog+[...].mjs`
+  Imports: `../../_runtime.mjs`, `./react-collection+[...].mjs`, `../radix-ui__primitive.mjs`, `tslib`
+
+### `.vercel/output/functions/__server.func/_libs/@radix-ui/react-slider+[...].mjs`
+  Imports: `../../_runtime.mjs`, `./react-collection+[...].mjs`, `./react-dialog+[...].mjs`, `../radix-ui__number.mjs`, `../radix-ui__primitive.mjs`, `../radix-ui__react-direction.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/@supabase/storage-js+[...].mjs`
+  Imports: `base64-arraybuffer`, `base64-arraybuffer`, `@supabase/supabase-js`, `@supabase/storage-js`, `@supabase/supabase-js`, `@supabase/storage-js`, `@supabase/supabase-js`, `@supabase/storage-js`
+
+### `.vercel/output/functions/__server.func/_libs/@tanstack/react-router+[...].mjs`
+  Imports: `../../_runtime.mjs`, `../@radix-ui/react-collection+[...].mjs`, `../tanstack__history.mjs`, `../@radix-ui/react-dialog+[...].mjs`, `node:stream`, `node:stream/web`, `util`, `crypto`, `async_hooks`, `stream`
+
+### `.vercel/output/functions/__server.func/_libs/@tanstack/router-core+[...].mjs`
+  Imports: `./react-router+[...].mjs`
+
+### `.vercel/output/functions/__server.func/_libs/babel__runtime.mjs`
+  Imports: `../_runtime.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/canvg+[...].mjs`
+  Imports: `../_runtime.mjs`, `./babel__runtime.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/dompurify.mjs`
+  Imports: `../_runtime.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/fast-png+iobuffer+pako.mjs`
+  Imports: `../_runtime.mjs`, `pako`, `pako`, `pako`, `pako`
+
+### `.vercel/output/functions/__server.func/_libs/fflate.mjs`
+  Imports: `../_runtime.mjs`, `worker_threads`, `worker_threads`
+
+### `.vercel/output/functions/__server.func/_libs/h3+rou3+srvx.mjs`
+  Imports: `node:stream`
+
+### `.vercel/output/functions/__server.func/_libs/h3-v2+rou3+srvx.mjs`
+  Imports: `node:stream`
+
+### `.vercel/output/functions/__server.func/_libs/html2canvas.mjs`
+  Imports: `../_runtime.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/jspdf.mjs`
+  Imports: `../_runtime.mjs`, `./html2canvas.mjs`, `./fflate.mjs`, `./fast-png+iobuffer+pako.mjs`, `./dompurify.mjs`, `./canvg+[...].mjs`, `fs`, `fs`, `path`
+
+### `.vercel/output/functions/__server.func/_libs/lucide-react.mjs`
+  Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`
+
+### `.vercel/output/functions/__server.func/_libs/pdfjs-dist.mjs`
+  Imports: `../_runtime.mjs`
+
+### `.vercel/output/functions/__server.func/_libs/radix-ui__react-direction.mjs`
+  Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`
+
+### `.vercel/output/functions/__server.func/_libs/radix-ui__react-label.mjs`
+  Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`, `./@radix-ui/react-dialog+[...].mjs`
+
+### `.vercel/output/functions/__server.func/_libs/radix-ui__react-switch.mjs`
+  Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`, `./@radix-ui/react-dialog+[...].mjs`, `./radix-ui__primitive.mjs`, `./@radix-ui/react-slider+[...].mjs`
+
+### `.vercel/output/functions/__server.func/_libs/supabase__auth-js.mjs`
+  Imports: `tslib`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/auth-js`, `@supabase/supabase-js`, `@supabase/auth-js`, `@supabase/supabase-js`, `@supabase/auth-js`, `react-native`, `react-native`
+
+### `.vercel/output/functions/__server.func/_libs/supabase__functions-js.mjs`
+  Imports: `tslib`, `@supabase/functions-js`, `@supabase/functions-js`, `@supabase/functions-js`, `@supabase/functions-js`, `@supabase/supabase-js`, `@supabase/functions-js`, `@supabase/supabase-js`, `@supabase/supabase-js`
+
+### `.vercel/output/functions/__server.func/_libs/supabase__postgrest-js.mjs`
+  Imports: `@supabase/postgrest-js`, `@supabase/supabase-js`, `@supabase/postgrest-js`, `@supabase/supabase-js`, `@supabase/postgrest-js`, `@supabase/supabase-js`, `@supabase/postgrest-js`
+
+### `.vercel/output/functions/__server.func/_libs/supabase__realtime-js.mjs`
+  Imports: `./supabase__phoenix.mjs`, `@supabase/supabase-js`, `@supabase/realtime-js`, `@supabase/supabase-js`, `@supabase/realtime-js`
+
+### `.vercel/output/functions/__server.func/_libs/supabase__supabase-js.mjs`
+  Imports: `./supabase__functions-js.mjs`, `./supabase__postgrest-js.mjs`, `./supabase__realtime-js.mjs`, `./@supabase/storage-js+[...].mjs`, `./supabase__auth-js.mjs`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@react-native-async-storage/async-storage`, `@supabase/supabase-js`, `@react-native-async-storage/async-storage`, `expo-secure-store`, `aes-js`, `@supabase/supabase-js`, `@supabase/supabase-js`, `@opentelemetry/api`, `@supabase/supabase-js`
+
+### `.vercel/output/functions/__server.func/_libs/tanstack__react-query.mjs`
+  Imports: `../_runtime.mjs`, `./@radix-ui/react-collection+[...].mjs`
+
+### `.vercel/output/functions/__server.func/_runtime.mjs`
+  Imports: `node:module`
+
+### `.vercel/output/functions/__server.func/_ssr/auth-CxD6zv3k.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `./auth-h0Voc93s.mjs`, `./button-DSKqFpbT.mjs`, `./label-Cdxd-27C.mjs`, `./auth-state-BYdo0LTM.mjs`, `./ecosystem-auth-service-CzARZORj.mjs`, `../_libs/lucide-react.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/auth-h0Voc93s.mjs`
+  Imports: `../_libs/@tanstack/react-router+[...].mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/boost-DLWSA-Ix.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `./button-DSKqFpbT.mjs`, `../_libs/lucide-react.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/button-DSKqFpbT.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/class-variance-authority+clsx.mjs`, `../_libs/tailwind-merge.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/create-WzDe9bmb.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `./button-DSKqFpbT.mjs`, `./label-Cdxd-27C.mjs`, `./auth-state-BYdo0LTM.mjs`, `./ecosystem-auth-service-CzARZORj.mjs`, `../_libs/lucide-react.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/eco-B-qLTOoF.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `./button-DSKqFpbT.mjs`, `./auth-state-BYdo0LTM.mjs`, `../_libs/lucide-react.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/ecosystem-auth-service-CzARZORj.mjs`
+  Imports: `../_libs/supabase__supabase-js.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/label-Cdxd-27C.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/class-variance-authority+clsx.mjs`, `./button-DSKqFpbT.mjs`, `../_libs/radix-ui__react-label.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/master-admin-Dz_XwRRc.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/supabase__supabase-js.mjs`, `./ecosystem-auth-service-CzARZORj.mjs`, `../_libs/lucide-react.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/router-r1ls563Y.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `./auth-h0Voc93s.mjs`, `../_libs/lucide-react.mjs`, `../_libs/tanstack__query-core.mjs`, `../_libs/tanstack__react-query.mjs`, `../_libs/zod.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/routes-2L5PY-Io.mjs`
+  Imports: `../_runtime.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `../_libs/@radix-ui/react-dialog+[...].mjs`, `./button-DSKqFpbT.mjs`, `./label-Cdxd-27C.mjs`, `./auth-state-BYdo0LTM.mjs`, `./ecosystem-auth-service-CzARZORj.mjs`, `../_libs/lucide-react.mjs`, `../_libs/@radix-ui/react-slider+[...].mjs`, `../_libs/radix-ui__react-switch.mjs`, `../_libs/html2canvas.mjs`, `../_libs/jspdf.mjs`
+
+### `.vercel/output/functions/__server.func/_ssr/server-BNULulwv.mjs`
+  Imports: `../_libs/h3-v2+rou3+srvx.mjs`, `../_libs/@radix-ui/react-collection+[...].mjs`, `../_libs/@tanstack/react-router+[...].mjs`, `../_libs/tanstack__history.mjs`, `../_libs/@tanstack/router-core+[...].mjs`, `./createCsrfMiddleware-B2To0gPJ.mjs`, `node:async_hooks`
+
+### `.vercel/output/functions/__server.func/_ssr/start-RKGGYzjZ.mjs`
   Imports: `./createCsrfMiddleware-B2To0gPJ.mjs`, `./ssr.mjs`
 
 ### `e2e/auth.spec.ts`
@@ -118,7 +271,7 @@
   Imports: `react`, `../../types/magazine`, `../../lib/editions-archive`, `../../lib/cloud-sync`, `../ui/button`, `../ui/input`, `../ui/label`, `../ui/dialog`, `lucide-react`, `../ui/timeline`
 
 ### `src/components/auth/AuthModal.tsx`
-  Imports: `react`, `../ui/dialog`, `../ui/button`, `../ui/input`, `../ui/label`, `../../lib/auth-state`, `lucide-react`
+  Imports: `react`, `../ui/dialog`, `../ui/button`, `../ui/input`, `../ui/label`, `../../lib/auth-state`, `../../services/ecosystem-auth-service`, `lucide-react`
 
 ### `src/components/editor/AiStudioDialog.tsx`
   Imports: `react`, `../../types/magazine`, `../../lib/ai-service`, `../ui/dialog`, `../ui/button`, `../ui/input`, `../ui/label`, `lucide-react`
@@ -136,7 +289,10 @@
   Imports: `react`, `../../types/magazine`, `../../lib/sample-data`, `../../lib/ui-theme`, `../../lib/theme-utils`, `../ui/input`, `../ui/label`, `../ui/textarea`, `../ui/switch`, `../ui/image-picker`, `../pwa/PwaInstallPrompt`, `lucide-react`
 
 ### `src/components/export/PdfExportModal.tsx`
-  Imports: `react`, `../../types/magazine`, `../../lib/magazine-pages`, `../../lib/pdf-direct-export`, `../ui/dialog`, `../ui/button`, `lucide-react`
+  Imports: `react`, `../../types/magazine`, `../../lib/magazine-pages`, `../../lib/pdf-direct-export`, `../ui/dialog`, `../ui/button`, `lucide-react`, `../ui/slide-to-confirm`
+
+### `src/components/ImpersonationBanner.tsx`
+  Imports: `react`, `@tanstack/react-router`, `lucide-react`
 
 ### `src/components/magazine/ArticleSpread.tsx`
   Imports: `react`, `../../types/magazine`, `../../lib/theme-utils`, `../../lib/magazine-utils`, `lucide-react`
@@ -158,6 +314,9 @@
 
 ### `src/components/magazine/MagazineViewer.tsx`
   Imports: `react`, `../../types/magazine`, `../../lib/magazine-pages`, `lucide-react`, `../ui/button`
+
+### `src/components/MasterAdminDashboard.tsx`
+  Imports: `react`, `lucide-react`, `@supabase/supabase-js`, `../services/ecosystem-auth-service`
 
 ### `src/components/mockup/MockupStudioModal.tsx`
   Imports: `react`, `../../types/magazine`, `../../lib/ai-service`, `../ui/dialog`, `../ui/button`, `../ui/textarea`, `lucide-react`
@@ -206,6 +365,9 @@
 
 ### `src/components/ui/label.tsx`
   Imports: `react`, `@radix-ui/react-label`, `class-variance-authority`, `@/lib/utils`
+
+### `src/components/ui/slide-to-confirm.tsx`
+  Imports: `react`, `lucide-react`
 
 ### `src/components/ui/slider.tsx`
   Imports: `react`, `@radix-ui/react-slider`, `@/lib/utils`
@@ -264,17 +426,38 @@
 ### `src/routes/api/project.ts`
   Imports: `@tanstack/react-router`
 
+### `src/routes/auth.tsx`
+  Imports: `react`, `@tanstack/react-router`, `lucide-react`, `@/components/ui/button`, `@/components/ui/input`, `@/components/ui/label`, `@/lib/auth-state`, `@/services/ecosystem-auth-service`
+
+### `src/routes/boost.tsx`
+  Imports: `react`, `@tanstack/react-router`, `lucide-react`, `@/components/ui/button`
+
+### `src/routes/create.tsx`
+  Imports: `react`, `@tanstack/react-router`, `lucide-react`, `@/components/ui/button`, `@/components/ui/input`, `@/components/ui/label`, `@/lib/auth-state`, `@/services/ecosystem-auth-service`
+
+### `src/routes/eco.tsx`
+  Imports: `react`, `@tanstack/react-router`, `lucide-react`, `@/components/ui/button`, `@/lib/auth-state`
+
 ### `src/routes/index.tsx`
   Imports: `@tanstack/react-router`, `react`, `../types/magazine`, `../lib/sample-data`, `../lib/ui-theme`, `../lib/cloud-sync`, `../components/magazine/MagazineViewer`, `../components/editor/CoverCustomizer`, `../components/editor/ArticleEditorModal`, `../components/editor/EditorialSettings`, `../components/editor/MagazineSettings`, `../components/editor/AiStudioDialog`, `../components/export/PdfExportModal`, `../components/mockup/MockupStudioModal`, `../components/sync/CloudSyncDialog`, `../lib/magazine-pages`, `../components/pwa/PwaInstallPrompt`, `../components/repository/ContentRepositoryView`, `../components/repository/ImportFromRepositoryModal`, `../components/repository/AiApprovalModal`, `../components/repository/PdfImportModal`, `../components/auth/AuthModal`, `../components/subscription/SubscriptionModal`, `../components/archive/EditionsArchiveView`, `../lib/editions-archive`, `../lib/auth-state`, `../lib/ai-service`, `../lib/magazine-utils`, `../types/magazine`, `../lib/google-drive-sync`, `lucide-react`, `../components/ui/button`, `../components/ui/dialog`
 
+### `src/routes/login.tsx`
+  Imports: `@tanstack/react-router`
+
+### `src/routes/master-admin.tsx`
+  Imports: `@tanstack/react-router`, `@/components/MasterAdminDashboard`
+
 ### `src/routes/__root.tsx`
-  Imports: `@tanstack/react-query`, `@tanstack/react-router`, `react`, `../styles.css?url`, `../lib/lovable-error-reporting`
+  Imports: `@tanstack/react-query`, `@tanstack/react-router`, `react`, `../styles.css?url`, `../lib/lovable-error-reporting`, `@/components/ImpersonationBanner`
 
 ### `src/routeTree.gen.ts`
-  Imports: `./routes/__root`, `./routes/index`, `./routes/api/ai`, `./routes/api/project`, `./router.tsx`, `./start.ts`
+  Imports: `./routes/__root`, `./routes/index`, `./routes/auth`, `./routes/boost`, `./routes/create`, `./routes/eco`, `./routes/login`, `./routes/master-admin`, `./routes/api/ai`, `./routes/api/project`, `./router.tsx`, `./start.ts`
 
 ### `src/server.ts`
   Imports: `./lib/error-capture`, `./lib/error-page`
+
+### `src/services/ecosystem-auth-service.ts`
+  Imports: `@supabase/supabase-js`
 
 ### `src/start.ts`
   Imports: `@tanstack/react-start`, `./lib/error-page`

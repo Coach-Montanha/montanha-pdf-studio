@@ -1,0 +1,5034 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "Montanha PDF Studio",
+    "languages": [
+      "css",
+      "csv",
+      "env",
+      "html",
+      "javascript",
+      "json",
+      "markdown",
+      "plaintext",
+      "python",
+      "shell",
+      "sql",
+      "toml",
+      "typescript",
+      "xml",
+      "yaml"
+    ],
+    "frameworks": [
+      "React",
+      "TanStack Router / Start",
+      "TanStack Query",
+      "Tailwind CSS",
+      "Vite",
+      "Supabase",
+      "Lucide Icons",
+      "Zod",
+      "PDF Engine (jsPDF)"
+    ],
+    "description": "Estúdio editorial de alta precisão para diagramação, publicações técnicas, exportação em alta resolução de PDFs e fichas profissionais.",
+    "analyzedAt": "2026-10-02T02:42:39.764Z",
+    "gitCommitHash": "ddd8583eae1d9b006101d32cc4ce38f796a72654",
+    "entryPoint": "src/routes/__root.tsx",
+    "category": "Editorial Publishing & Visual AI Studio"
+  },
+  "nodes": [
+    {
+      "id": "config:.agents/aas-catalog/skills_index.json",
+      "type": "config",
+      "name": "skills_index.json",
+      "filePath": ".agents/aas-catalog/skills_index.json",
+      "summary": "Arquivo de configuração de ambiente e build: skills_index.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/avoid-ai-writing/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/avoid-ai-writing/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/brutalist-typography/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/brutalist-typography/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/cloudflare-deploy/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/cloudflare-deploy/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/content-strategy/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/content-strategy/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/content-strategy/references/headless-cms.md",
+      "type": "document",
+      "name": "headless-cms.md",
+      "filePath": ".agents/skills/content-strategy/references/headless-cms.md",
+      "summary": "Documentação técnica de projeto: headless-cms.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/copy-editing/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/copy-editing/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/editorial-design/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/editorial-design/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/high-end-visual-design/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/high-end-visual-design/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.agents/skills/image-generator/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": ".agents/skills/image-generator/.env.example",
+      "summary": "Arquivo de configuração de ambiente e build: .env.example.",
+      "tags": [
+        "config",
+        "config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/image-generator/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/image-generator/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/pdf-conversion-router/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/pdf-conversion-router/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/pdf-official/LICENSE.txt",
+      "type": "document",
+      "name": "LICENSE.txt",
+      "filePath": ".agents/skills/pdf-official/LICENSE.txt",
+      "summary": "Documentação técnica de projeto: LICENSE.txt.",
+      "tags": [
+        "docs",
+        "txt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/pdf-official/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/pdf-official/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/pdf-official/forms.md",
+      "type": "document",
+      "name": "forms.md",
+      "filePath": ".agents/skills/pdf-official/forms.md",
+      "summary": "Documentação técnica de projeto: forms.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/pdf-official/reference.md",
+      "type": "document",
+      "name": "reference.md",
+      "filePath": ".agents/skills/pdf-official/reference.md",
+      "summary": "Documentação técnica de projeto: reference.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/check_bounding_boxes.py",
+      "type": "file",
+      "name": "check_bounding_boxes.py",
+      "filePath": ".agents/skills/pdf-official/scripts/check_bounding_boxes.py",
+      "summary": "Módulo de código code: check_bounding_boxes.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/check_bounding_boxes_test.py",
+      "type": "file",
+      "name": "check_bounding_boxes_test.py",
+      "filePath": ".agents/skills/pdf-official/scripts/check_bounding_boxes_test.py",
+      "summary": "Módulo de código code: check_bounding_boxes_test.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/check_fillable_fields.py",
+      "type": "file",
+      "name": "check_fillable_fields.py",
+      "filePath": ".agents/skills/pdf-official/scripts/check_fillable_fields.py",
+      "summary": "Módulo de código code: check_fillable_fields.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/convert_pdf_to_images.py",
+      "type": "file",
+      "name": "convert_pdf_to_images.py",
+      "filePath": ".agents/skills/pdf-official/scripts/convert_pdf_to_images.py",
+      "summary": "Módulo de código code: convert_pdf_to_images.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/create_validation_image.py",
+      "type": "file",
+      "name": "create_validation_image.py",
+      "filePath": ".agents/skills/pdf-official/scripts/create_validation_image.py",
+      "summary": "Módulo de código code: create_validation_image.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/extract_form_field_info.py",
+      "type": "file",
+      "name": "extract_form_field_info.py",
+      "filePath": ".agents/skills/pdf-official/scripts/extract_form_field_info.py",
+      "summary": "Módulo de código code: extract_form_field_info.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/fill_fillable_fields.py",
+      "type": "file",
+      "name": "fill_fillable_fields.py",
+      "filePath": ".agents/skills/pdf-official/scripts/fill_fillable_fields.py",
+      "summary": "Módulo de código code: fill_fillable_fields.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/pdf-official/scripts/fill_pdf_form_with_annotations.py",
+      "type": "file",
+      "name": "fill_pdf_form_with_annotations.py",
+      "filePath": ".agents/skills/pdf-official/scripts/fill_pdf_form_with_annotations.py",
+      "summary": "Módulo de código code: fill_pdf_form_with_annotations.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/playwright-pdf-validation/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/playwright-pdf-validation/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/print-css-optimization/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/print-css-optimization/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/professional-proofreader/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/professional-proofreader/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/professional-proofreader/references/file-processing-mode.md",
+      "type": "document",
+      "name": "file-processing-mode.md",
+      "filePath": ".agents/skills/professional-proofreader/references/file-processing-mode.md",
+      "summary": "Documentação técnica de projeto: file-processing-mode.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/professional-proofreader/references/inline-text-mode.md",
+      "type": "document",
+      "name": "inline-text-mode.md",
+      "filePath": ".agents/skills/professional-proofreader/references/inline-text-mode.md",
+      "summary": "Documentação técnica de projeto: inline-text-mode.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/radix-ui-design-system/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/radix-ui-design-system/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/radix-ui-design-system/examples/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": ".agents/skills/radix-ui-design-system/examples/README.md",
+      "summary": "Documentação técnica de projeto: README.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/radix-ui-design-system/examples/dialog-example.tsx",
+      "type": "file",
+      "name": "dialog-example.tsx",
+      "filePath": ".agents/skills/radix-ui-design-system/examples/dialog-example.tsx",
+      "summary": "Módulo de código code: dialog-example.tsx",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/radix-ui-design-system/examples/dropdown-example.tsx",
+      "type": "file",
+      "name": "dropdown-example.tsx",
+      "filePath": ".agents/skills/radix-ui-design-system/examples/dropdown-example.tsx",
+      "summary": "Módulo de código code: dropdown-example.tsx",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/radix-ui-design-system/templates/component-template.tsx.template",
+      "type": "file",
+      "name": "component-template.tsx.template",
+      "filePath": ".agents/skills/radix-ui-design-system/templates/component-template.tsx.template",
+      "summary": "Módulo de código code: component-template.tsx.template",
+      "tags": [
+        "code",
+        "template"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": ".agents/skills/react-best-practices/AGENTS.md",
+      "summary": "Diretrizes oficiais da Vercel e regras de IA para desenvolvimento sustentável.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": ".agents/skills/react-best-practices/README.md",
+      "summary": "Documentação técnica de projeto: README.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/react-best-practices/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.agents/skills/react-best-practices/metadata.json",
+      "type": "config",
+      "name": "metadata.json",
+      "filePath": ".agents/skills/react-best-practices/metadata.json",
+      "summary": "Arquivo de configuração de ambiente e build: metadata.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/_sections.md",
+      "type": "document",
+      "name": "_sections.md",
+      "filePath": ".agents/skills/react-best-practices/rules/_sections.md",
+      "summary": "Documentação técnica de projeto: _sections.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/_template.md",
+      "type": "document",
+      "name": "_template.md",
+      "filePath": ".agents/skills/react-best-practices/rules/_template.md",
+      "summary": "Documentação técnica de projeto: _template.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/advanced-event-handler-refs.md",
+      "type": "document",
+      "name": "advanced-event-handler-refs.md",
+      "filePath": ".agents/skills/react-best-practices/rules/advanced-event-handler-refs.md",
+      "summary": "Documentação técnica de projeto: advanced-event-handler-refs.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/advanced-use-latest.md",
+      "type": "document",
+      "name": "advanced-use-latest.md",
+      "filePath": ".agents/skills/react-best-practices/rules/advanced-use-latest.md",
+      "summary": "Documentação técnica de projeto: advanced-use-latest.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/async-api-routes.md",
+      "type": "document",
+      "name": "async-api-routes.md",
+      "filePath": ".agents/skills/react-best-practices/rules/async-api-routes.md",
+      "summary": "Definição de rotas e navegação para async-api-routes.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/async-defer-await.md",
+      "type": "document",
+      "name": "async-defer-await.md",
+      "filePath": ".agents/skills/react-best-practices/rules/async-defer-await.md",
+      "summary": "Documentação técnica de projeto: async-defer-await.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/async-dependencies.md",
+      "type": "document",
+      "name": "async-dependencies.md",
+      "filePath": ".agents/skills/react-best-practices/rules/async-dependencies.md",
+      "summary": "Documentação técnica de projeto: async-dependencies.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/async-parallel.md",
+      "type": "document",
+      "name": "async-parallel.md",
+      "filePath": ".agents/skills/react-best-practices/rules/async-parallel.md",
+      "summary": "Documentação técnica de projeto: async-parallel.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/async-suspense-boundaries.md",
+      "type": "document",
+      "name": "async-suspense-boundaries.md",
+      "filePath": ".agents/skills/react-best-practices/rules/async-suspense-boundaries.md",
+      "summary": "Documentação técnica de projeto: async-suspense-boundaries.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/bundle-barrel-imports.md",
+      "type": "document",
+      "name": "bundle-barrel-imports.md",
+      "filePath": ".agents/skills/react-best-practices/rules/bundle-barrel-imports.md",
+      "summary": "Documentação técnica de projeto: bundle-barrel-imports.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/bundle-conditional.md",
+      "type": "document",
+      "name": "bundle-conditional.md",
+      "filePath": ".agents/skills/react-best-practices/rules/bundle-conditional.md",
+      "summary": "Documentação técnica de projeto: bundle-conditional.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/bundle-defer-third-party.md",
+      "type": "document",
+      "name": "bundle-defer-third-party.md",
+      "filePath": ".agents/skills/react-best-practices/rules/bundle-defer-third-party.md",
+      "summary": "Documentação técnica de projeto: bundle-defer-third-party.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/bundle-dynamic-imports.md",
+      "type": "document",
+      "name": "bundle-dynamic-imports.md",
+      "filePath": ".agents/skills/react-best-practices/rules/bundle-dynamic-imports.md",
+      "summary": "Documentação técnica de projeto: bundle-dynamic-imports.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/bundle-preload.md",
+      "type": "document",
+      "name": "bundle-preload.md",
+      "filePath": ".agents/skills/react-best-practices/rules/bundle-preload.md",
+      "summary": "Documentação técnica de projeto: bundle-preload.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/client-event-listeners.md",
+      "type": "document",
+      "name": "client-event-listeners.md",
+      "filePath": ".agents/skills/react-best-practices/rules/client-event-listeners.md",
+      "summary": "Documentação técnica de projeto: client-event-listeners.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/client-swr-dedup.md",
+      "type": "document",
+      "name": "client-swr-dedup.md",
+      "filePath": ".agents/skills/react-best-practices/rules/client-swr-dedup.md",
+      "summary": "Documentação técnica de projeto: client-swr-dedup.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-batch-dom-css.md",
+      "type": "document",
+      "name": "js-batch-dom-css.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-batch-dom-css.md",
+      "summary": "Documentação técnica de projeto: js-batch-dom-css.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-cache-function-results.md",
+      "type": "document",
+      "name": "js-cache-function-results.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-cache-function-results.md",
+      "summary": "Documentação técnica de projeto: js-cache-function-results.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-cache-property-access.md",
+      "type": "document",
+      "name": "js-cache-property-access.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-cache-property-access.md",
+      "summary": "Documentação técnica de projeto: js-cache-property-access.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-cache-storage.md",
+      "type": "document",
+      "name": "js-cache-storage.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-cache-storage.md",
+      "summary": "Documentação técnica de projeto: js-cache-storage.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-combine-iterations.md",
+      "type": "document",
+      "name": "js-combine-iterations.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-combine-iterations.md",
+      "summary": "Documentação técnica de projeto: js-combine-iterations.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-early-exit.md",
+      "type": "document",
+      "name": "js-early-exit.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-early-exit.md",
+      "summary": "Documentação técnica de projeto: js-early-exit.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-hoist-regexp.md",
+      "type": "document",
+      "name": "js-hoist-regexp.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-hoist-regexp.md",
+      "summary": "Documentação técnica de projeto: js-hoist-regexp.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-index-maps.md",
+      "type": "document",
+      "name": "js-index-maps.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-index-maps.md",
+      "summary": "Documentação técnica de projeto: js-index-maps.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-length-check-first.md",
+      "type": "document",
+      "name": "js-length-check-first.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-length-check-first.md",
+      "summary": "Documentação técnica de projeto: js-length-check-first.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-min-max-loop.md",
+      "type": "document",
+      "name": "js-min-max-loop.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-min-max-loop.md",
+      "summary": "Documentação técnica de projeto: js-min-max-loop.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-set-map-lookups.md",
+      "type": "document",
+      "name": "js-set-map-lookups.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-set-map-lookups.md",
+      "summary": "Documentação técnica de projeto: js-set-map-lookups.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/js-tosorted-immutable.md",
+      "type": "document",
+      "name": "js-tosorted-immutable.md",
+      "filePath": ".agents/skills/react-best-practices/rules/js-tosorted-immutable.md",
+      "summary": "Documentação técnica de projeto: js-tosorted-immutable.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rendering-activity.md",
+      "type": "document",
+      "name": "rendering-activity.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rendering-activity.md",
+      "summary": "Documentação técnica de projeto: rendering-activity.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md",
+      "type": "document",
+      "name": "rendering-animate-svg-wrapper.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md",
+      "summary": "Documentação técnica de projeto: rendering-animate-svg-wrapper.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rendering-conditional-render.md",
+      "type": "document",
+      "name": "rendering-conditional-render.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rendering-conditional-render.md",
+      "summary": "Documentação técnica de projeto: rendering-conditional-render.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rendering-content-visibility.md",
+      "type": "document",
+      "name": "rendering-content-visibility.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rendering-content-visibility.md",
+      "summary": "Documentação técnica de projeto: rendering-content-visibility.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rendering-hoist-jsx.md",
+      "type": "document",
+      "name": "rendering-hoist-jsx.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rendering-hoist-jsx.md",
+      "summary": "Documentação técnica de projeto: rendering-hoist-jsx.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rendering-hydration-no-flicker.md",
+      "type": "document",
+      "name": "rendering-hydration-no-flicker.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rendering-hydration-no-flicker.md",
+      "summary": "Documentação técnica de projeto: rendering-hydration-no-flicker.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rendering-svg-precision.md",
+      "type": "document",
+      "name": "rendering-svg-precision.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rendering-svg-precision.md",
+      "summary": "Documentação técnica de projeto: rendering-svg-precision.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rerender-defer-reads.md",
+      "type": "document",
+      "name": "rerender-defer-reads.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rerender-defer-reads.md",
+      "summary": "Documentação técnica de projeto: rerender-defer-reads.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rerender-dependencies.md",
+      "type": "document",
+      "name": "rerender-dependencies.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rerender-dependencies.md",
+      "summary": "Documentação técnica de projeto: rerender-dependencies.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rerender-derived-state.md",
+      "type": "document",
+      "name": "rerender-derived-state.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rerender-derived-state.md",
+      "summary": "Documentação técnica de projeto: rerender-derived-state.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rerender-functional-setstate.md",
+      "type": "document",
+      "name": "rerender-functional-setstate.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rerender-functional-setstate.md",
+      "summary": "Documentação técnica de projeto: rerender-functional-setstate.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rerender-lazy-state-init.md",
+      "type": "document",
+      "name": "rerender-lazy-state-init.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rerender-lazy-state-init.md",
+      "summary": "Documentação técnica de projeto: rerender-lazy-state-init.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rerender-memo.md",
+      "type": "document",
+      "name": "rerender-memo.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rerender-memo.md",
+      "summary": "Documentação técnica de projeto: rerender-memo.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/rerender-transitions.md",
+      "type": "document",
+      "name": "rerender-transitions.md",
+      "filePath": ".agents/skills/react-best-practices/rules/rerender-transitions.md",
+      "summary": "Documentação técnica de projeto: rerender-transitions.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/server-after-nonblocking.md",
+      "type": "document",
+      "name": "server-after-nonblocking.md",
+      "filePath": ".agents/skills/react-best-practices/rules/server-after-nonblocking.md",
+      "summary": "Documentação técnica de projeto: server-after-nonblocking.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/server-cache-lru.md",
+      "type": "document",
+      "name": "server-cache-lru.md",
+      "filePath": ".agents/skills/react-best-practices/rules/server-cache-lru.md",
+      "summary": "Documentação técnica de projeto: server-cache-lru.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/server-cache-react.md",
+      "type": "document",
+      "name": "server-cache-react.md",
+      "filePath": ".agents/skills/react-best-practices/rules/server-cache-react.md",
+      "summary": "Documentação técnica de projeto: server-cache-react.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/server-parallel-fetching.md",
+      "type": "document",
+      "name": "server-parallel-fetching.md",
+      "filePath": ".agents/skills/react-best-practices/rules/server-parallel-fetching.md",
+      "summary": "Documentação técnica de projeto: server-parallel-fetching.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/react-best-practices/rules/server-serialization.md",
+      "type": "document",
+      "name": "server-serialization.md",
+      "filePath": ".agents/skills/react-best-practices/rules/server-serialization.md",
+      "summary": "Documentação técnica de projeto: server-serialization.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/swiss-design/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/swiss-design/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/systematic-debugging/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/systematic-debugging/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/systematic-debugging/condition-based-waiting-example.ts",
+      "type": "file",
+      "name": "condition-based-waiting-example.ts",
+      "filePath": ".agents/skills/systematic-debugging/condition-based-waiting-example.ts",
+      "summary": "Módulo de código code: condition-based-waiting-example.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/systematic-debugging/condition-based-waiting.md",
+      "type": "document",
+      "name": "condition-based-waiting.md",
+      "filePath": ".agents/skills/systematic-debugging/condition-based-waiting.md",
+      "summary": "Documentação técnica de projeto: condition-based-waiting.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/systematic-debugging/defense-in-depth.md",
+      "type": "document",
+      "name": "defense-in-depth.md",
+      "filePath": ".agents/skills/systematic-debugging/defense-in-depth.md",
+      "summary": "Documentação técnica de projeto: defense-in-depth.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/systematic-debugging/root-cause-tracing.md",
+      "type": "document",
+      "name": "root-cause-tracing.md",
+      "filePath": ".agents/skills/systematic-debugging/root-cause-tracing.md",
+      "summary": "Documentação técnica de projeto: root-cause-tracing.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.agents/skills/tailwind-design-system/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/tailwind-design-system/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.agents/skills/tailwind-design-system/resources/implementation-playbook.md",
+      "type": "document",
+      "name": "implementation-playbook.md",
+      "filePath": ".agents/skills/tailwind-design-system/resources/implementation-playbook.md",
+      "summary": "Documentação técnica de projeto: implementation-playbook.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.agents/skills/ui-ux-pro-max/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/ui-ux-pro-max/SKILL.md",
+      "summary": "Documentação técnica de projeto: SKILL.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/charts.csv",
+      "type": "file",
+      "name": "charts.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/charts.csv",
+      "summary": "Módulo de código data: charts.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/colors.csv",
+      "type": "file",
+      "name": "colors.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/colors.csv",
+      "summary": "Módulo de código data: colors.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/icons.csv",
+      "type": "file",
+      "name": "icons.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/icons.csv",
+      "summary": "Módulo de código data: icons.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/landing.csv",
+      "type": "file",
+      "name": "landing.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/landing.csv",
+      "summary": "Módulo de código data: landing.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/products.csv",
+      "type": "file",
+      "name": "products.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/products.csv",
+      "summary": "Módulo de código data: products.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/prompts.csv",
+      "type": "file",
+      "name": "prompts.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/prompts.csv",
+      "summary": "Módulo de código data: prompts.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/react-performance.csv",
+      "type": "file",
+      "name": "react-performance.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/react-performance.csv",
+      "summary": "Módulo de código data: react-performance.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+      "type": "file",
+      "name": "flutter.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+      "summary": "Módulo de código data: flutter.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+      "type": "file",
+      "name": "html-tailwind.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+      "summary": "Módulo de código data: html-tailwind.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+      "type": "file",
+      "name": "nextjs.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+      "summary": "Módulo de código data: nextjs.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+      "type": "file",
+      "name": "nuxt-ui.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+      "summary": "Módulo de código data: nuxt-ui.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+      "type": "file",
+      "name": "nuxtjs.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+      "summary": "Módulo de código data: nuxtjs.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+      "type": "file",
+      "name": "react-native.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+      "summary": "Módulo de código data: react-native.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/react.csv",
+      "type": "file",
+      "name": "react.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/react.csv",
+      "summary": "Módulo de código data: react.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+      "type": "file",
+      "name": "shadcn.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+      "summary": "Módulo de código data: shadcn.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+      "type": "file",
+      "name": "svelte.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+      "summary": "Módulo de código data: svelte.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+      "type": "file",
+      "name": "swiftui.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+      "summary": "Módulo de código data: swiftui.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/stacks/vue.csv",
+      "type": "file",
+      "name": "vue.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/stacks/vue.csv",
+      "summary": "Módulo de código data: vue.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/styles.csv",
+      "type": "file",
+      "name": "styles.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/styles.csv",
+      "summary": "Módulo de código data: styles.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/typography.csv",
+      "type": "file",
+      "name": "typography.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/typography.csv",
+      "summary": "Módulo de código data: typography.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+      "type": "file",
+      "name": "ui-reasoning.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+      "summary": "Módulo de código data: ui-reasoning.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+      "type": "file",
+      "name": "ux-guidelines.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+      "summary": "Módulo de código data: ux-guidelines.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/data/web-interface.csv",
+      "type": "file",
+      "name": "web-interface.csv",
+      "filePath": ".agents/skills/ui-ux-pro-max/data/web-interface.csv",
+      "summary": "Módulo de código data: web-interface.csv",
+      "tags": [
+        "data",
+        "csv"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "file",
+      "name": "core.py",
+      "filePath": ".agents/skills/ui-ux-pro-max/scripts/core.py",
+      "summary": "Módulo de código code: core.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "file",
+      "name": "design_system.py",
+      "filePath": ".agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "summary": "Módulo de código code: design_system.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.agents/skills/ui-ux-pro-max/scripts/search.py",
+      "type": "file",
+      "name": "search.py",
+      "filePath": ".agents/skills/ui-ux-pro-max/scripts/search.py",
+      "summary": "Módulo de código code: search.py",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": ".env.example",
+      "summary": "Arquivo de configuração de ambiente e build: .env.example.",
+      "tags": [
+        "config",
+        "config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.lovable/plan/plano-página-em-branco-com-ponto-preto-centralizado-2026-08-29.md",
+      "type": "document",
+      "name": "plano-página-em-branco-com-ponto-preto-centralizado-2026-08-29.md",
+      "filePath": ".lovable/plan/plano-página-em-branco-com-ponto-preto-centralizado-2026-08-29.md",
+      "summary": "Documentação técnica de projeto: plano-página-em-branco-com-ponto-preto-centralizado-2026-08-29.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.lovable/project.json",
+      "type": "config",
+      "name": "project.json",
+      "filePath": ".lovable/project.json",
+      "summary": "Arquivo de configuração de ambiente e build: project.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.prettierignore",
+      "type": "file",
+      "name": ".prettierignore",
+      "filePath": ".prettierignore",
+      "summary": "Módulo de código code: .prettierignore",
+      "tags": [
+        "code",
+        "unknown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "Diretrizes oficiais da Vercel e regras de IA para desenvolvimento sustentável.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:DEV_GUIDE.md",
+      "type": "document",
+      "name": "DEV_GUIDE.md",
+      "filePath": "DEV_GUIDE.md",
+      "summary": "Guia confidencial de arquitetura interna, onboarding técnico e troubleshooting.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Documentação técnica de projeto: README.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:bunfig.toml",
+      "type": "config",
+      "name": "bunfig.toml",
+      "filePath": "bunfig.toml",
+      "summary": "Arquivo de configuração de ambiente e build: bunfig.toml.",
+      "tags": [
+        "config",
+        "toml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ci/github-actions-e2e.yml",
+      "type": "config",
+      "name": "github-actions-e2e.yml",
+      "filePath": "ci/github-actions-e2e.yml",
+      "summary": "Arquivo de configuração de ambiente e build: github-actions-e2e.yml.",
+      "tags": [
+        "config",
+        "yaml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:components.json",
+      "type": "config",
+      "name": "components.json",
+      "filePath": "components.json",
+      "summary": "Arquivo de configuração de ambiente e build: components.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:e2e/auth.spec.ts",
+      "type": "file",
+      "name": "auth.spec.ts",
+      "filePath": "e2e/auth.spec.ts",
+      "summary": "Módulo de autenticação, validação de senhas de 10 dígitos e controle de sessões.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:e2e/fixtures/auth.fixture.ts",
+      "type": "file",
+      "name": "auth.fixture.ts",
+      "filePath": "e2e/fixtures/auth.fixture.ts",
+      "summary": "Módulo de autenticação, validação de senhas de 10 dígitos e controle de sessões.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:e2e/layout-modes.spec.ts",
+      "type": "file",
+      "name": "layout-modes.spec.ts",
+      "filePath": "e2e/layout-modes.spec.ts",
+      "summary": "Módulo de código code: layout-modes.spec.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:e2e/main-action.spec.ts",
+      "type": "file",
+      "name": "main-action.spec.ts",
+      "filePath": "e2e/main-action.spec.ts",
+      "summary": "Módulo de código code: main-action.spec.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:e2e/payment.spec.ts",
+      "type": "file",
+      "name": "payment.spec.ts",
+      "filePath": "e2e/payment.spec.ts",
+      "summary": "Módulo de código code: payment.spec.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:e2e/pdf-conversion-router.spec.ts",
+      "type": "file",
+      "name": "pdf-conversion-router.spec.ts",
+      "filePath": "e2e/pdf-conversion-router.spec.ts",
+      "summary": "Módulo de código code: pdf-conversion-router.spec.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ecosystem_schema.sql",
+      "type": "file",
+      "name": "ecosystem_schema.sql",
+      "filePath": "ecosystem_schema.sql",
+      "summary": "Módulo de código data: ecosystem_schema.sql",
+      "tags": [
+        "data",
+        "sql"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:eslint.config.js",
+      "type": "file",
+      "name": "eslint.config.js",
+      "filePath": "eslint.config.js",
+      "summary": "Módulo de código code: eslint.config.js",
+      "tags": [
+        "code",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:graphify-out/GRAPH_REPORT.md",
+      "type": "document",
+      "name": "GRAPH_REPORT.md",
+      "filePath": "graphify-out/GRAPH_REPORT.md",
+      "summary": "Documentação técnica de projeto: GRAPH_REPORT.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:graphify-out/graph.html",
+      "type": "file",
+      "name": "graph.html",
+      "filePath": "graphify-out/graph.html",
+      "summary": "Módulo de código markup: graph.html",
+      "tags": [
+        "markup",
+        "html"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:graphify-out/graph.json",
+      "type": "config",
+      "name": "graph.json",
+      "filePath": "graphify-out/graph.json",
+      "summary": "Arquivo de configuração de ambiente e build: graph.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:knip_pdf.json",
+      "type": "config",
+      "name": "knip_pdf.json",
+      "filePath": "knip_pdf.json",
+      "summary": "Arquivo de configuração de ambiente e build: knip_pdf.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "Manifesto de dependências, scripts e configuração do projeto Node/Vite.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:playwright.config.ts",
+      "type": "file",
+      "name": "playwright.config.ts",
+      "filePath": "playwright.config.ts",
+      "summary": "Módulo de código code: playwright.config.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:public/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "public/manifest.json",
+      "summary": "Arquivo de configuração de ambiente e build: manifest.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/pdf.worker.mjs",
+      "type": "file",
+      "name": "pdf.worker.mjs",
+      "filePath": "public/pdf.worker.mjs",
+      "summary": "Módulo de código code: pdf.worker.mjs",
+      "tags": [
+        "code",
+        "javascript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:public/robots.txt",
+      "type": "document",
+      "name": "robots.txt",
+      "filePath": "public/robots.txt",
+      "summary": "Documentação técnica de projeto: robots.txt.",
+      "tags": [
+        "docs",
+        "txt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:public/sitemap.xml",
+      "type": "config",
+      "name": "sitemap.xml",
+      "filePath": "public/sitemap.xml",
+      "summary": "Arquivo de configuração de ambiente e build: sitemap.xml.",
+      "tags": [
+        "config",
+        "xml"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:public/sw.js",
+      "type": "file",
+      "name": "sw.js",
+      "filePath": "public/sw.js",
+      "summary": "Módulo de código code: sw.js",
+      "tags": [
+        "code",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:roadmap.md",
+      "type": "document",
+      "name": "roadmap.md",
+      "filePath": "roadmap.md",
+      "summary": "Documentação técnica de projeto: roadmap.md.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/aas-catalog.ts",
+      "type": "file",
+      "name": "aas-catalog.ts",
+      "filePath": "scripts/aas-catalog.ts",
+      "summary": "Módulo de código code: aas-catalog.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/aas-mcp-server.ts",
+      "type": "file",
+      "name": "aas-mcp-server.ts",
+      "filePath": "scripts/aas-mcp-server.ts",
+      "summary": "Módulo de código code: aas-mcp-server.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/run-e2e-ci.sh",
+      "type": "file",
+      "name": "run-e2e-ci.sh",
+      "filePath": "scripts/run-e2e-ci.sh",
+      "summary": "Módulo de código script: run-e2e-ci.sh",
+      "tags": [
+        "script",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ImpersonationBanner.tsx",
+      "type": "file",
+      "name": "ImpersonationBanner.tsx",
+      "filePath": "src/components/ImpersonationBanner.tsx",
+      "summary": "Componente de interface visual: ImpersonationBanner.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/MasterAdminDashboard.tsx",
+      "type": "file",
+      "name": "MasterAdminDashboard.tsx",
+      "filePath": "src/components/MasterAdminDashboard.tsx",
+      "summary": "Componente de interface visual: MasterAdminDashboard.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/archive/EditionsArchiveView.tsx",
+      "type": "file",
+      "name": "EditionsArchiveView.tsx",
+      "filePath": "src/components/archive/EditionsArchiveView.tsx",
+      "summary": "Componente de interface visual: EditionsArchiveView.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/auth/AuthModal.tsx",
+      "type": "file",
+      "name": "AuthModal.tsx",
+      "filePath": "src/components/auth/AuthModal.tsx",
+      "summary": "Componente de interface visual: AuthModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/editor/AiStudioDialog.tsx",
+      "type": "file",
+      "name": "AiStudioDialog.tsx",
+      "filePath": "src/components/editor/AiStudioDialog.tsx",
+      "summary": "Componente de interface visual: AiStudioDialog.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/editor/ArticleEditorModal.tsx",
+      "type": "file",
+      "name": "ArticleEditorModal.tsx",
+      "filePath": "src/components/editor/ArticleEditorModal.tsx",
+      "summary": "Componente de interface visual: ArticleEditorModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/editor/CoverCustomizer.tsx",
+      "type": "file",
+      "name": "CoverCustomizer.tsx",
+      "filePath": "src/components/editor/CoverCustomizer.tsx",
+      "summary": "Componente de interface visual: CoverCustomizer.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/editor/EditorialSettings.tsx",
+      "type": "file",
+      "name": "EditorialSettings.tsx",
+      "filePath": "src/components/editor/EditorialSettings.tsx",
+      "summary": "Componente de interface visual: EditorialSettings.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/editor/MagazineSettings.tsx",
+      "type": "file",
+      "name": "MagazineSettings.tsx",
+      "filePath": "src/components/editor/MagazineSettings.tsx",
+      "summary": "Componente de interface visual: MagazineSettings.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/export/PdfExportModal.tsx",
+      "type": "file",
+      "name": "PdfExportModal.tsx",
+      "filePath": "src/components/export/PdfExportModal.tsx",
+      "summary": "Componente de interface visual: PdfExportModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/magazine/ArticleSpread.tsx",
+      "type": "file",
+      "name": "ArticleSpread.tsx",
+      "filePath": "src/components/magazine/ArticleSpread.tsx",
+      "summary": "Componente de interface visual: ArticleSpread.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/magazine/BackCoverPage.tsx",
+      "type": "file",
+      "name": "BackCoverPage.tsx",
+      "filePath": "src/components/magazine/BackCoverPage.tsx",
+      "summary": "Componente de interface visual: BackCoverPage.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/magazine/ContributorsPage.tsx",
+      "type": "file",
+      "name": "ContributorsPage.tsx",
+      "filePath": "src/components/magazine/ContributorsPage.tsx",
+      "summary": "Componente de interface visual: ContributorsPage.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/magazine/CoverPage.tsx",
+      "type": "file",
+      "name": "CoverPage.tsx",
+      "filePath": "src/components/magazine/CoverPage.tsx",
+      "summary": "Componente de interface visual: CoverPage.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/magazine/EditorLetterPage.tsx",
+      "type": "file",
+      "name": "EditorLetterPage.tsx",
+      "filePath": "src/components/magazine/EditorLetterPage.tsx",
+      "summary": "Componente de interface visual: EditorLetterPage.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/magazine/EditorialPage.tsx",
+      "type": "file",
+      "name": "EditorialPage.tsx",
+      "filePath": "src/components/magazine/EditorialPage.tsx",
+      "summary": "Componente de interface visual: EditorialPage.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/magazine/MagazineViewer.tsx",
+      "type": "file",
+      "name": "MagazineViewer.tsx",
+      "filePath": "src/components/magazine/MagazineViewer.tsx",
+      "summary": "Componente de interface visual: MagazineViewer.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/mockup/MockupStudioModal.tsx",
+      "type": "file",
+      "name": "MockupStudioModal.tsx",
+      "filePath": "src/components/mockup/MockupStudioModal.tsx",
+      "summary": "Componente de interface visual: MockupStudioModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/pwa/PwaInstallPrompt.tsx",
+      "type": "file",
+      "name": "PwaInstallPrompt.tsx",
+      "filePath": "src/components/pwa/PwaInstallPrompt.tsx",
+      "summary": "Componente de interface visual: PwaInstallPrompt.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/repository/AiApprovalModal.tsx",
+      "type": "file",
+      "name": "AiApprovalModal.tsx",
+      "filePath": "src/components/repository/AiApprovalModal.tsx",
+      "summary": "Componente de interface visual: AiApprovalModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/repository/ContentRepositoryView.tsx",
+      "type": "file",
+      "name": "ContentRepositoryView.tsx",
+      "filePath": "src/components/repository/ContentRepositoryView.tsx",
+      "summary": "Componente de interface visual: ContentRepositoryView.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/repository/ImportFromRepositoryModal.tsx",
+      "type": "file",
+      "name": "ImportFromRepositoryModal.tsx",
+      "filePath": "src/components/repository/ImportFromRepositoryModal.tsx",
+      "summary": "Componente de interface visual: ImportFromRepositoryModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/repository/PdfImportModal.tsx",
+      "type": "file",
+      "name": "PdfImportModal.tsx",
+      "filePath": "src/components/repository/PdfImportModal.tsx",
+      "summary": "Componente de interface visual: PdfImportModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/subscription/SubscriptionModal.tsx",
+      "type": "file",
+      "name": "SubscriptionModal.tsx",
+      "filePath": "src/components/subscription/SubscriptionModal.tsx",
+      "summary": "Componente de interface visual: SubscriptionModal.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/sync/CloudSyncDialog.tsx",
+      "type": "file",
+      "name": "CloudSyncDialog.tsx",
+      "filePath": "src/components/sync/CloudSyncDialog.tsx",
+      "summary": "Componente de interface visual: CloudSyncDialog.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/ui/button.tsx",
+      "type": "file",
+      "name": "button.tsx",
+      "filePath": "src/components/ui/button.tsx",
+      "summary": "Componente de interface visual: button.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/data-grid.tsx",
+      "type": "file",
+      "name": "data-grid.tsx",
+      "filePath": "src/components/ui/data-grid.tsx",
+      "summary": "Componente de interface visual: data-grid.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/ui/dialog.tsx",
+      "type": "file",
+      "name": "dialog.tsx",
+      "filePath": "src/components/ui/dialog.tsx",
+      "summary": "Componente de interface visual: dialog.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/ui/file-upload.tsx",
+      "type": "file",
+      "name": "file-upload.tsx",
+      "filePath": "src/components/ui/file-upload.tsx",
+      "summary": "Componente de interface visual: file-upload.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/ui/image-picker.tsx",
+      "type": "file",
+      "name": "image-picker.tsx",
+      "filePath": "src/components/ui/image-picker.tsx",
+      "summary": "Componente de interface visual: image-picker.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/components/ui/input.tsx",
+      "type": "file",
+      "name": "input.tsx",
+      "filePath": "src/components/ui/input.tsx",
+      "summary": "Componente de interface visual: input.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/kanban.tsx",
+      "type": "file",
+      "name": "kanban.tsx",
+      "filePath": "src/components/ui/kanban.tsx",
+      "summary": "Componente de interface visual: kanban.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/ui/label.tsx",
+      "type": "file",
+      "name": "label.tsx",
+      "filePath": "src/components/ui/label.tsx",
+      "summary": "Componente de interface visual: label.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/slide-to-confirm.tsx",
+      "type": "file",
+      "name": "slide-to-confirm.tsx",
+      "filePath": "src/components/ui/slide-to-confirm.tsx",
+      "summary": "Componente de interface visual: slide-to-confirm.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/ui/slider.tsx",
+      "type": "file",
+      "name": "slider.tsx",
+      "filePath": "src/components/ui/slider.tsx",
+      "summary": "Componente de interface visual: slider.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/stepper.tsx",
+      "type": "file",
+      "name": "stepper.tsx",
+      "filePath": "src/components/ui/stepper.tsx",
+      "summary": "Componente de interface visual: stepper.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/components/ui/switch.tsx",
+      "type": "file",
+      "name": "switch.tsx",
+      "filePath": "src/components/ui/switch.tsx",
+      "summary": "Componente de interface visual: switch.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/textarea.tsx",
+      "type": "file",
+      "name": "textarea.tsx",
+      "filePath": "src/components/ui/textarea.tsx",
+      "summary": "Componente de interface visual: textarea.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/timeline.tsx",
+      "type": "file",
+      "name": "timeline.tsx",
+      "filePath": "src/components/ui/timeline.tsx",
+      "summary": "Componente de interface visual: timeline.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/lib/ai-service.ts",
+      "type": "file",
+      "name": "ai-service.ts",
+      "filePath": "src/lib/ai-service.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: ai-service.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/lib/auth-state.ts",
+      "type": "file",
+      "name": "auth-state.ts",
+      "filePath": "src/lib/auth-state.ts",
+      "summary": "Módulo de autenticação, validação de senhas de 10 dígitos e controle de sessões.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/lib/cloud-sync.ts",
+      "type": "file",
+      "name": "cloud-sync.ts",
+      "filePath": "src/lib/cloud-sync.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: cloud-sync.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/lib/editions-archive.ts",
+      "type": "file",
+      "name": "editions-archive.ts",
+      "filePath": "src/lib/editions-archive.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: editions-archive.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/lib/error-capture.ts",
+      "type": "file",
+      "name": "error-capture.ts",
+      "filePath": "src/lib/error-capture.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: error-capture.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/lib/error-page.ts",
+      "type": "file",
+      "name": "error-page.ts",
+      "filePath": "src/lib/error-page.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: error-page.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/lib/google-drive-sync.ts",
+      "type": "file",
+      "name": "google-drive-sync.ts",
+      "filePath": "src/lib/google-drive-sync.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: google-drive-sync.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/lib/lovable-error-reporting.ts",
+      "type": "file",
+      "name": "lovable-error-reporting.ts",
+      "filePath": "src/lib/lovable-error-reporting.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: lovable-error-reporting.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/lib/magazine-pages.tsx",
+      "type": "file",
+      "name": "magazine-pages.tsx",
+      "filePath": "src/lib/magazine-pages.tsx",
+      "summary": "Módulo de utilitários e funções auxiliares: magazine-pages.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/lib/magazine-utils.ts",
+      "type": "file",
+      "name": "magazine-utils.ts",
+      "filePath": "src/lib/magazine-utils.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: magazine-utils.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/lib/pdf-conversion-router.ts",
+      "type": "file",
+      "name": "pdf-conversion-router.ts",
+      "filePath": "src/lib/pdf-conversion-router.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: pdf-conversion-router.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/lib/pdf-direct-export.ts",
+      "type": "file",
+      "name": "pdf-direct-export.ts",
+      "filePath": "src/lib/pdf-direct-export.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: pdf-direct-export.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/lib/sample-data.ts",
+      "type": "file",
+      "name": "sample-data.ts",
+      "filePath": "src/lib/sample-data.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: sample-data.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/lib/stock-photos.ts",
+      "type": "file",
+      "name": "stock-photos.ts",
+      "filePath": "src/lib/stock-photos.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: stock-photos.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/lib/theme-utils.ts",
+      "type": "file",
+      "name": "theme-utils.ts",
+      "filePath": "src/lib/theme-utils.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: theme-utils.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/lib/ui-theme.ts",
+      "type": "file",
+      "name": "ui-theme.ts",
+      "filePath": "src/lib/ui-theme.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: ui-theme.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/lib/utils.ts",
+      "type": "file",
+      "name": "utils.ts",
+      "filePath": "src/lib/utils.ts",
+      "summary": "Módulo de utilitários e funções auxiliares: utils.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/routeTree.gen.ts",
+      "type": "file",
+      "name": "routeTree.gen.ts",
+      "filePath": "src/routeTree.gen.ts",
+      "summary": "Módulo de código code: routeTree.gen.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/router.tsx",
+      "type": "file",
+      "name": "router.tsx",
+      "filePath": "src/router.tsx",
+      "summary": "Módulo de código code: router.tsx",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:src/routes/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "src/routes/README.md",
+      "summary": "Definição de rotas e navegação para README.",
+      "tags": [
+        "docs",
+        "markdown"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/routes/__root.tsx",
+      "type": "file",
+      "name": "__root.tsx",
+      "filePath": "src/routes/__root.tsx",
+      "summary": "Definição de rotas e navegação para __root.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/routes/api/ai.ts",
+      "type": "file",
+      "name": "ai.ts",
+      "filePath": "src/routes/api/ai.ts",
+      "summary": "Definição de rotas e navegação para ai.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/routes/api/project.ts",
+      "type": "file",
+      "name": "project.ts",
+      "filePath": "src/routes/api/project.ts",
+      "summary": "Definição de rotas e navegação para project.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/routes/auth.tsx",
+      "type": "file",
+      "name": "auth.tsx",
+      "filePath": "src/routes/auth.tsx",
+      "summary": "Módulo de autenticação, validação de senhas de 10 dígitos e controle de sessões.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/routes/boost.tsx",
+      "type": "file",
+      "name": "boost.tsx",
+      "filePath": "src/routes/boost.tsx",
+      "summary": "Definição de rotas e navegação para boost.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/routes/create.tsx",
+      "type": "file",
+      "name": "create.tsx",
+      "filePath": "src/routes/create.tsx",
+      "summary": "Definição de rotas e navegação para create.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/routes/eco.tsx",
+      "type": "file",
+      "name": "eco.tsx",
+      "filePath": "src/routes/eco.tsx",
+      "summary": "Definição de rotas e navegação para eco.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/routes/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "src/routes/index.tsx",
+      "summary": "Definição de rotas e navegação para index.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/routes/login.tsx",
+      "type": "file",
+      "name": "login.tsx",
+      "filePath": "src/routes/login.tsx",
+      "summary": "Módulo de autenticação, validação de senhas de 10 dígitos e controle de sessões.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/routes/master-admin.tsx",
+      "type": "file",
+      "name": "master-admin.tsx",
+      "filePath": "src/routes/master-admin.tsx",
+      "summary": "Definição de rotas e navegação para master-admin.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "src/server.ts",
+      "summary": "Módulo de código code: server.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/services/ecosystem-auth-service.ts",
+      "type": "file",
+      "name": "ecosystem-auth-service.ts",
+      "filePath": "src/services/ecosystem-auth-service.ts",
+      "summary": "Módulo de autenticação, validação de senhas de 10 dígitos e controle de sessões.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/start.ts",
+      "type": "file",
+      "name": "start.ts",
+      "filePath": "src/start.ts",
+      "summary": "Módulo de código code: start.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/styles.css",
+      "type": "file",
+      "name": "styles.css",
+      "filePath": "src/styles.css",
+      "summary": "Folha de estilos e temas de alto contraste com regras de conformidade Vercel.",
+      "tags": [
+        "markup",
+        "css"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/types/magazine.ts",
+      "type": "file",
+      "name": "magazine.ts",
+      "filePath": "src/types/magazine.ts",
+      "summary": "Módulo de código code: magazine.ts",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "tsconfig.json",
+      "summary": "Arquivo de configuração de ambiente e build: tsconfig.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:vercel.json",
+      "type": "config",
+      "name": "vercel.json",
+      "filePath": "vercel.json",
+      "summary": "Arquivo de configuração de ambiente e build: vercel.json.",
+      "tags": [
+        "config",
+        "json"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "vite.config.ts",
+      "summary": "Configuração do bundler Vite, plugins, otimizações SSR e aliases.",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:.agents/skills/pdf-official/scripts/check_bounding_boxes_test.py",
+      "target": "file:.agents/skills/pdf-official/scripts/check_bounding_boxes.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:.agents/skills/pdf-official/scripts/fill_fillable_fields.py",
+      "target": "file:.agents/skills/pdf-official/scripts/extract_form_field_info.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:.agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "target": "file:.agents/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:.agents/skills/ui-ux-pro-max/scripts/search.py",
+      "target": "file:.agents/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:.agents/skills/ui-ux-pro-max/scripts/search.py",
+      "target": "file:.agents/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:e2e/auth.spec.ts",
+      "target": "file:e2e/fixtures/auth.fixture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:e2e/fixtures/auth.fixture.ts",
+      "target": "file:src/lib/auth-state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:e2e/layout-modes.spec.ts",
+      "target": "file:e2e/fixtures/auth.fixture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:e2e/main-action.spec.ts",
+      "target": "file:e2e/fixtures/auth.fixture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:e2e/payment.spec.ts",
+      "target": "file:e2e/fixtures/auth.fixture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:e2e/pdf-conversion-router.spec.ts",
+      "target": "file:e2e/fixtures/auth.fixture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/aas-mcp-server.ts",
+      "target": "file:scripts/aas-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/MasterAdminDashboard.tsx",
+      "target": "file:src/services/ecosystem-auth-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/components/ui/timeline.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/lib/cloud-sync.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/lib/editions-archive.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/archive/EditionsArchiveView.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/auth/AuthModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/auth/AuthModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/auth/AuthModal.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/auth/AuthModal.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/auth/AuthModal.tsx",
+      "target": "file:src/lib/auth-state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/auth/AuthModal.tsx",
+      "target": "file:src/services/ecosystem-auth-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/AiStudioDialog.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/AiStudioDialog.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/AiStudioDialog.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/AiStudioDialog.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/AiStudioDialog.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/AiStudioDialog.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/magazine/ArticleSpread.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/ui/image-picker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/ui/switch.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/components/ui/textarea.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/lib/sample-data.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/ArticleEditorModal.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/components/ui/image-picker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/components/ui/slider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/components/ui/switch.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/components/ui/textarea.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/CoverCustomizer.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/EditorialSettings.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/EditorialSettings.tsx",
+      "target": "file:src/components/ui/image-picker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/EditorialSettings.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/EditorialSettings.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/EditorialSettings.tsx",
+      "target": "file:src/components/ui/switch.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/EditorialSettings.tsx",
+      "target": "file:src/components/ui/textarea.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/EditorialSettings.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/components/pwa/PwaInstallPrompt.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/components/ui/image-picker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/components/ui/switch.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/components/ui/textarea.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/lib/sample-data.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/lib/theme-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/lib/ui-theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/editor/MagazineSettings.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/export/PdfExportModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/export/PdfExportModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/export/PdfExportModal.tsx",
+      "target": "file:src/components/ui/slide-to-confirm.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/export/PdfExportModal.tsx",
+      "target": "file:src/lib/magazine-pages.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/export/PdfExportModal.tsx",
+      "target": "file:src/lib/pdf-direct-export.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/export/PdfExportModal.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/ArticleSpread.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/ArticleSpread.tsx",
+      "target": "file:src/lib/theme-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/ArticleSpread.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/BackCoverPage.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/BackCoverPage.tsx",
+      "target": "file:src/lib/theme-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/BackCoverPage.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/ContributorsPage.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/ContributorsPage.tsx",
+      "target": "file:src/lib/theme-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/ContributorsPage.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/CoverPage.tsx",
+      "target": "file:src/lib/theme-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/CoverPage.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/EditorLetterPage.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/EditorLetterPage.tsx",
+      "target": "file:src/lib/theme-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/EditorLetterPage.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/EditorialPage.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/EditorialPage.tsx",
+      "target": "file:src/lib/theme-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/EditorialPage.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/MagazineViewer.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/MagazineViewer.tsx",
+      "target": "file:src/lib/magazine-pages.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/magazine/MagazineViewer.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/mockup/MockupStudioModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/mockup/MockupStudioModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/mockup/MockupStudioModal.tsx",
+      "target": "file:src/components/ui/textarea.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/mockup/MockupStudioModal.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/mockup/MockupStudioModal.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/pwa/PwaInstallPrompt.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/components/ui/image-picker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/components/ui/stepper.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/components/ui/textarea.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/AiApprovalModal.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/repository/AiApprovalModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/repository/PdfImportModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/ui/data-grid.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/ui/kanban.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/components/ui/textarea.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/lib/editions-archive.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/lib/google-drive-sync.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ContentRepositoryView.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ImportFromRepositoryModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ImportFromRepositoryModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ImportFromRepositoryModal.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ImportFromRepositoryModal.tsx",
+      "target": "file:src/lib/editions-archive.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/ImportFromRepositoryModal.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/PdfImportModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/PdfImportModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/PdfImportModal.tsx",
+      "target": "file:src/components/ui/file-upload.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/PdfImportModal.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/PdfImportModal.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/PdfImportModal.tsx",
+      "target": "file:src/lib/pdf-conversion-router.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/repository/PdfImportModal.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/subscription/SubscriptionModal.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/subscription/SubscriptionModal.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/subscription/SubscriptionModal.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/subscription/SubscriptionModal.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/subscription/SubscriptionModal.tsx",
+      "target": "file:src/lib/auth-state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/sync/CloudSyncDialog.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/sync/CloudSyncDialog.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/sync/CloudSyncDialog.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/sync/CloudSyncDialog.tsx",
+      "target": "file:src/lib/cloud-sync.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/sync/CloudSyncDialog.tsx",
+      "target": "file:src/lib/google-drive-sync.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/sync/CloudSyncDialog.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/button.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/data-grid.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/data-grid.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/dialog.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/file-upload.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/file-upload.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/image-picker.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/image-picker.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/image-picker.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/image-picker.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/image-picker.tsx",
+      "target": "file:src/lib/stock-photos.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/input.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/kanban.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/kanban.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/label.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/slider.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/stepper.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/switch.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/textarea.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/components/ui/timeline.tsx",
+      "target": "file:src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/ai-service.ts",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/ai-service.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/cloud-sync.ts",
+      "target": "file:src/lib/google-drive-sync.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/cloud-sync.ts",
+      "target": "file:src/lib/sample-data.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/cloud-sync.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/editions-archive.ts",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/editions-archive.ts",
+      "target": "file:src/lib/sample-data.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/editions-archive.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/google-drive-sync.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/components/magazine/ArticleSpread.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/components/magazine/BackCoverPage.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/components/magazine/ContributorsPage.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/components/magazine/CoverPage.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/components/magazine/EditorLetterPage.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/components/magazine/EditorialPage.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-pages.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/magazine-utils.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/pdf-conversion-router.ts",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/pdf-conversion-router.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/pdf-direct-export.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/sample-data.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/lib/theme-utils.ts",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/router.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/__root.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/api/ai.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/api/project.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/auth.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/boost.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/create.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/eco.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/login.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/routes/master-admin.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routeTree.gen.ts",
+      "target": "file:src/start.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/router.tsx",
+      "target": "file:src/routeTree.gen.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/__root.tsx",
+      "target": "file:src/components/ImpersonationBanner.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/__root.tsx",
+      "target": "file:src/lib/lovable-error-reporting.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/auth.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/auth.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/auth.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/auth.tsx",
+      "target": "file:src/lib/auth-state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/auth.tsx",
+      "target": "file:src/services/ecosystem-auth-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/boost.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/create.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/create.tsx",
+      "target": "file:src/components/ui/input.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/create.tsx",
+      "target": "file:src/components/ui/label.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/create.tsx",
+      "target": "file:src/lib/auth-state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/create.tsx",
+      "target": "file:src/services/ecosystem-auth-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/eco.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/eco.tsx",
+      "target": "file:src/lib/auth-state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/archive/EditionsArchiveView.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/auth/AuthModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/editor/AiStudioDialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/editor/ArticleEditorModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/editor/CoverCustomizer.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/editor/EditorialSettings.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/editor/MagazineSettings.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/export/PdfExportModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/magazine/MagazineViewer.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/mockup/MockupStudioModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/pwa/PwaInstallPrompt.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/repository/AiApprovalModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/repository/ContentRepositoryView.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/repository/ImportFromRepositoryModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/repository/PdfImportModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/subscription/SubscriptionModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/sync/CloudSyncDialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/components/ui/dialog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/ai-service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/auth-state.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/cloud-sync.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/editions-archive.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/google-drive-sync.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/magazine-pages.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/magazine-utils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/sample-data.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/lib/ui-theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/index.tsx",
+      "target": "file:src/types/magazine.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/routes/master-admin.tsx",
+      "target": "file:src/components/MasterAdminDashboard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/server.ts",
+      "target": "file:src/lib/error-capture.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/server.ts",
+      "target": "file:src/lib/error-page.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/start.ts",
+      "target": "file:src/lib/error-page.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:core",
+      "name": "Core",
+      "description": "Core application files",
+      "nodeIds": [
+        "file:.agents/skills/pdf-official/scripts/check_bounding_boxes.py",
+        "file:.agents/skills/pdf-official/scripts/check_bounding_boxes_test.py",
+        "file:.agents/skills/pdf-official/scripts/check_fillable_fields.py",
+        "file:.agents/skills/pdf-official/scripts/convert_pdf_to_images.py",
+        "file:.agents/skills/pdf-official/scripts/create_validation_image.py",
+        "file:.agents/skills/pdf-official/scripts/extract_form_field_info.py",
+        "file:.agents/skills/pdf-official/scripts/fill_fillable_fields.py",
+        "file:.agents/skills/pdf-official/scripts/fill_pdf_form_with_annotations.py",
+        "file:.agents/skills/radix-ui-design-system/examples/dialog-example.tsx",
+        "file:.agents/skills/radix-ui-design-system/examples/dropdown-example.tsx",
+        "file:.agents/skills/radix-ui-design-system/templates/component-template.tsx.template",
+        "file:.agents/skills/systematic-debugging/condition-based-waiting-example.ts",
+        "file:.agents/skills/ui-ux-pro-max/data/charts.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/colors.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/icons.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/landing.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/products.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/prompts.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/react-performance.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/react.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/vue.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/styles.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/typography.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/web-interface.csv",
+        "file:.agents/skills/ui-ux-pro-max/scripts/core.py",
+        "file:.agents/skills/ui-ux-pro-max/scripts/design_system.py",
+        "file:.agents/skills/ui-ux-pro-max/scripts/search.py",
+        "file:.prettierignore",
+        "file:e2e/auth.spec.ts",
+        "file:e2e/fixtures/auth.fixture.ts",
+        "file:e2e/layout-modes.spec.ts",
+        "file:e2e/main-action.spec.ts",
+        "file:e2e/payment.spec.ts",
+        "file:e2e/pdf-conversion-router.spec.ts",
+        "file:ecosystem_schema.sql",
+        "file:eslint.config.js",
+        "file:graphify-out/graph.html",
+        "file:playwright.config.ts",
+        "file:public/pdf.worker.mjs",
+        "file:public/sw.js",
+        "file:scripts/aas-catalog.ts",
+        "file:scripts/aas-mcp-server.ts",
+        "file:scripts/run-e2e-ci.sh",
+        "file:src/routeTree.gen.ts",
+        "file:src/router.tsx",
+        "file:src/server.ts",
+        "file:src/start.ts",
+        "file:src/styles.css",
+        "file:src/types/magazine.ts",
+        "file:vite.config.ts"
+      ]
+    },
+    {
+      "id": "layer:ui-layer",
+      "name": "UI Layer",
+      "description": "User interface components and views",
+      "nodeIds": [
+        "file:src/components/ImpersonationBanner.tsx",
+        "file:src/components/MasterAdminDashboard.tsx",
+        "file:src/components/archive/EditionsArchiveView.tsx",
+        "file:src/components/auth/AuthModal.tsx",
+        "file:src/components/editor/AiStudioDialog.tsx",
+        "file:src/components/editor/ArticleEditorModal.tsx",
+        "file:src/components/editor/CoverCustomizer.tsx",
+        "file:src/components/editor/EditorialSettings.tsx",
+        "file:src/components/editor/MagazineSettings.tsx",
+        "file:src/components/export/PdfExportModal.tsx",
+        "file:src/components/magazine/ArticleSpread.tsx",
+        "file:src/components/magazine/BackCoverPage.tsx",
+        "file:src/components/magazine/ContributorsPage.tsx",
+        "file:src/components/magazine/CoverPage.tsx",
+        "file:src/components/magazine/EditorLetterPage.tsx",
+        "file:src/components/magazine/EditorialPage.tsx",
+        "file:src/components/magazine/MagazineViewer.tsx",
+        "file:src/components/mockup/MockupStudioModal.tsx",
+        "file:src/components/pwa/PwaInstallPrompt.tsx",
+        "file:src/components/subscription/SubscriptionModal.tsx",
+        "file:src/components/sync/CloudSyncDialog.tsx",
+        "file:src/components/ui/button.tsx",
+        "file:src/components/ui/data-grid.tsx",
+        "file:src/components/ui/dialog.tsx",
+        "file:src/components/ui/file-upload.tsx",
+        "file:src/components/ui/image-picker.tsx",
+        "file:src/components/ui/input.tsx",
+        "file:src/components/ui/kanban.tsx",
+        "file:src/components/ui/label.tsx",
+        "file:src/components/ui/slide-to-confirm.tsx",
+        "file:src/components/ui/slider.tsx",
+        "file:src/components/ui/stepper.tsx",
+        "file:src/components/ui/switch.tsx",
+        "file:src/components/ui/textarea.tsx",
+        "file:src/components/ui/timeline.tsx"
+      ]
+    },
+    {
+      "id": "layer:data-layer",
+      "name": "Data Layer",
+      "description": "Data models, database access, and persistence",
+      "nodeIds": [
+        "file:src/components/repository/AiApprovalModal.tsx",
+        "file:src/components/repository/ContentRepositoryView.tsx",
+        "file:src/components/repository/ImportFromRepositoryModal.tsx",
+        "file:src/components/repository/PdfImportModal.tsx"
+      ]
+    },
+    {
+      "id": "layer:utility-layer",
+      "name": "Utility Layer",
+      "description": "Shared utilities, helpers, and common libraries",
+      "nodeIds": [
+        "file:src/lib/ai-service.ts",
+        "file:src/lib/auth-state.ts",
+        "file:src/lib/cloud-sync.ts",
+        "file:src/lib/editions-archive.ts",
+        "file:src/lib/error-capture.ts",
+        "file:src/lib/error-page.ts",
+        "file:src/lib/google-drive-sync.ts",
+        "file:src/lib/lovable-error-reporting.ts",
+        "file:src/lib/magazine-pages.tsx",
+        "file:src/lib/magazine-utils.ts",
+        "file:src/lib/pdf-conversion-router.ts",
+        "file:src/lib/pdf-direct-export.ts",
+        "file:src/lib/sample-data.ts",
+        "file:src/lib/stock-photos.ts",
+        "file:src/lib/theme-utils.ts",
+        "file:src/lib/ui-theme.ts",
+        "file:src/lib/utils.ts"
+      ]
+    },
+    {
+      "id": "layer:api-layer",
+      "name": "API Layer",
+      "description": "HTTP endpoints, route handlers, and API controllers",
+      "nodeIds": [
+        "file:src/routes/__root.tsx",
+        "file:src/routes/api/ai.ts",
+        "file:src/routes/api/project.ts",
+        "file:src/routes/auth.tsx",
+        "file:src/routes/boost.tsx",
+        "file:src/routes/create.tsx",
+        "file:src/routes/eco.tsx",
+        "file:src/routes/index.tsx",
+        "file:src/routes/login.tsx",
+        "file:src/routes/master-admin.tsx"
+      ]
+    },
+    {
+      "id": "layer:service-layer",
+      "name": "Service Layer",
+      "description": "Business logic and application services",
+      "nodeIds": [
+        "file:src/services/ecosystem-auth-service.ts"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Core",
+      "description": "Core application files. Key files: check_bounding_boxes_test.py, check_fillable_fields.py, convert_pdf_to_images.py, create_validation_image.py, fill_fillable_fields.py, fill_pdf_form_with_annotations.py, dialog-example.tsx, dropdown-example.tsx, component-template.tsx.template, condition-based-waiting-example.ts, charts.csv, colors.csv, icons.csv, landing.csv, products.csv, prompts.csv, react-performance.csv, flutter.csv, html-tailwind.csv, nextjs.csv, nuxt-ui.csv, nuxtjs.csv, react-native.csv, react.csv, shadcn.csv, svelte.csv, swiftui.csv, vue.csv, styles.csv, typography.csv, ui-reasoning.csv, ux-guidelines.csv, web-interface.csv, search.py, .prettierignore, auth.spec.ts, layout-modes.spec.ts, main-action.spec.ts, payment.spec.ts, pdf-conversion-router.spec.ts, ecosystem_schema.sql, eslint.config.js, graph.html, playwright.config.ts, pdf.worker.mjs, sw.js, aas-mcp-server.ts, run-e2e-ci.sh, server.ts, styles.css, vite.config.ts, check_bounding_boxes.py, extract_form_field_info.py, design_system.py, auth.fixture.ts, aas-catalog.ts, core.py, routeTree.gen.ts, router.tsx, start.ts, magazine.ts.",
+      "nodeIds": [
+        "file:.agents/skills/pdf-official/scripts/check_bounding_boxes_test.py",
+        "file:.agents/skills/pdf-official/scripts/check_fillable_fields.py",
+        "file:.agents/skills/pdf-official/scripts/convert_pdf_to_images.py",
+        "file:.agents/skills/pdf-official/scripts/create_validation_image.py",
+        "file:.agents/skills/pdf-official/scripts/fill_fillable_fields.py",
+        "file:.agents/skills/pdf-official/scripts/fill_pdf_form_with_annotations.py",
+        "file:.agents/skills/radix-ui-design-system/examples/dialog-example.tsx",
+        "file:.agents/skills/radix-ui-design-system/examples/dropdown-example.tsx",
+        "file:.agents/skills/radix-ui-design-system/templates/component-template.tsx.template",
+        "file:.agents/skills/systematic-debugging/condition-based-waiting-example.ts",
+        "file:.agents/skills/ui-ux-pro-max/data/charts.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/colors.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/icons.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/landing.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/products.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/prompts.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/react-performance.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/react.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/stacks/vue.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/styles.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/typography.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+        "file:.agents/skills/ui-ux-pro-max/data/web-interface.csv",
+        "file:.agents/skills/ui-ux-pro-max/scripts/search.py",
+        "file:.prettierignore",
+        "file:e2e/auth.spec.ts",
+        "file:e2e/layout-modes.spec.ts",
+        "file:e2e/main-action.spec.ts",
+        "file:e2e/payment.spec.ts",
+        "file:e2e/pdf-conversion-router.spec.ts",
+        "file:ecosystem_schema.sql",
+        "file:eslint.config.js",
+        "file:graphify-out/graph.html",
+        "file:playwright.config.ts",
+        "file:public/pdf.worker.mjs",
+        "file:public/sw.js",
+        "file:scripts/aas-mcp-server.ts",
+        "file:scripts/run-e2e-ci.sh",
+        "file:src/server.ts",
+        "file:src/styles.css",
+        "file:vite.config.ts",
+        "file:.agents/skills/pdf-official/scripts/check_bounding_boxes.py",
+        "file:.agents/skills/pdf-official/scripts/extract_form_field_info.py",
+        "file:.agents/skills/ui-ux-pro-max/scripts/design_system.py",
+        "file:e2e/fixtures/auth.fixture.ts",
+        "file:scripts/aas-catalog.ts",
+        "file:.agents/skills/ui-ux-pro-max/scripts/core.py",
+        "file:src/routeTree.gen.ts",
+        "file:src/router.tsx",
+        "file:src/start.ts",
+        "file:src/types/magazine.ts"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Utility Layer",
+      "description": "Shared utilities, helpers, and common libraries. Key files: error-capture.ts, ai-service.ts, auth-state.ts, cloud-sync.ts, editions-archive.ts, error-page.ts, google-drive-sync.ts, lovable-error-reporting.ts, magazine-pages.tsx, magazine-utils.ts, pdf-conversion-router.ts, pdf-direct-export.ts, sample-data.ts, stock-photos.ts, theme-utils.ts, ui-theme.ts, utils.ts.",
+      "nodeIds": [
+        "file:src/lib/error-capture.ts",
+        "file:src/lib/ai-service.ts",
+        "file:src/lib/auth-state.ts",
+        "file:src/lib/cloud-sync.ts",
+        "file:src/lib/editions-archive.ts",
+        "file:src/lib/error-page.ts",
+        "file:src/lib/google-drive-sync.ts",
+        "file:src/lib/lovable-error-reporting.ts",
+        "file:src/lib/magazine-pages.tsx",
+        "file:src/lib/magazine-utils.ts",
+        "file:src/lib/pdf-conversion-router.ts",
+        "file:src/lib/pdf-direct-export.ts",
+        "file:src/lib/sample-data.ts",
+        "file:src/lib/stock-photos.ts",
+        "file:src/lib/theme-utils.ts",
+        "file:src/lib/ui-theme.ts",
+        "file:src/lib/utils.ts"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "UI Layer",
+      "description": "User interface components and views. Key files: ImpersonationBanner.tsx, MasterAdminDashboard.tsx, EditionsArchiveView.tsx, AuthModal.tsx, AiStudioDialog.tsx, ArticleEditorModal.tsx, CoverCustomizer.tsx, EditorialSettings.tsx, MagazineSettings.tsx, PdfExportModal.tsx, ArticleSpread.tsx, BackCoverPage.tsx, ContributorsPage.tsx, CoverPage.tsx, EditorLetterPage.tsx, EditorialPage.tsx, MagazineViewer.tsx, MockupStudioModal.tsx, PwaInstallPrompt.tsx, SubscriptionModal.tsx, CloudSyncDialog.tsx, button.tsx, data-grid.tsx, dialog.tsx, file-upload.tsx, image-picker.tsx, input.tsx, kanban.tsx, label.tsx, slide-to-confirm.tsx, slider.tsx, stepper.tsx, switch.tsx, textarea.tsx, timeline.tsx.",
+      "nodeIds": [
+        "file:src/components/ImpersonationBanner.tsx",
+        "file:src/components/MasterAdminDashboard.tsx",
+        "file:src/components/archive/EditionsArchiveView.tsx",
+        "file:src/components/auth/AuthModal.tsx",
+        "file:src/components/editor/AiStudioDialog.tsx",
+        "file:src/components/editor/ArticleEditorModal.tsx",
+        "file:src/components/editor/CoverCustomizer.tsx",
+        "file:src/components/editor/EditorialSettings.tsx",
+        "file:src/components/editor/MagazineSettings.tsx",
+        "file:src/components/export/PdfExportModal.tsx",
+        "file:src/components/magazine/ArticleSpread.tsx",
+        "file:src/components/magazine/BackCoverPage.tsx",
+        "file:src/components/magazine/ContributorsPage.tsx",
+        "file:src/components/magazine/CoverPage.tsx",
+        "file:src/components/magazine/EditorLetterPage.tsx",
+        "file:src/components/magazine/EditorialPage.tsx",
+        "file:src/components/magazine/MagazineViewer.tsx",
+        "file:src/components/mockup/MockupStudioModal.tsx",
+        "file:src/components/pwa/PwaInstallPrompt.tsx",
+        "file:src/components/subscription/SubscriptionModal.tsx",
+        "file:src/components/sync/CloudSyncDialog.tsx",
+        "file:src/components/ui/button.tsx",
+        "file:src/components/ui/data-grid.tsx",
+        "file:src/components/ui/dialog.tsx",
+        "file:src/components/ui/file-upload.tsx",
+        "file:src/components/ui/image-picker.tsx",
+        "file:src/components/ui/input.tsx",
+        "file:src/components/ui/kanban.tsx",
+        "file:src/components/ui/label.tsx",
+        "file:src/components/ui/slide-to-confirm.tsx",
+        "file:src/components/ui/slider.tsx",
+        "file:src/components/ui/stepper.tsx",
+        "file:src/components/ui/switch.tsx",
+        "file:src/components/ui/textarea.tsx",
+        "file:src/components/ui/timeline.tsx"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Data Layer",
+      "description": "Data models, database access, and persistence. Key files: AiApprovalModal.tsx, ContentRepositoryView.tsx, ImportFromRepositoryModal.tsx, PdfImportModal.tsx.",
+      "nodeIds": [
+        "file:src/components/repository/AiApprovalModal.tsx",
+        "file:src/components/repository/ContentRepositoryView.tsx",
+        "file:src/components/repository/ImportFromRepositoryModal.tsx",
+        "file:src/components/repository/PdfImportModal.tsx"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "API Layer",
+      "description": "HTTP endpoints, route handlers, and API controllers. Key files: __root.tsx, ai.ts, project.ts, auth.tsx, boost.tsx, create.tsx, eco.tsx, index.tsx, login.tsx, master-admin.tsx.",
+      "nodeIds": [
+        "file:src/routes/__root.tsx",
+        "file:src/routes/api/ai.ts",
+        "file:src/routes/api/project.ts",
+        "file:src/routes/auth.tsx",
+        "file:src/routes/boost.tsx",
+        "file:src/routes/create.tsx",
+        "file:src/routes/eco.tsx",
+        "file:src/routes/index.tsx",
+        "file:src/routes/login.tsx",
+        "file:src/routes/master-admin.tsx"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Service Layer",
+      "description": "Business logic and application services. Key files: ecosystem-auth-service.ts.",
+      "nodeIds": [
+        "file:src/services/ecosystem-auth-service.ts"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "Supporting Components",
+      "description": "Additional supporting files: skills_index.json, SKILL.md, SKILL.md, SKILL.md, SKILL.md, headless-cms.md, SKILL.md, SKILL.md, SKILL.md, .env.example, SKILL.md, SKILL.md, LICENSE.txt, SKILL.md, forms.md, reference.md, SKILL.md, SKILL.md, SKILL.md, file-processing-mode.md, inline-text-mode.md, SKILL.md, README.md, AGENTS.md, README.md, SKILL.md, metadata.json, _sections.md, _template.md, advanced-event-handler-refs.md, advanced-use-latest.md, async-api-routes.md, async-defer-await.md, async-dependencies.md, async-parallel.md, async-suspense-boundaries.md, bundle-barrel-imports.md, bundle-conditional.md, bundle-defer-third-party.md, bundle-dynamic-imports.md, bundle-preload.md, client-event-listeners.md, client-swr-dedup.md, js-batch-dom-css.md, js-cache-function-results.md, js-cache-property-access.md, js-cache-storage.md, js-combine-iterations.md, js-early-exit.md, js-hoist-regexp.md, js-index-maps.md, js-length-check-first.md, js-min-max-loop.md, js-set-map-lookups.md, js-tosorted-immutable.md, rendering-activity.md, rendering-animate-svg-wrapper.md, rendering-conditional-render.md, rendering-content-visibility.md, rendering-hoist-jsx.md, rendering-hydration-no-flicker.md, rendering-svg-precision.md, rerender-defer-reads.md, rerender-dependencies.md, rerender-derived-state.md, rerender-functional-setstate.md, rerender-lazy-state-init.md, rerender-memo.md, rerender-transitions.md, server-after-nonblocking.md, server-cache-lru.md, server-cache-react.md, server-parallel-fetching.md, server-serialization.md, SKILL.md, SKILL.md, condition-based-waiting.md, defense-in-depth.md, root-cause-tracing.md, SKILL.md, implementation-playbook.md, SKILL.md, .env.example, plano-página-em-branco-com-ponto-preto-centralizado-2026-08-29.md, project.json, AGENTS.md, DEV_GUIDE.md, README.md, bunfig.toml, github-actions-e2e.yml, components.json, GRAPH_REPORT.md, graph.json, knip_pdf.json, package.json, manifest.json, robots.txt, sitemap.xml, roadmap.md, README.md, tsconfig.json, vercel.json.",
+      "nodeIds": [
+        "config:.agents/aas-catalog/skills_index.json",
+        "document:.agents/skills/avoid-ai-writing/SKILL.md",
+        "document:.agents/skills/brutalist-typography/SKILL.md",
+        "document:.agents/skills/cloudflare-deploy/SKILL.md",
+        "document:.agents/skills/content-strategy/SKILL.md",
+        "document:.agents/skills/content-strategy/references/headless-cms.md",
+        "document:.agents/skills/copy-editing/SKILL.md",
+        "document:.agents/skills/editorial-design/SKILL.md",
+        "document:.agents/skills/high-end-visual-design/SKILL.md",
+        "config:.agents/skills/image-generator/.env.example",
+        "document:.agents/skills/image-generator/SKILL.md",
+        "document:.agents/skills/pdf-conversion-router/SKILL.md",
+        "document:.agents/skills/pdf-official/LICENSE.txt",
+        "document:.agents/skills/pdf-official/SKILL.md",
+        "document:.agents/skills/pdf-official/forms.md",
+        "document:.agents/skills/pdf-official/reference.md",
+        "document:.agents/skills/playwright-pdf-validation/SKILL.md",
+        "document:.agents/skills/print-css-optimization/SKILL.md",
+        "document:.agents/skills/professional-proofreader/SKILL.md",
+        "document:.agents/skills/professional-proofreader/references/file-processing-mode.md",
+        "document:.agents/skills/professional-proofreader/references/inline-text-mode.md",
+        "document:.agents/skills/radix-ui-design-system/SKILL.md",
+        "document:.agents/skills/radix-ui-design-system/examples/README.md",
+        "document:.agents/skills/react-best-practices/AGENTS.md",
+        "document:.agents/skills/react-best-practices/README.md",
+        "document:.agents/skills/react-best-practices/SKILL.md",
+        "config:.agents/skills/react-best-practices/metadata.json",
+        "document:.agents/skills/react-best-practices/rules/_sections.md",
+        "document:.agents/skills/react-best-practices/rules/_template.md",
+        "document:.agents/skills/react-best-practices/rules/advanced-event-handler-refs.md",
+        "document:.agents/skills/react-best-practices/rules/advanced-use-latest.md",
+        "document:.agents/skills/react-best-practices/rules/async-api-routes.md",
+        "document:.agents/skills/react-best-practices/rules/async-defer-await.md",
+        "document:.agents/skills/react-best-practices/rules/async-dependencies.md",
+        "document:.agents/skills/react-best-practices/rules/async-parallel.md",
+        "document:.agents/skills/react-best-practices/rules/async-suspense-boundaries.md",
+        "document:.agents/skills/react-best-practices/rules/bundle-barrel-imports.md",
+        "document:.agents/skills/react-best-practices/rules/bundle-conditional.md",
+        "document:.agents/skills/react-best-practices/rules/bundle-defer-third-party.md",
+        "document:.agents/skills/react-best-practices/rules/bundle-dynamic-imports.md",
+        "document:.agents/skills/react-best-practices/rules/bundle-preload.md",
+        "document:.agents/skills/react-best-practices/rules/client-event-listeners.md",
+        "document:.agents/skills/react-best-practices/rules/client-swr-dedup.md",
+        "document:.agents/skills/react-best-practices/rules/js-batch-dom-css.md",
+        "document:.agents/skills/react-best-practices/rules/js-cache-function-results.md",
+        "document:.agents/skills/react-best-practices/rules/js-cache-property-access.md",
+        "document:.agents/skills/react-best-practices/rules/js-cache-storage.md",
+        "document:.agents/skills/react-best-practices/rules/js-combine-iterations.md",
+        "document:.agents/skills/react-best-practices/rules/js-early-exit.md",
+        "document:.agents/skills/react-best-practices/rules/js-hoist-regexp.md",
+        "document:.agents/skills/react-best-practices/rules/js-index-maps.md",
+        "document:.agents/skills/react-best-practices/rules/js-length-check-first.md",
+        "document:.agents/skills/react-best-practices/rules/js-min-max-loop.md",
+        "document:.agents/skills/react-best-practices/rules/js-set-map-lookups.md",
+        "document:.agents/skills/react-best-practices/rules/js-tosorted-immutable.md",
+        "document:.agents/skills/react-best-practices/rules/rendering-activity.md",
+        "document:.agents/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md",
+        "document:.agents/skills/react-best-practices/rules/rendering-conditional-render.md",
+        "document:.agents/skills/react-best-practices/rules/rendering-content-visibility.md",
+        "document:.agents/skills/react-best-practices/rules/rendering-hoist-jsx.md",
+        "document:.agents/skills/react-best-practices/rules/rendering-hydration-no-flicker.md",
+        "document:.agents/skills/react-best-practices/rules/rendering-svg-precision.md",
+        "document:.agents/skills/react-best-practices/rules/rerender-defer-reads.md",
+        "document:.agents/skills/react-best-practices/rules/rerender-dependencies.md",
+        "document:.agents/skills/react-best-practices/rules/rerender-derived-state.md",
+        "document:.agents/skills/react-best-practices/rules/rerender-functional-setstate.md",
+        "document:.agents/skills/react-best-practices/rules/rerender-lazy-state-init.md",
+        "document:.agents/skills/react-best-practices/rules/rerender-memo.md",
+        "document:.agents/skills/react-best-practices/rules/rerender-transitions.md",
+        "document:.agents/skills/react-best-practices/rules/server-after-nonblocking.md",
+        "document:.agents/skills/react-best-practices/rules/server-cache-lru.md",
+        "document:.agents/skills/react-best-practices/rules/server-cache-react.md",
+        "document:.agents/skills/react-best-practices/rules/server-parallel-fetching.md",
+        "document:.agents/skills/react-best-practices/rules/server-serialization.md",
+        "document:.agents/skills/swiss-design/SKILL.md",
+        "document:.agents/skills/systematic-debugging/SKILL.md",
+        "document:.agents/skills/systematic-debugging/condition-based-waiting.md",
+        "document:.agents/skills/systematic-debugging/defense-in-depth.md",
+        "document:.agents/skills/systematic-debugging/root-cause-tracing.md",
+        "document:.agents/skills/tailwind-design-system/SKILL.md",
+        "document:.agents/skills/tailwind-design-system/resources/implementation-playbook.md",
+        "document:.agents/skills/ui-ux-pro-max/SKILL.md",
+        "config:.env.example",
+        "document:.lovable/plan/plano-página-em-branco-com-ponto-preto-centralizado-2026-08-29.md",
+        "config:.lovable/project.json",
+        "document:AGENTS.md",
+        "document:DEV_GUIDE.md",
+        "document:README.md",
+        "config:bunfig.toml",
+        "config:ci/github-actions-e2e.yml",
+        "config:components.json",
+        "document:graphify-out/GRAPH_REPORT.md",
+        "config:graphify-out/graph.json",
+        "config:knip_pdf.json",
+        "config:package.json",
+        "config:public/manifest.json",
+        "document:public/robots.txt",
+        "config:public/sitemap.xml",
+        "document:roadmap.md",
+        "document:src/routes/README.md",
+        "config:tsconfig.json",
+        "config:vercel.json"
+      ]
+    }
+  ]
+}
