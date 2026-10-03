@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { MagazineProject, Article, MagazineLayoutMode } from "../types/magazine";
 import { INITIAL_MAGAZINE_PROJECT, MAGAZINE_THEMES } from "../lib/sample-data";
 import { APP_UI_THEMES, AppUiThemeMode } from "../lib/ui-theme";
-import { loadLatestProject, syncProjectToCloud } from "../lib/cloud-sync";
+import { loadLatestProject, syncProjectToCloud, recoverLegacyLovableDatabase } from "../lib/cloud-sync";
 import { MagazineViewer } from "../components/magazine/MagazineViewer";
 import { CoverCustomizer } from "../components/editor/CoverCustomizer";
 import { ArticleEditorModal } from "../components/editor/ArticleEditorModal";
@@ -128,6 +128,14 @@ function Index() {
 
   const [articleToDelete, setArticleToDelete] = useState<Article | null>(null);
   const [articleSearchQuery, setArticleSearchQuery] = useState<string>("");
+
+  // Dual Workspace Mode State (Magazine Studio vs E-books Studio)
+  const [workspaceMode, setWorkspaceMode] = useState<"magazine" | "ebooks">("magazine");
+
+  const handleRecoverLovableDb = () => {
+    const result = recoverLegacyLovableDatabase();
+    alert(`Varredura do Banco de Dados Concluída!\n\n• Chaves analisadas no navegador: ${result.keysScanned}\n• Revistas/Projetos identificados: ${result.projectsRecovered}\n• E-books identificados: ${result.ebooksRecovered}\n• Artigos identificados: ${result.articlesRecovered}`);
+  };
 
   // Editions Archive Count State
   const [archivedEditionsCount, setArchivedEditionsCount] = useState<number>(() => {
@@ -641,111 +649,145 @@ function Index() {
         </div>
       </header>
 
-      {/* Subheader Navigation Tabs */}
+      {/* Subheader Navigation Tabs & Dual Workspace Switcher */}
       <div className="no-print px-4 sm:px-6 flex items-center justify-between overflow-x-auto custom-scrollbar transition-colors theme-app-subnav border-b-2 shadow-xs">
-        <div ref={spotlightNavRef} className="relative flex items-center gap-1 sm:gap-2 py-1.5">
-          <span ref={spotlightBarRef} className="pointer-events-none absolute rounded-md bg-amber-500/30 border border-amber-500 shadow-[0_0_8px_rgba(245,158,11,.6)] transition-[left,width,top,height] duration-300 ease-[cubic-bezier(.4,0,.2,1)]" />
-          <button
-            ref={(el) => { spotlightButtonRefs.current["viewer"] = el; }}
-            data-testid="tab-viewer"
-            onClick={() => setActiveTab("viewer")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-              activeTab === "viewer"
-                ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-            }`}
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Leitor & Preview Visual</span>
-          </button>
+        <div className="flex items-center gap-2 shrink-0">
+          {/* DUAL WORKSPACE MODE BUTTONS */}
+          <div className="flex items-center gap-1.5 pr-3 my-1 border-r border-current/20 shrink-0">
+            <button
+              onClick={() => setWorkspaceMode("magazine")}
+              className={`px-3 py-1.5 rounded-lg font-black text-xs transition flex items-center gap-1.5 cursor-pointer border-2 ${
+                workspaceMode === "magazine"
+                  ? "bg-amber-400 text-slate-950 border-black shadow-xs"
+                  : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+              }`}
+              title="Alternar para a Área de Trabalho da Revista"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Estúdio da Revista 📰</span>
+            </button>
 
-          <button
-            ref={(el) => { spotlightButtonRefs.current["articles"] = el; }}
-            data-testid="tab-articles"
-            onClick={() => setActiveTab("articles")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-              activeTab === "articles"
-                ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-            }`}
-          >
-            <FileText className="w-3.5 h-3.5" />
-            <span>Matérias & Artigos ({project.articles.length})</span>
-          </button>
+            <button
+              onClick={() => setWorkspaceMode("ebooks")}
+              className={`px-3 py-1.5 rounded-lg font-black text-xs transition flex items-center gap-1.5 cursor-pointer border-2 ${
+                workspaceMode === "ebooks"
+                  ? "bg-amber-400 text-slate-950 border-black shadow-xs"
+                  : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+              }`}
+              title="Alternar para a Área de Trabalho dos E-books"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span>Estúdio de E-books 📚</span>
+            </button>
+          </div>
 
-          <button
-            ref={(el) => { spotlightButtonRefs.current["repository"] = el; }}
-            data-testid="tab-repository"
-            onClick={() => setActiveTab("repository")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-              activeTab === "repository"
-                ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-            }`}
-          >
-            <FolderOpen className="w-3.5 h-3.5" />
-            <span>Acervo & Textos ({project.contentRepository?.length || 0})</span>
-          </button>
+          {/* MAGAZINE WORKSPACE TABS */}
+          {workspaceMode === "magazine" && (
+            <div ref={spotlightNavRef} className="relative flex items-center gap-1 sm:gap-2 py-1.5">
+              <span ref={spotlightBarRef} className="pointer-events-none absolute rounded-md bg-amber-500/30 border border-amber-500 shadow-[0_0_8px_rgba(245,158,11,.6)] transition-[left,width,top,height] duration-300 ease-[cubic-bezier(.4,0,.2,1)]" />
+              <button
+                ref={(el) => { spotlightButtonRefs.current["viewer"] = el; }}
+                data-testid="tab-viewer"
+                onClick={() => setActiveTab("viewer")}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
+                  activeTab === "viewer"
+                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
+                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+                }`}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Leitor & Preview Visual</span>
+              </button>
 
-          <button
-            ref={(el) => { spotlightButtonRefs.current["cover"] = el; }}
-            data-testid="tab-cover"
-            onClick={() => setActiveTab("cover")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-              activeTab === "cover"
-                ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-            }`}
-          >
-            <Palette className="w-3.5 h-3.5" />
-            <span>Capa & Contracapa da Revista</span>
-          </button>
+              <button
+                ref={(el) => { spotlightButtonRefs.current["articles"] = el; }}
+                data-testid="tab-articles"
+                onClick={() => setActiveTab("articles")}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
+                  activeTab === "articles"
+                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
+                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Matérias & Artigos ({project.articles.length})</span>
+              </button>
 
-          <button
-            ref={(el) => { spotlightButtonRefs.current["editorial"] = el; }}
-            data-testid="tab-editorial"
-            onClick={() => setActiveTab("editorial")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-              activeTab === "editorial"
-                ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-            }`}
-          >
-            <Feather className="w-3.5 h-3.5" />
-            <span>Editorial & Páginas</span>
-          </button>
+              <button
+                ref={(el) => { spotlightButtonRefs.current["repository"] = el; }}
+                data-testid="tab-repository"
+                onClick={() => setActiveTab("repository")}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
+                  activeTab === "repository"
+                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
+                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+                }`}
+              >
+                <FolderOpen className="w-3.5 h-3.5" />
+                <span>Acervo & Textos ({project.contentRepository?.length || 0})</span>
+              </button>
 
-          <button
-            ref={(el) => { spotlightButtonRefs.current["archive"] = el; }}
-            data-testid="tab-archive"
-            onClick={() => setActiveTab("archive")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-              activeTab === "archive"
-                ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-            }`}
-          >
-            <FolderArchive className="w-3.5 h-3.5 text-amber-500" />
-            <span>Arquivo de Edições ({archivedEditionsCount})</span>
-          </button>
+              <button
+                ref={(el) => { spotlightButtonRefs.current["cover"] = el; }}
+                data-testid="tab-cover"
+                onClick={() => setActiveTab("cover")}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
+                  activeTab === "cover"
+                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
+                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+                }`}
+              >
+                <Palette className="w-3.5 h-3.5" />
+                <span>Capa & Contracapa</span>
+              </button>
 
-          <button
-            ref={(el) => { spotlightButtonRefs.current["settings"] = el; }}
-            data-testid="tab-settings"
-            onClick={() => setActiveTab("settings")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-              activeTab === "settings"
-                ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-            }`}
-          >
-            <Settings className="w-3.5 h-3.5" />
-            <span>Configurações</span>
-          </button>
+              <button
+                ref={(el) => { spotlightButtonRefs.current["editorial"] = el; }}
+                data-testid="tab-editorial"
+                onClick={() => setActiveTab("editorial")}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
+                  activeTab === "editorial"
+                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
+                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+                }`}
+              >
+                <Feather className="w-3.5 h-3.5" />
+                <span>Editorial & Páginas</span>
+              </button>
+
+              <button
+                ref={(el) => { spotlightButtonRefs.current["archive"] = el; }}
+                data-testid="tab-archive"
+                onClick={() => setActiveTab("archive")}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
+                  activeTab === "archive"
+                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
+                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+                }`}
+              >
+                <FolderArchive className="w-3.5 h-3.5 text-amber-500" />
+                <span>Arquivo de Edições ({archivedEditionsCount})</span>
+              </button>
+
+              <button
+                ref={(el) => { spotlightButtonRefs.current["settings"] = el; }}
+                data-testid="tab-settings"
+                onClick={() => setActiveTab("settings")}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
+                  activeTab === "settings"
+                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
+                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
+                }`}
+              >
+                <Settings className="w-3.5 h-3.5" />
+                <span>Configurações</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Right utility items */}
-        <div className="hidden lg:flex items-center gap-3 text-xs opacity-80">
+        <div className="hidden xl:flex items-center gap-3 text-xs opacity-80 shrink-0 ml-4">
           <Link
             to="/create"
             className="flex items-center gap-1 font-bold text-amber-500 hover:text-amber-400 transition-colors"
@@ -754,14 +796,14 @@ function Index() {
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span>Criador IA</span>
           </Link>
-          <Link
-            to="/eco"
-            className="flex items-center gap-1 font-bold text-purple-400 hover:text-purple-300 transition-colors"
-            title="Central do Ecossistema Montanha"
+          <button
+            onClick={handleRecoverLovableDb}
+            className="flex items-center gap-1 font-bold text-amber-400 hover:text-amber-300 transition-colors cursor-pointer"
+            title="Resgatar artigos e revistas do banco de dados/versão anterior do navegador"
           >
-            <Globe className="w-3.5 h-3.5 text-purple-400" />
-            <span>Ecossistema</span>
-          </Link>
+            <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
+            <span>Resgatar Banco Legado 🔄</span>
+          </button>
           <button
             onClick={() => setIsCloudSyncOpen(true)}
             className="flex items-center gap-1 font-bold text-emerald-600 hover:text-emerald-700 cursor-pointer"
@@ -783,22 +825,72 @@ function Index() {
 
       {/* Main Workspace Body */}
       <main className="no-print flex-1 p-4 sm:p-6 max-w-7xl w-full mx-auto">
-        {/* Tab 1: Interactive Magazine Viewer */}
-        {activeTab === "viewer" && (
-          <div className="h-[calc(100vh-140px)] min-h-[580px]">
-            <MagazineViewer
-              project={project}
-              theme={currentPublicationTheme}
-              layoutMode={layoutMode}
-              onLayoutModeChange={setLayoutMode}
-              onOpenExportModal={() => setIsExportModalOpen(true)}
-              onOpenArticleEditor={(id) => {
-                const art = project.articles.find((a) => a.id === id);
-                if (art) handleEditArticle(art);
-              }}
-            />
+        {/* WORKSPACE 2: ESTÚDIO DE E-BOOKS */}
+        {workspaceMode === "ebooks" && (
+          <div className="space-y-6 max-w-5xl mx-auto">
+            <div className="theme-app-card p-6 rounded-2xl border-2 shadow-md space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-4 border-current/20">
+                <div>
+                  <span className="font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/40 uppercase tracking-wider">
+                    ÁREA DE TRABALHO: ESTÚDIO DE E-BOOKS IA
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tight mt-1 flex items-center gap-2">
+                    <BookOpen className="w-6 h-6 text-amber-500" />
+                    <span>Construção Automática de E-books & Livros Digitais</span>
+                  </h2>
+                  <p className="text-xs opacity-75 mt-1">
+                    Defina o tema, escolha o número de capítulos (3, 5, 7 ou 10), adicione prompt de direcionamento e edite o texto e imagem pós-produção.
+                  </p>
+                </div>
+
+                <Button
+                  onClick={() => setIsEbookStudioOpen(true)}
+                  className="h-10 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-md border-2 border-black flex items-center gap-2 cursor-pointer shrink-0"
+                >
+                  <Wand2 className="w-4 h-4" />
+                  <span>Gerar / Abrir Acervo de E-books</span>
+                </Button>
+              </div>
+
+              <div className="p-8 text-center rounded-2xl border-2 border-dashed border-amber-500/30 bg-amber-500/5 space-y-4">
+                <BookOpen className="w-12 h-12 text-amber-500 mx-auto" />
+                <div className="max-w-md mx-auto space-y-2">
+                  <h3 className="text-base font-black uppercase text-white">Estúdio Dedicado de E-books</h3>
+                  <p className="text-xs opacity-80 leading-relaxed">
+                    Crie e-books completos com auxílio de IA, configure a quantidade de capítulos (3 a 10), insira instruções personalizadas (prompts/referências), realize pós-produção visual e exporte em .JSON, .HTML e PDF.
+                  </p>
+                </div>
+                <Button
+                  onClick={() => setIsEbookStudioOpen(true)}
+                  className="h-11 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs uppercase tracking-wider px-6 rounded-xl shadow-lg border-2 border-black cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 mr-1.5" />
+                  <span>Iniciar Criador de E-books ou Acessar Acervo</span>
+                </Button>
+              </div>
+            </div>
           </div>
         )}
+
+        {/* WORKSPACE 1: ESTÚDIO DA REVISTA (TABS DE EDICÃO) */}
+        {workspaceMode === "magazine" && (
+          <>
+            {/* Tab 1: Interactive Magazine Viewer */}
+            {activeTab === "viewer" && (
+              <div className="h-[calc(100vh-140px)] min-h-[580px]">
+                <MagazineViewer
+                  project={project}
+                  theme={currentPublicationTheme}
+                  layoutMode={layoutMode}
+                  onLayoutModeChange={setLayoutMode}
+                  onOpenExportModal={() => setIsExportModalOpen(true)}
+                  onOpenArticleEditor={(id) => {
+                    const art = project.articles.find((a) => a.id === id);
+                    if (art) handleEditArticle(art);
+                  }}
+                />
+              </div>
+            )}
 
         {/* Tab 2: Articles Management */}
         {activeTab === "articles" && (
@@ -1155,6 +1247,8 @@ function Index() {
               onSelectUiTheme={handleSelectUiTheme}
             />
           </div>
+        )}
+        </>
         )}
       </main>
 

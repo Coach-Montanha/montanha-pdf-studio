@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import { EbookProject, EbookChapter } from "../../types/ebook";
-import { EBOOK_PRESETS_INFO } from "../../lib/ebook-templates";
+import { EbookProject, EbookChapter, EbookSection } from "../../types/ebook";
+import { EBOOK_PRESETS_INFO, saveEbookProject, exportEbookToFile, exportEbookToHtml } from "../../lib/ebook-templates";
 import {
   BookOpen,
   CheckCircle2,
   Quote,
-  AlertTriangle,
   Sparkles,
-  ArrowRight,
-  User,
   Printer,
   ListOrdered,
-  FileText,
-  Share2,
   ChevronRight,
   ExternalLink,
+  Edit3,
+  Save,
+  Download,
+  FileCode,
+  Image as ImageIcon,
 } from "lucide-react";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
 interface EbookViewerProps {
   ebook: EbookProject;
@@ -24,8 +26,11 @@ interface EbookViewerProps {
   onExportPdf?: () => void;
 }
 
-export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExportPdf }) => {
-  const [activeChapterId, setActiveChapterId] = useState<string | null>(ebook.chapters[0]?.id || null);
+export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook: initialEbook, onEdit, onExportPdf }) => {
+  const [ebook, setEbook] = useState<EbookProject>(initialEbook);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [activeChapterId, setActiveChapterId] = useState<string | null>(initialEbook.chapters[0]?.id || null);
+
   const presetInfo = EBOOK_PRESETS_INFO[ebook.presetStyle] || EBOOK_PRESETS_INFO["practical-guide"];
 
   const handlePrint = () => {
@@ -36,9 +41,48 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
     }
   };
 
+  const handleSaveEdit = () => {
+    saveEbookProject(ebook);
+    setIsEditing(false);
+    if (onEdit) onEdit(ebook);
+  };
+
+  const handleUpdateSectionContent = (chapterId: string, sectionId: string, newContent: string) => {
+    setEbook((prev) => ({
+      ...prev,
+      chapters: prev.chapters.map((ch) => {
+        if (ch.id !== chapterId) return ch;
+        return {
+          ...ch,
+          sections: ch.sections.map((sec) => (sec.id === sectionId ? { ...sec, content: newContent } : sec)),
+        };
+      }),
+    }));
+  };
+
+  const handleUpdateSectionTitle = (chapterId: string, sectionId: string, newTitle: string) => {
+    setEbook((prev) => ({
+      ...prev,
+      chapters: prev.chapters.map((ch) => {
+        if (ch.id !== chapterId) return ch;
+        return {
+          ...ch,
+          sections: ch.sections.map((sec) => (sec.id === sectionId ? { ...sec, title: newTitle } : sec)),
+        };
+      }),
+    }));
+  };
+
+  const handleUpdateChapterTitle = (chapterId: string, newTitle: string) => {
+    setEbook((prev) => ({
+      ...prev,
+      chapters: prev.chapters.map((ch) => (ch.id === chapterId ? { ...ch, title: newTitle } : ch)),
+    }));
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8 font-sans selection:bg-amber-500 selection:text-black">
-      {/* Header Controls (Estúdio & Visualização) */}
+      {/* Header Controls (Estúdio & Visualização & Download) */}
       <div className="no-print flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/90 border border-amber-500/30 backdrop-blur-xl shadow-lg">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400">
@@ -49,20 +93,63 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
               <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase tracking-wider">
                 {presetInfo.badge}
               </span>
-              <span className="text-xs text-slate-400 font-medium">Modo Leitura Mobile/Tablet</span>
+              <span className="text-xs text-slate-400 font-medium">Visualizador & Edição IA</span>
             </div>
             <h2 className="text-base font-black text-white truncate max-w-md">{ebook.title}</h2>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {isEditing ? (
+            <Button
+              size="sm"
+              onClick={handleSaveEdit}
+              className="h-9 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-3.5 rounded-xl shadow-md border border-emerald-400 flex items-center gap-2 cursor-pointer"
+            >
+              <Save className="w-4 h-4" />
+              <span>Salvar Edições</span>
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setIsEditing(true)}
+              className="h-9 bg-slate-900 border-amber-500/40 text-amber-300 hover:bg-amber-500/10 text-xs px-3.5 rounded-xl flex items-center gap-2 cursor-pointer"
+            >
+              <Edit3 className="w-4 h-4" />
+              <span>Pós-Produção / Editar</span>
+            </Button>
+          )}
+
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => exportEbookToFile(ebook)}
+            className="h-9 bg-slate-900 border-slate-700 text-slate-300 hover:text-white text-xs px-3 rounded-xl flex items-center gap-1.5 cursor-pointer"
+            title="Baixar Backup .JSON"
+          >
+            <Download className="w-4 h-4 text-amber-400" />
+            <span>.JSON</span>
+          </Button>
+
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => exportEbookToHtml(ebook)}
+            className="h-9 bg-slate-900 border-slate-700 text-slate-300 hover:text-white text-xs px-3 rounded-xl flex items-center gap-1.5 cursor-pointer"
+            title="Baixar Arquivo HTML"
+          >
+            <FileCode className="w-4 h-4 text-blue-400" />
+            <span>.HTML</span>
+          </Button>
+
           <Button
             size="sm"
             onClick={handlePrint}
             className="h-9 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 rounded-xl shadow-md border border-amber-400 flex items-center gap-2 cursor-pointer"
           >
             <Printer className="w-4 h-4" />
-            <span>Imprimir / Exportar PDF</span>
+            <span>Imprimir PDF</span>
           </Button>
         </div>
       </div>
@@ -80,12 +167,47 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
             <span>{ebook.categoryTag || "E-BOOK EXCLUSIVO ECOSSISTEMA"}</span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight uppercase">
-            {ebook.title}
-          </h1>
-          <p className="text-sm md:text-lg font-medium text-slate-300 max-w-2xl">
-            {ebook.subtitle}
-          </p>
+          {isEditing ? (
+            <div className="space-y-3 bg-slate-900/90 p-4 rounded-2xl border border-amber-500/40">
+              <div>
+                <label className="text-xs font-bold text-amber-400 block mb-1">Título do E-book</label>
+                <Input
+                  value={ebook.title}
+                  onChange={(e) => setEbook({ ...ebook, title: e.target.value })}
+                  className="bg-slate-950 border-slate-800 text-white font-bold"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-bold text-amber-400 block mb-1">Subtítulo</label>
+                <Input
+                  value={ebook.subtitle}
+                  onChange={(e) => setEbook({ ...ebook, subtitle: e.target.value })}
+                  className="bg-slate-950 border-slate-800 text-slate-200"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-bold text-amber-400 block mb-1 flex items-center gap-1">
+                  <ImageIcon className="w-3.5 h-3.5" />
+                  <span>URL da Imagem de Capa</span>
+                </label>
+                <Input
+                  value={ebook.coverImage || ""}
+                  onChange={(e) => setEbook({ ...ebook, coverImage: e.target.value })}
+                  placeholder="https://images.unsplash.com/..."
+                  className="bg-slate-950 border-slate-800 text-slate-200 text-xs"
+                />
+              </div>
+            </div>
+          ) : (
+            <>
+              <h1 className="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight uppercase">
+                {ebook.title}
+              </h1>
+              <p className="text-sm md:text-lg font-medium text-slate-300 max-w-2xl">
+                {ebook.subtitle}
+              </p>
+            </>
+          )}
         </div>
 
         <div className="relative z-10 pt-8 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
@@ -99,7 +221,15 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
             )}
             <div>
               <span className="text-[11px] font-bold text-slate-400 block uppercase tracking-wider">Autor(a)</span>
-              <span className="text-sm font-bold text-amber-400">{ebook.authorName}</span>
+              {isEditing ? (
+                <Input
+                  value={ebook.authorName}
+                  onChange={(e) => setEbook({ ...ebook, authorName: e.target.value })}
+                  className="bg-slate-950 border-slate-800 text-amber-400 font-bold h-8 text-xs"
+                />
+              ) : (
+                <span className="text-sm font-bold text-amber-400">{ebook.authorName}</span>
+              )}
             </div>
           </div>
 
@@ -151,7 +281,15 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
                     CAPÍTULO {ch.chapterNumber}
                   </span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-black text-white">{ch.title}</h2>
+                {isEditing ? (
+                  <Input
+                    value={ch.title}
+                    onChange={(e) => handleUpdateChapterTitle(ch.id, e.target.value)}
+                    className="bg-slate-950 border-amber-500/40 text-white font-bold text-lg"
+                  />
+                ) : (
+                  <h2 className="text-2xl md:text-3xl font-black text-white">{ch.title}</h2>
+                )}
                 {ch.subtitle && <p className="text-sm font-medium text-slate-400">{ch.subtitle}</p>}
               </div>
 
@@ -166,24 +304,61 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
               <div className="space-y-6">
                 {ch.sections.map((sec) => (
                   <div key={sec.id} className="space-y-3">
-                    {sec.title && <h3 className="text-lg font-bold text-white flex items-center gap-2">{sec.title}</h3>}
+                    {sec.title && (
+                      isEditing ? (
+                        <Input
+                          value={sec.title}
+                          onChange={(e) => handleUpdateSectionTitle(ch.id, sec.id, e.target.value)}
+                          className="bg-slate-950 border-slate-800 text-white font-bold text-sm"
+                        />
+                      ) : (
+                        <h3 className="text-lg font-bold text-white flex items-center gap-2">{sec.title}</h3>
+                      )
+                    )}
 
                     {/* Renderização condicional conforme tipo de bloco */}
                     {sec.type === "text" && (
-                      <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">{sec.content}</p>
+                      isEditing ? (
+                        <Textarea
+                          value={sec.content}
+                          onChange={(e) => handleUpdateSectionContent(ch.id, sec.id, e.target.value)}
+                          rows={4}
+                          className="bg-slate-950 border-slate-800 text-slate-200 text-sm"
+                        />
+                      ) : (
+                        <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">{sec.content}</p>
+                      )
                     )}
 
                     {sec.type === "callout" && (
                       <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/15 to-amber-600/10 border-l-4 border-amber-500 text-slate-100 text-sm space-y-1">
                         {sec.calloutTitle && <h4 className="font-bold text-amber-300 text-xs uppercase tracking-wider">{sec.calloutTitle}</h4>}
-                        <p className="text-slate-200 leading-relaxed">{sec.content}</p>
+                        {isEditing ? (
+                          <Textarea
+                            value={sec.content}
+                            onChange={(e) => handleUpdateSectionContent(ch.id, sec.id, e.target.value)}
+                            rows={3}
+                            className="bg-slate-950 border-slate-800 text-slate-200 text-sm"
+                          />
+                        ) : (
+                          <p className="text-slate-200 leading-relaxed">{sec.content}</p>
+                        )}
                       </div>
                     )}
 
                     {sec.type === "quote" && (
                       <div className="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 text-center space-y-3 my-4">
                         <Quote className="w-8 h-8 text-amber-400 mx-auto opacity-70" />
-                        <p className="text-base md:text-lg font-serif italic text-amber-200">"{sec.content}"</p>
+                        {isEditing ? (
+                          <Textarea
+                            value={sec.content}
+                            onChange={(e) => handleUpdateSectionContent(ch.id, sec.id, e.target.value)}
+                            rows={2}
+                            className="bg-slate-900 border-slate-800 text-amber-200 italic text-center"
+                          />
+                        ) : (
+                          <p className="text-base md:text-lg font-serif italic text-amber-200">"{sec.content}"</p>
+                        )}
                         {sec.quoteAuthor && <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">— {sec.quoteAuthor}</span>}
                       </div>
                     )}
@@ -210,9 +385,18 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
                     )}
 
                     {sec.type === "step-by-step" && (
-                      <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 text-xs text-slate-300 leading-relaxed whitespace-pre-line">
-                        {sec.content}
-                      </div>
+                      isEditing ? (
+                        <Textarea
+                          value={sec.content}
+                          onChange={(e) => handleUpdateSectionContent(ch.id, sec.id, e.target.value)}
+                          rows={4}
+                          className="bg-slate-950 border-slate-800 text-slate-200 text-xs"
+                        />
+                      ) : (
+                        <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 text-xs text-slate-300 leading-relaxed whitespace-pre-line">
+                          {sec.content}
+                        </div>
+                      )
                     )}
                   </div>
                 ))}
@@ -239,7 +423,7 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook, onEdit, onExpor
           ))}
       </div>
 
-      {/* CONTRACAPA COMERCIALE & BIO DO AUTOR */}
+      {/* CONTRACAPA COMERCIAL & BIO DO AUTOR */}
       <div className="p-8 md:p-10 rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/40 border-2 border-amber-500/40 shadow-2xl space-y-6 text-slate-100">
         <div className="flex flex-col md:flex-row items-center gap-6 pb-6 border-b border-slate-800">
           {ebook.authorAvatarUrl ? (

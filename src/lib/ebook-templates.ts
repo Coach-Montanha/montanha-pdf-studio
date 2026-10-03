@@ -199,3 +199,79 @@ export function saveEbookProject(project: EbookProject): void {
     }
   }
 }
+
+export function deleteEbookProject(id: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    const existing = getStoredEbooks();
+    const filtered = existing.filter((p) => p.id !== id);
+    localStorage.setItem(getEbookStorageKey(), JSON.stringify(filtered));
+    window.dispatchEvent(new Event("montanha-ebooks-changed"));
+
+    const supabase = getSupabaseClient();
+    if (supabase) {
+      supabase.from("ecosystem_ebook_projects").delete().eq("id", id).then(() => {}).catch(() => {});
+    }
+  } catch (err) {
+    console.warn("Falha ao excluir E-book:", err);
+  }
+}
+
+export function exportEbookToFile(project: EbookProject): void {
+  const jsonStr = JSON.stringify(project, null, 2);
+  const blob = new Blob([jsonStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const fileName = (project.title || "ebook").toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+  a.href = url;
+  a.download = `ebook-${fileName}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export function exportEbookToHtml(project: EbookProject): void {
+  const htmlContent = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>${project.title}</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; color: #1e293b; line-height: 1.6; background-color: #0f172a; color: #f8fafc; }
+    h1 { font-size: 2.5rem; color: #fbbf24; margin-bottom: 8px; text-transform: uppercase; }
+    h2 { font-size: 1.5rem; color: #f59e0b; margin-top: 30px; border-bottom: 2px solid #f59e0b; padding-bottom: 6px; }
+    .author { font-weight: bold; color: #94a3b8; margin-bottom: 40px; }
+    .callout { background: rgba(245,158,11,0.15); border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 8px; }
+    .checklist { background: #1e293b; border: 1px solid #334155; padding: 15px 20px; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <h1>${project.title}</h1>
+  <p style="font-size: 1.2rem; color: #cbd5e1;">${project.subtitle}</p>
+  <p class="author">Autor: ${project.authorName} | Categoria: ${project.categoryTag}</p>
+  <hr style="border-color: #334155;" />
+  ${project.chapters.map(ch => `
+    <h2>Capítulo ${ch.chapterNumber}: ${ch.title}</h2>
+    ${ch.subtitle ? `<p style="color: #94a3b8;"><em>${ch.subtitle}</em></p>` : ''}
+    ${ch.introduction ? `<p style="font-style: italic; opacity: 0.9;">"${ch.introduction}"</p>` : ''}
+    ${ch.sections.map(sec => `
+      <div style="margin: 20px 0;">
+        ${sec.title ? `<h3 style="font-size: 1.1rem; color: #e2e8f0;">${sec.title}</h3>` : ''}
+        ${sec.type === 'callout' ? `<div class="callout"><strong>${sec.calloutTitle || 'Destaque'}</strong><p>${sec.content}</p></div>` : `<p>${sec.content}</p>`}
+      </div>
+    `).join('')}
+  `).join('')}
+</body>
+</html>`;
+  const blob = new Blob([htmlContent], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const fileName = (project.title || "ebook").toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+  a.href = url;
+  a.download = `ebook-${fileName}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}

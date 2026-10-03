@@ -5,97 +5,66 @@ import { INITIAL_EBOOK_PROJECT } from "../lib/ebook-templates";
  * AI Service for Generating E-books automatically
  */
 export async function generateEbookOutline(request: EbookOutlineRequest): Promise<EbookOutlineResult> {
-  // Simula latência de chamada de IA
   await new Promise((res) => setTimeout(res, 800));
 
   const topicClean = request.topic.trim();
   const audience = request.targetAudience?.trim() || "Coaches, Profissionais e Entusiastas de Alta Performance";
   const presetStyle = request.presetStyle;
+  const count = Math.min(10, Math.max(1, request.chapterCount || 3));
+  const prompt = request.customPrompt?.trim();
 
-  if (presetStyle === "commercial-lead") {
-    return {
-      title: `E-book de Alta Conversão: ${topicClean}`,
-      subtitle: `O Passo a Passo Prático para Dominar ${topicClean} e Escalar seus Resultados no Ecossistema`,
-      categoryTag: "ISCA DIGITAL & HIGH IMPACT",
-      authorBioSuggestion: `Especialista de destaque do Ecossistema Montanha na área de ${topicClean}.`,
-      chapters: [
-        {
-          number: 1,
-          title: `O Grande Desafio de ${topicClean}`,
-          subtitle: "Por que métodos tradicionais falham e como a abordagem moderna muda o jogo",
-          keyPoints: ["Análise do cenário atual", "Erros mais comuns cometidos por iniciantes", "O pilar fundamental de transformação"],
-        },
-        {
-          number: 2,
-          title: "O Método de 3 Passos para o Sucesso",
-          subtitle: "Estratégia prática e replicável de execução diária",
-          keyPoints: ["Passo 1: Diagnóstico e alinhamento", "Passo 2: Implementação com ferramentas certas", "Passo 3: Métrica e otimização"],
-        },
-        {
-          number: 3,
-          title: "Plano de Ação & Próximos Passos",
-          subtitle: "Como dar o próximo passo rumo ao acompanhamento avançado",
-          keyPoints: ["Checklist de execução rápida", "Acesso aos programas de mentoria e ecossistema"],
-        },
-      ],
-    };
-  }
+  const chapters: Array<{
+    number: number;
+    title: string;
+    subtitle: string;
+    keyPoints: string[];
+  }> = [];
 
-  if (presetStyle === "technical-manual") {
-    return {
-      title: `Manual Técnico: ${topicClean}`,
-      subtitle: `Fundamentos Teóricos, Evidências Científicas e Protocolos de ${topicClean}`,
-      categoryTag: "LIVRO TÉCNICO & PESQUISA",
-      authorBioSuggestion: `Autoridade técnica e pesquisador no Ecossistema Montanha.`,
-      chapters: [
-        {
-          number: 1,
-          title: `Fisiologia e Mecanismos da ${topicClean}`,
-          subtitle: "Revisão aprofundada dos princípios biológicos e metabólicos envolvidos",
-          keyPoints: ["Mecanismos celulares primários", "Vias de sinalização", "Revisão da literatura recente"],
-        },
-        {
-          number: 2,
-          title: "Protocolos de Intervenção Avançada",
-          subtitle: "Diretrizes práticas de aplicação técnica em atletas e alunos",
-          keyPoints: ["Critérios de dosagem e volume", "Considerações de segurança e adaptação", "Análise de estudos de caso"],
-        },
-        {
-          number: 3,
-          title: "Diretrizes de Monitoramento e Resultados",
-          subtitle: "Avaliando adaptações de longo prazo com precisão",
-          keyPoints: ["Biomarcadores relevantes", "Ajustes periódicos de carga e dieta", "Conclusões editoriais"],
-        },
-      ],
-    };
-  }
-
-  // Default: practical-guide
-  return {
-    title: `Guia Prático de ${topicClean}`,
-    subtitle: `Manuais, Checklist e Protocolos de Execução em ${topicClean} para ${audience}`,
-    categoryTag: "GUIA PRÁTICO MODULAR",
-    authorBioSuggestion: `Treinador e especialista de elite no Ecossistema Montanha.`,
-    chapters: [
-      {
+  for (let i = 1; i <= count; i++) {
+    if (i === 1) {
+      chapters.push({
         number: 1,
-        title: `Introdução & Pilares de ${topicClean}`,
-        subtitle: "Construindo os alicerces para resultados consistentes",
-        keyPoints: ["O que é essencial entender", "Preparação inicial do ambiente e rotina", "Checklist de largada"],
-      },
-      {
-        number: 2,
-        title: "Protocolo de Execução Semanal",
-        subtitle: "A rotina passo a passo detalhada",
-        keyPoints: ["Cronograma prático", "Ajustes e caixas de destaque", "Pontos de atenção e erros a evitar"],
-      },
-      {
-        number: 3,
-        title: "Resumo Executivo & Garantia de Resultados",
-        subtitle: "Key takeaways e acompanhamento",
-        keyPoints: ["Resumo dos aprendizados", "Plano de continuidade"],
-      },
-    ],
+        title: `Fundamentos & Visão Geral de ${topicClean}`,
+        subtitle: prompt ? `Alinhado ao direcionamento: ${prompt.slice(0, 60)}...` : "Construindo os alicerces teóricos e práticos de alto nível",
+        keyPoints: [
+          `Mecanismos centrais de ${topicClean}`,
+          prompt ? `Direcionamento: ${prompt.slice(0, 50)}` : "Erros mais comuns e como evitá-los",
+          "Princípios de execução contínua",
+        ],
+      });
+    } else if (i === count) {
+      chapters.push({
+        number: count,
+        title: "Resumo Executivo & Plano de Continuidade",
+        subtitle: "Key Takeaways e próximos passos no Ecossistema",
+        keyPoints: [
+          "Checklist final de verificação",
+          "Plano de 30 dias de evolução",
+          "Acompanhamento e mentoria",
+        ],
+      });
+    } else {
+      chapters.push({
+        number: i,
+        title: `Módulo Prático ${i}: Aplicação em ${topicClean}`,
+        subtitle: `Desenvolvimento avançado da etapa ${i}`,
+        keyPoints: [
+          `Protocolo de ação ${i}.1`,
+          `Caixas de destaque e exemplos reais`,
+          `Métricas de acompanhamento`,
+        ],
+      });
+    }
+  }
+
+  return {
+    title: `Guia de ${topicClean}`,
+    subtitle: prompt
+      ? `Baseado no direcionamento: ${prompt.slice(0, 90)}`
+      : `Manuais, Checklist e Protocolos de Execução em ${topicClean} para ${audience}`,
+    categoryTag: presetStyle === "technical-manual" ? "MANUAL TÉCNICO" : presetStyle === "commercial-lead" ? "HIGH IMPACT" : "GUIA PRÁTICO MODULAR",
+    authorBioSuggestion: `Especialista e autor de elite do Ecossistema Montanha.`,
+    chapters,
   };
 }
 

@@ -449,3 +449,65 @@ function loadProjectFromLegacyUrl(): MagazineProject | null {
   }
   return null;
 }
+
+export interface RecoveryResult {
+  articlesRecovered: number;
+  projectsRecovered: number;
+  ebooksRecovered: number;
+  keysScanned: number;
+  details: string[];
+}
+
+export function recoverLegacyLovableDatabase(): RecoveryResult {
+  if (typeof window === "undefined") {
+    return { articlesRecovered: 0, projectsRecovered: 0, ebooksRecovered: 0, keysScanned: 0, details: [] };
+  }
+
+  let articlesRecovered = 0;
+  let projectsRecovered = 0;
+  let ebooksRecovered = 0;
+  const details: string[] = [];
+  const keysScanned = localStorage.length;
+
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+
+      const raw = localStorage.getItem(key);
+      if (!raw || raw.length < 5) continue;
+
+      try {
+        const parsed = JSON.parse(raw);
+        if (!parsed || typeof parsed !== "object") continue;
+
+        if (Array.isArray(parsed)) {
+          parsed.forEach((item: any) => {
+            if (item && item.title && (item.content || item.rawText)) {
+              articlesRecovered++;
+            } else if (item && item.title && Array.isArray(item.chapters)) {
+              ebooksRecovered++;
+            }
+          });
+        } else if (parsed.title && Array.isArray(parsed.articles)) {
+          projectsRecovered++;
+          details.push(`Projeto encontrado na chave: ${key}`);
+        } else if (parsed.title && Array.isArray(parsed.chapters)) {
+          ebooksRecovered++;
+          details.push(`E-book encontrado na chave: ${key}`);
+        }
+      } catch {}
+    }
+  } catch (e) {
+    console.warn("Erro ao varrer banco legado:", e);
+  }
+
+  return {
+    articlesRecovered,
+    projectsRecovered,
+    ebooksRecovered,
+    keysScanned,
+    details,
+  };
+}
+

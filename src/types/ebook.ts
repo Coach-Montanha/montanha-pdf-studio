@@ -54,6 +54,7 @@ export interface EbookOutlineRequest {
   targetAudience?: string;
   presetStyle: EbookPresetStyle;
   chapterCount?: number;
+  customPrompt?: string;
 }
 
 export interface EbookOutlineResult {
