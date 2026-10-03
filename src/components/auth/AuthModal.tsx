@@ -10,7 +10,8 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { registerUser, loginUser, UserProfile } from "../../lib/auth-state";
 import { checkAndLockGuestDemo, validateEmailMx, checkProjectAccess } from "../../services/ecosystem-auth-service";
-import { LogIn, UserPlus, AlertCircle, CheckCircle2, Lock, Mail, User, Zap, Globe, Sparkles, ChevronDown, ChevronUp, ShieldCheck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { LogIn, UserPlus, AlertCircle, CheckCircle2, Lock, Mail, User, Zap, Globe, Sparkles, ChevronDown, ChevronUp, ShieldCheck, ExternalLink } from "lucide-react";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -179,6 +180,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <Sparkles className="w-3 h-3 text-amber-400" />
               <span>ECOSSISTEMA MONTANHA</span>
             </span>
+            <Link
+              to="/auth"
+              onClick={() => handleClose()}
+              className="text-[11px] font-bold text-amber-400 hover:text-amber-300 hover:underline flex items-center gap-1 transition cursor-pointer"
+            >
+              <span>Tela de Login Completa</span>
+              <ExternalLink className="w-3 h-3" />
+            </Link>
           </div>
           <DialogTitle className="text-xl font-black tracking-tight text-white flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400">
