@@ -5,13 +5,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { registerUser, loginUser, UserProfile } from "../../lib/auth-state";
-import { checkAndLockGuestDemo, validateEmailMx, checkProjectAccess } from "../../services/ecosystem-auth-service";
-import { Link } from "@tanstack/react-router";
-import { LogIn, UserPlus, AlertCircle, CheckCircle2, Lock, Mail, User, Zap, Globe, Sparkles, ChevronDown, ChevronUp, ShieldCheck, ExternalLink } from "lucide-react";
+import { validateEmailMx, checkProjectAccess } from "../../services/ecosystem-auth-service";
+import {
+  BookOpen,
+  Sparkles,
+  ShieldCheck,
+  KeyRound,
+  Mail,
+  User,
+  Eye,
+  EyeOff,
+  CheckCircle2,
+  Loader2,
+  Globe,
+  ChevronDown,
+  ChevronUp,
+  AlertCircle,
+} from "lucide-react";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -27,7 +38,7 @@ const ECOSYSTEM_APPS = [
     name: "Montanha PDF Studio",
     tag: "Diagramação & IA",
     slogan: "Diagramação Editorial & Publicações com IA",
-    accent: "#f59e0b",
+    accent: "#eab308",
     badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
     isCurrent: true,
   },
@@ -36,8 +47,8 @@ const ECOSYSTEM_APPS = [
     name: "Montanha Personal Studio",
     tag: "Finanças & Operação",
     slogan: "Gestão Financeira & Inteligência para Studios",
-    accent: "#10b981",
-    badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+    accent: "#6958e2",
+    badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/40",
     isCurrent: false,
   },
   {
@@ -45,8 +56,8 @@ const ECOSYSTEM_APPS = [
     name: "Montanha Hybrid Training",
     tag: "Performance & Treino",
     slogan: "Alta Performance & Periodização de Treino",
-    accent: "#06b6d4",
-    badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+    accent: "#dc2626",
+    badgeBg: "bg-red-500/20 text-red-300 border-red-500/40",
     isCurrent: false,
   },
   {
@@ -54,17 +65,17 @@ const ECOSYSTEM_APPS = [
     name: "Montanha Language AI",
     tag: "Idiomas & IA",
     slogan: "Tutor de Idiomas com IA & Treinos Diários",
-    accent: "#6366f1",
-    badgeBg: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
+    accent: "#06b6d4",
+    badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
     isCurrent: false,
   },
   {
     id: "whatsapp",
     name: "Montanha WhatsApp Automation",
-    tag: "SaaS & CRM",
-    slogan: "Automação Multi-Tenant & Disparos WhatsApp",
-    accent: "#a855f7",
-    badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+    tag: "Automação & CRM",
+    slogan: "CRM & Disparos Inteligentes via WhatsApp",
+    accent: "#10b981",
+    badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
     isCurrent: false,
   },
 ];
@@ -79,6 +90,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [activeTab, setActiveTab] = useState<"login" | "register" | "reset">(initialTab);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   const [showEcosystem, setShowEcosystem] = useState(false);
 
   // Login Form State
@@ -113,7 +127,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       setErrorMessage("Informe seu e-mail.");
       return;
     }
+    setLoading(true);
     const mx = await validateEmailMx(loginEmail);
+    setLoading(false);
     if (!mx.valid) {
       setErrorMessage(mx.reason || "E-mail inválido.");
       return;
@@ -124,20 +140,39 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
+    setLoading(true);
 
-    const mx = await validateEmailMx(loginEmail);
+    const cleanEmail = loginEmail.trim().toLowerCase();
+    const cleanPin = loginPassword.trim();
+
+    if (!cleanEmail) {
+      setLoading(false);
+      setErrorMessage("Informe seu e-mail de acesso.");
+      return;
+    }
+
+    if (!cleanPin || cleanPin.length < 6) {
+      setLoading(false);
+      setErrorMessage("Informe seu PIN ou senha (no mínimo 6 caracteres).");
+      return;
+    }
+
+    const mx = await validateEmailMx(cleanEmail);
     if (!mx.valid) {
+      setLoading(false);
       setErrorMessage(mx.reason || "E-mail inválido.");
       return;
     }
 
-    const access = await checkProjectAccess(null, 'construtor-pdf', loginEmail);
+    const access = await checkProjectAccess(null, 'construtor-pdf', cleanEmail);
     if (!access.hasAccess) {
+      setLoading(false);
       setErrorMessage(access.message);
       return;
     }
 
-    const res = loginUser(loginEmail, loginPassword);
+    const res = loginUser(cleanEmail, cleanPin);
+    setLoading(false);
     if (!res.success) {
       setErrorMessage(res.error || "Falha na autenticação.");
       return;
@@ -153,7 +188,28 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
-    const res = registerUser(registerName, registerEmail, registerPassword);
+    setLoading(true);
+
+    if (!registerName.trim()) {
+      setLoading(false);
+      setErrorMessage("O nome completo é obrigatório.");
+      return;
+    }
+
+    if (!registerEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(registerEmail.trim())) {
+      setLoading(false);
+      setErrorMessage("Informe um e-mail válido.");
+      return;
+    }
+
+    if (!registerPassword || registerPassword.length < 6) {
+      setLoading(false);
+      setErrorMessage("A senha deve conter no mínimo 6 caracteres.");
+      return;
+    }
+
+    const res = registerUser(registerName.trim(), registerEmail.trim(), registerPassword);
+    setLoading(false);
     if (!res.success) {
       setErrorMessage(res.error || "Falha no cadastro.");
       return;
@@ -170,292 +226,422 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) handleClose(); }}>
       <DialogContent
         data-testid="auth-modal"
-        className={`max-w-md p-6 font-sans bg-slate-950/95 text-slate-100 border border-amber-500/40 shadow-[0_0_50px_rgba(245,158,11,0.2)] backdrop-blur-2xl rounded-2xl ${
+        className={`max-w-[920px] w-[95vw] p-0 font-sans bg-slate-900 text-slate-100 border border-[#eab308]/40 shadow-[0_0_50px_rgba(234,179,8,0.2)] backdrop-blur-2xl rounded-3xl overflow-hidden ${
           !canClose ? "[&>button]:hidden" : ""
         }`}
       >
-        <DialogHeader className="border-b border-slate-800/80 pb-4">
-          <div className="flex items-center justify-between gap-2 mb-1.5">
-            <span className="font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase tracking-wider flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-amber-400" />
-              <span>ECOSSISTEMA MONTANHA</span>
-            </span>
-            <Link
-              to="/auth"
-              onClick={() => handleClose()}
-              className="text-[11px] font-bold text-amber-400 hover:text-amber-300 hover:underline flex items-center gap-1 transition cursor-pointer"
-            >
-              <span>Tela de Login Completa</span>
-              <ExternalLink className="w-3 h-3" />
-            </Link>
-          </div>
-          <DialogTitle className="text-xl font-black tracking-tight text-white flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400">
-              <Lock className="w-4 h-4" />
-            </div>
-            <span>{activeTab === "login" ? "Montanha PDF Studio" : "Criar Nova Conta"}</span>
-          </DialogTitle>
-          <p className="text-xs text-slate-400 mt-1">
-            Diagramação Editorial &amp; Publicações de Alto Nível com IA
-          </p>
+        <DialogHeader className="sr-only">
+          <DialogTitle>Montanha PDF Studio Authentication</DialogTitle>
         </DialogHeader>
 
-        {/* Tab switchers */}
-        <div className="flex items-center p-1 rounded-xl bg-slate-900/80 border border-slate-800 my-2">
-          <button
-            type="button"
-            data-testid="tab-login"
-            onClick={() => {
-              setActiveTab("login");
-              setErrorMessage(null);
-            }}
-            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-              activeTab === "login"
-                ? "bg-amber-500 text-slate-950 font-black shadow-md"
-                : "text-slate-400 hover:text-white"
-            }`}
-          >
-            <LogIn className="w-3.5 h-3.5" />
-            <span>Entrar</span>
-          </button>
-          <button
-            type="button"
-            data-testid="tab-register"
-            onClick={() => {
-              setActiveTab("register");
-              setErrorMessage(null);
-            }}
-            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-              activeTab === "register"
-                ? "bg-amber-500 text-slate-950 font-black shadow-md"
-                : "text-slate-400 hover:text-white"
-            }`}
-          >
-            <UserPlus className="w-3.5 h-3.5" />
-            <span>Cadastrar</span>
-          </button>
-        </div>
-
-        {/* Error Notification */}
-        {errorMessage && (
-          <div
-            data-testid="auth-error-msg"
-            className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold flex items-center gap-2"
-          >
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
-            <span>{errorMessage}</span>
-          </div>
-        )}
-
-        {/* Success Notification */}
-        {successMessage && (
-          <div
-            data-testid="auth-success-msg"
-            className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center gap-2"
-          >
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span>{successMessage}</span>
-          </div>
-        )}
-
-        {/* Login Tab Form */}
-        {activeTab === "login" && (
-          <form onSubmit={handleLogin} noValidate className="space-y-3.5 pt-1">
-            <div className="space-y-1.5">
-              <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-amber-400" />
-                <span>E-mail</span>
-              </Label>
-              <Input
-                type="email"
-                data-testid="input-login-email"
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                placeholder="seu.email@exemplo.com"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Senha</span>
-                </Label>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/30">10 números</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setErrorMessage(null);
-                      setSuccessMessage(null);
-                      setActiveTab("reset");
-                    }}
-                    className="text-xs text-amber-400 hover:underline font-medium cursor-pointer"
-                  >
-                    Esqueci a senha
-                  </button>
+        <div className="flex flex-col md:flex-row min-h-[540px] w-full">
+          {/* A) NAV RAIL */}
+          <nav className="w-full md:w-20 bg-slate-950 border-b md:border-b-0 md:border-r border-slate-800 p-4 flex md:flex-col items-center justify-between z-20 flex-shrink-0">
+            <div className="flex flex-col items-center gap-1">
+              <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-[#eab308] to-amber-600 p-0.5 shadow-md shadow-[#eab308]/20 flex items-center justify-center">
+                <div className="h-full w-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                  <BookOpen className="h-5 w-5 text-[#eab308]" />
                 </div>
               </div>
-              <Input
-                type="password"
-                data-testid="input-login-password"
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-                placeholder="••••••••"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
-              />
+              <span className="text-[9px] font-extrabold tracking-wider text-slate-400 uppercase">STUDIO</span>
             </div>
 
-            <Button
-              type="submit"
-              data-testid="btn-submit-login"
-              className="w-full h-10 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <LogIn className="w-4 h-4" />
-              <span>Acessar Conta</span>
-            </Button>
-          </form>
-        )}
+            <div className="flex md:flex-col items-center gap-2">
+              <button
+                type="button"
+                data-testid="tab-login"
+                onClick={() => {
+                  setActiveTab("login");
+                  setErrorMessage(null);
+                }}
+                aria-label="Entrar na conta"
+                className={`min-h-[44px] min-w-[44px] px-3.5 py-2 rounded-xl flex flex-col items-center justify-center gap-1 transition-all text-[11px] font-bold cursor-pointer ${
+                  activeTab === "login"
+                    ? "bg-[#eab308] text-slate-950 shadow-md shadow-[#eab308]/30 font-black"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                }`}
+              >
+                <User className="h-4 w-4" />
+                <span>Entrar</span>
+              </button>
 
-        {/* Reset Password Form */}
-        {activeTab === "reset" && (
-          <form onSubmit={handleResetPassword} noValidate className="space-y-4 pt-1">
-            <div className="space-y-1.5">
-              <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-amber-400" />
-                <span>E-mail para Recuperação</span>
-              </Label>
-              <Input
-                type="email"
-                required
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                placeholder="seu.email@exemplo.com"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
-              />
-            </div>
-            <Button
-              type="submit"
-              className="w-full h-10 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Mail className="w-4 h-4" />
-              <span>Enviar Instruções de Reset</span>
-            </Button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("login")}
-              className="w-full text-center text-xs text-slate-400 hover:text-white transition cursor-pointer"
-            >
-              ← Voltar para o login
-            </button>
-          </form>
-        )}
-
-        {/* Register Tab Form */}
-        {activeTab === "register" && (
-          <form onSubmit={handleRegister} noValidate className="space-y-3.5 pt-1">
-            <div className="space-y-1">
-              <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-amber-400" />
-                <span>Nome Completo</span>
-              </Label>
-              <Input
-                type="text"
-                data-testid="input-register-name"
-                value={registerName}
-                onChange={(e) => setRegisterName(e.target.value)}
-                placeholder="Ex: Coach Silva"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
-              />
+              <button
+                type="button"
+                data-testid="tab-register"
+                onClick={() => {
+                  setActiveTab("register");
+                  setErrorMessage(null);
+                }}
+                aria-label="Criar nova conta"
+                className={`min-h-[44px] min-w-[44px] px-3.5 py-2 rounded-xl flex flex-col items-center justify-center gap-1 transition-all text-[11px] font-bold cursor-pointer ${
+                  activeTab === "register"
+                    ? "bg-[#eab308] text-slate-950 shadow-md shadow-[#eab308]/30 font-black"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                }`}
+              >
+                <Sparkles className="h-4 w-4" />
+                <span>Cadastrar</span>
+              </button>
             </div>
 
-            <div className="space-y-1">
-              <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-amber-400" />
-                <span>E-mail Profissional</span>
-              </Label>
-              <Input
-                type="email"
-                data-testid="input-register-email"
-                value={registerEmail}
-                onChange={(e) => setRegisterEmail(e.target.value)}
-                placeholder="seu.email@exemplo.com"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
-              />
+            <div className="hidden md:flex flex-col items-center text-[9px] text-slate-500">
+              <ShieldCheck className="h-4 w-4 text-[#eab308] mb-0.5" />
+              <span>SSL 256</span>
+            </div>
+          </nav>
+
+          {/* B) FLOATING HERO CARD */}
+          <div className="w-full md:w-80 relative overflow-hidden bg-slate-950/90 p-6 md:p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-800">
+            <div aria-hidden className="absolute -top-24 -left-24 w-64 h-64 bg-[#eab308]/20 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 space-y-4">
+              <div className="space-y-2">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                  Montanha PDF Studio
+                </h2>
+                <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
+                  Diagramação editorial &amp; inteligência operacional de alta performance para revistas, e-books e publicações com IA.
+                </p>
+              </div>
             </div>
 
-            <div className="space-y-1">
-              <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-amber-400" />
-                <span>Senha (Mínimo 6 caracteres)</span>
-              </Label>
-              <Input
-                type="password"
-                data-testid="input-register-password"
-                value={registerPassword}
-                onChange={(e) => setRegisterPassword(e.target.value)}
-                placeholder="••••••••"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
-              />
+            <div className="relative z-10 pt-6 border-t border-slate-800/80 space-y-2.5">
+              <div className="flex items-center gap-2.5 text-xs text-slate-300 font-medium">
+                <CheckCircle2 className="h-4 w-4 text-[#eab308] flex-shrink-0" />
+                <span>Autenticação rápida e segura por PIN</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs text-slate-300 font-medium">
+                <CheckCircle2 className="h-4 w-4 text-[#eab308] flex-shrink-0" />
+                <span>Criptografia de ponta a ponta</span>
+              </div>
             </div>
+          </div>
 
-            <Button
-              type="submit"
-              data-testid="btn-submit-register"
-              className="w-full h-10 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <UserPlus className="w-4 h-4" />
-              <span>Concluir Cadastro &amp; Entrar</span>
-            </Button>
-          </form>
-        )}
+          {/* C) FORM PANEL */}
+          <div className="flex-1 p-6 md:p-8 flex flex-col justify-between bg-slate-900">
+            <div className="space-y-5 my-auto">
+              <div>
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+                  {activeTab === "login" ? "Acessar Plataforma" : activeTab === "register" ? "Criar sua Conta" : "Recuperar Senha"}
+                </h3>
+                <p className="text-xs md:text-sm text-slate-400 mt-1">
+                  {activeTab === "login"
+                    ? "Informe suas credenciais ou PIN para acessar."
+                    : activeTab === "register"
+                    ? "Preencha os dados abaixo para cadastrar seu novo acesso."
+                    : "Informe seu e-mail para receber as instruções de recuperação."}
+                </p>
+              </div>
 
-        {/* Footer Ecosystem Button */}
-        <div className="text-center pt-2 border-t border-slate-800/80">
+              {/* Error Notification */}
+              {errorMessage && (
+                <div
+                  data-testid="auth-error-msg"
+                  className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold flex items-center gap-2"
+                >
+                  <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
+              {/* Success Notification */}
+              {successMessage && (
+                <div
+                  data-testid="auth-success-msg"
+                  className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center gap-2"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>{successMessage}</span>
+                </div>
+              )}
+
+              {/* Login Form */}
+              {activeTab === "login" && (
+                <form onSubmit={handleLogin} noValidate className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label htmlFor="login-email-input" className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      E-mail de Acesso
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      <input
+                        id="login-email-input"
+                        type="email"
+                        data-testid="input-login-email"
+                        required
+                        value={loginEmail}
+                        onChange={(e) => setLoginEmail(e.target.value)}
+                        placeholder="seu.email@exemplo.com"
+                        className="w-full h-11 pl-10 pr-4 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#eab308] text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="login-pin-input" className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                        PIN ou Senha de Acesso
+                      </label>
+                    </div>
+                    <div className="relative">
+                      <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      <input
+                        id="login-pin-input"
+                        type={showPass ? "text" : "password"}
+                        data-testid="input-login-password"
+                        required
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full h-11 pl-10 pr-12 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#eab308] text-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPass(!showPass)}
+                        aria-label="Alternar visibilidade da senha"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-white cursor-pointer"
+                      >
+                        {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-1">
+                    <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-400 hover:text-slate-200">
+                      <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        className="rounded border-slate-800 bg-slate-950 text-[#eab308] focus:ring-[#eab308]"
+                      />
+                      <span>Lembrar neste dispositivo</span>
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setErrorMessage(null);
+                        setSuccessMessage(null);
+                        setActiveTab("reset");
+                      }}
+                      className="text-xs font-bold text-[#eab308] hover:underline cursor-pointer"
+                    >
+                      Esqueci a senha
+                    </button>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    data-testid="btn-submit-login"
+                    aria-label="Entrar no PDF Studio"
+                    className="w-full h-12 rounded-xl bg-[#eab308] hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md shadow-[#eab308]/20 transition-all flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                  >
+                    {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                    <span>Entrar no PDF Studio</span>
+                  </button>
+                </form>
+              )}
+
+              {/* Register Form */}
+              {activeTab === "register" && (
+                <form onSubmit={handleRegister} noValidate className="space-y-3.5">
+                  <div className="space-y-1.5">
+                    <label htmlFor="modal-reg-name" className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      Nome Completo
+                    </label>
+                    <div className="relative">
+                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      <input
+                        id="modal-reg-name"
+                        type="text"
+                        data-testid="input-register-name"
+                        required
+                        value={registerName}
+                        onChange={(e) => setRegisterName(e.target.value)}
+                        placeholder="Ex: Designer Montanha"
+                        className="w-full h-11 pl-10 pr-4 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#eab308] text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="modal-reg-email" className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      E-mail de Acesso
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      <input
+                        id="modal-reg-email"
+                        type="email"
+                        data-testid="input-register-email"
+                        required
+                        value={registerEmail}
+                        onChange={(e) => setRegisterEmail(e.target.value)}
+                        placeholder="seu.email@exemplo.com"
+                        className="w-full h-11 pl-10 pr-4 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#eab308] text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="modal-reg-pass" className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      PIN ou Senha (no mínimo 6 dígitos)
+                    </label>
+                    <div className="relative">
+                      <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      <input
+                        id="modal-reg-pass"
+                        type={showPass ? "text" : "password"}
+                        data-testid="input-register-password"
+                        required
+                        value={registerPassword}
+                        onChange={(e) => setRegisterPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full h-11 pl-10 pr-12 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#eab308] text-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPass(!showPass)}
+                        aria-label="Alternar visibilidade da senha"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-white cursor-pointer"
+                      >
+                        {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    data-testid="btn-submit-register"
+                    aria-label="Criar Conta de Acesso"
+                    className="w-full h-12 rounded-xl bg-[#eab308] hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md shadow-[#eab308]/20 transition-all flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                  >
+                    {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                    <span>Criar Conta de Acesso</span>
+                  </button>
+                </form>
+              )}
+
+              {/* Reset Password Form */}
+              {activeTab === "reset" && (
+                <form onSubmit={handleResetPassword} noValidate className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label htmlFor="modal-reset-email" className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      E-mail para Recuperação
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      <input
+                        id="modal-reset-email"
+                        type="email"
+                        required
+                        value={loginEmail}
+                        onChange={(e) => setLoginEmail(e.target.value)}
+                        placeholder="seu.email@exemplo.com"
+                        className="w-full h-11 pl-10 pr-4 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#eab308] text-sm"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full h-12 rounded-xl bg-[#eab308] hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 min-h-[44px] cursor-pointer"
+                  >
+                    {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                    <span>Enviar Link de Recuperação</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("login")}
+                    className="w-full text-center text-xs text-slate-400 hover:text-white pt-1 block cursor-pointer"
+                  >
+                    ← Voltar para o login
+                  </button>
+                </form>
+              )}
+
+              {/* Footer Switcher */}
+              <div className="text-center text-xs text-slate-400 pt-3 border-t border-slate-800/80">
+                {activeTab === "login" ? (
+                  <span>
+                    Ainda não possui uma conta?{" "}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveTab("register");
+                        setErrorMessage(null);
+                      }}
+                      className="font-bold text-[#eab308] hover:underline ml-1 cursor-pointer"
+                    >
+                      Cadastre-se aqui
+                    </button>
+                  </span>
+                ) : activeTab === "register" ? (
+                  <span>
+                    Já possui uma conta?{" "}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveTab("login");
+                        setErrorMessage(null);
+                      }}
+                      className="font-bold text-[#eab308] hover:underline ml-1 cursor-pointer"
+                    >
+                      Fazer login
+                    </button>
+                  </span>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Ecosystem Drawer Toggle Footer */}
+        <div className="p-3 bg-slate-950 border-t border-slate-800 flex flex-col items-center justify-center">
           <button
             type="button"
             onClick={() => setShowEcosystem(!showEcosystem)}
-            className="text-xs text-amber-400 hover:text-amber-300 font-bold inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 transition-all cursor-pointer shadow-md"
+            className="text-xs text-[#eab308] hover:text-amber-400 font-bold inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#eab308]/10 border border-[#eab308]/30 transition-all cursor-pointer shadow-md min-h-[36px]"
           >
             <Globe className="w-3.5 h-3.5" />
-            <span>🌐 Ecossistema (5 Apps Integrados)</span>
+            <span>🌐 Ecossistema Montanha (5 Apps Integrados)</span>
             {showEcosystem ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
-        </div>
 
-        {/* Ecosystem Apps Drawer */}
-        {showEcosystem && (
-          <div className="p-3 rounded-xl bg-slate-900/90 border border-amber-500/30 space-y-2 animate-in fade-in">
-            <div className="text-[11px] font-bold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Plataformas Integradas do Ecossistema</span>
-            </div>
-            <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
-              {ECOSYSTEM_APPS.map((app) => (
-                <div
-                  key={app.id}
-                  className={`p-2 rounded-lg border text-xs flex items-center justify-between transition-all ${
-                    app.isCurrent
-                      ? "bg-amber-500/10 border-amber-500/50 text-white"
-                      : "bg-slate-950/60 border-slate-800/80 text-slate-300 hover:border-slate-700"
-                  }`}
-                >
-                  <div className="flex flex-col">
-                    <span className="font-bold flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: app.accent }} />
-                      {app.name}
+          {showEcosystem && (
+            <div className="mt-3 w-full p-3 rounded-2xl bg-slate-900 border border-[#eab308]/40 shadow-2xl space-y-2 animate-in fade-in">
+              <div className="text-[11px] font-bold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-[#eab308]" />
+                <span>Plataformas do Ecossistema Montanha</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-48 overflow-y-auto">
+                {ECOSYSTEM_APPS.map((app) => (
+                  <div
+                    key={app.id}
+                    className={`p-2.5 rounded-xl border text-xs flex items-center justify-between transition-all ${
+                      app.isCurrent
+                        ? "bg-[#eab308]/15 border-[#eab308]/50 text-white"
+                        : "bg-slate-950/60 border-slate-800/80 text-slate-300 hover:border-slate-700"
+                    }`}
+                  >
+                    <div className="flex flex-col">
+                      <span className="font-bold flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: app.accent }} />
+                        {app.name}
+                      </span>
+                      <span className="text-[10px] text-slate-400">{app.slogan}</span>
+                    </div>
+                    <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full border ${app.badgeBg}`}>
+                      {app.isCurrent ? "ATUAL" : app.tag}
                     </span>
-                    <span className="text-[10px] text-slate-400">{app.slogan}</span>
                   </div>
-                  <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full border ${app.badgeBg}`}>
-                    {app.isCurrent ? "ATUAL" : app.tag}
-                  </span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );

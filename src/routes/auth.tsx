@@ -208,9 +208,10 @@ function AuthPage() {
           <div className="flex md:flex-col items-center gap-3">
             <button
               type="button"
+              data-testid="tab-login"
               onClick={() => setView("signin")}
               aria-label="Entrar na conta"
-              className={`min-h-[44px] min-w-[44px] px-4 py-2.5 rounded-xl flex flex-col items-center justify-center gap-1 transition-all text-xs font-bold ${
+              className={`min-h-[44px] min-w-[44px] px-4 py-2.5 rounded-xl flex flex-col items-center justify-center gap-1 transition-all text-xs font-bold cursor-pointer ${
                 view === "signin"
                   ? "bg-[#eab308] text-slate-950 shadow-md shadow-[#eab308]/30"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
@@ -222,9 +223,10 @@ function AuthPage() {
 
             <button
               type="button"
+              data-testid="tab-register"
               onClick={() => setView("signup")}
               aria-label="Criar nova conta"
-              className={`min-h-[44px] min-w-[44px] px-4 py-2.5 rounded-xl flex flex-col items-center justify-center gap-1 transition-all text-xs font-bold ${
+              className={`min-h-[44px] min-w-[44px] px-4 py-2.5 rounded-xl flex flex-col items-center justify-center gap-1 transition-all text-xs font-bold cursor-pointer ${
                 view === "signup"
                   ? "bg-[#eab308] text-slate-950 shadow-md shadow-[#eab308]/30"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
@@ -377,6 +379,7 @@ function AuthPage() {
                       <input
                         id="su-name-input"
                         type="text"
+                        data-testid="input-register-name"
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -395,6 +398,7 @@ function AuthPage() {
                     <input
                       id="si-email-input"
                       type="email"
+                      data-testid={view === "signin" ? "input-login-email" : "input-register-email"}
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -416,6 +420,7 @@ function AuthPage() {
                     <input
                       id="pin-input"
                       type={showPass ? "text" : "password"}
+                      data-testid={view === "signin" ? "input-login-password" : "input-register-password"}
                       required
                       value={pin}
                       onChange={(e) => setPin(e.target.value)}
@@ -427,7 +432,7 @@ function AuthPage() {
                       type="button"
                       onClick={() => setShowPass(!showPass)}
                       aria-label="Alternar visibilidade da senha"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-white"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-white cursor-pointer"
                     >
                       {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -449,7 +454,7 @@ function AuthPage() {
                     <button
                       type="button"
                       onClick={() => setShowReset(true)}
-                      className="text-xs font-bold text-[#eab308] hover:underline"
+                      className="text-xs font-bold text-[#eab308] hover:underline cursor-pointer"
                     >
                       Esqueci a senha
                     </button>
@@ -459,8 +464,9 @@ function AuthPage() {
                 <button
                   type="submit"
                   disabled={loading}
+                  data-testid={view === "signin" ? "btn-submit-login" : "btn-submit-register"}
                   aria-label={view === "signin" ? "Entrar no PDF Studio" : "Cadastrar conta"}
-                  className="w-full h-12 rounded-xl bg-[#eab308] hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 min-h-[44px]"
+                  className="w-full h-12 rounded-xl bg-[#eab308] hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 min-h-[44px] cursor-pointer"
                 >
                   {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                   <span>{view === "signin" ? "Entrar no PDF Studio" : "Criar Conta de Acesso"}</span>
