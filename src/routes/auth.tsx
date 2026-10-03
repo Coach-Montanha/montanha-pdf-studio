@@ -503,51 +503,6 @@ function AuthPage() {
           )}
         </div>
       </div>
-
-      {/* Ecosystem Drawer Toggle */}
-      <div className="mt-4 text-center">
-        <button
-          type="button"
-          onClick={() => setShowEcosystem(!showEcosystem)}
-          className="text-xs text-[#eab308] hover:text-amber-400 font-bold inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#eab308]/10 border border-[#eab308]/30 transition-all cursor-pointer shadow-md min-h-[44px]"
-        >
-          <Globe className="w-3.5 h-3.5" />
-          <span>🌐 Ecossistema Montanha (5 Apps Integrados)</span>
-          {showEcosystem ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-        </button>
-      </div>
-
-      {showEcosystem && (
-        <div className="mt-3 w-full max-w-[920px] p-4 rounded-2xl bg-slate-900/95 border border-[#eab308]/40 shadow-2xl space-y-2 animate-in fade-in">
-          <div className="text-[11px] font-bold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-[#eab308]" />
-            <span>Plataformas do Ecossistema Montanha</span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {ECOSYSTEM_APPS.map((app) => (
-              <div
-                key={app.id}
-                className={`p-3 rounded-xl border text-xs flex items-center justify-between transition-all ${
-                  app.isCurrent
-                    ? "bg-[#eab308]/15 border-[#eab308]/50 text-white"
-                    : "bg-slate-950/60 border-slate-800/80 text-slate-300 hover:border-slate-700"
-                }`}
-              >
-                <div className="flex flex-col">
-                  <span className="font-bold flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: app.accent }} />
-                    {app.name}
-                  </span>
-                  <span className="text-[10px] text-slate-400">{app.slogan}</span>
-                </div>
-                <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full border ${app.badgeBg}`}>
-                  {app.isCurrent ? "ATUAL" : app.tag}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

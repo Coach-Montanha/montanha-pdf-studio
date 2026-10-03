@@ -7,11 +7,19 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
     await waitForHydration(page);
   });
 
+  const ensureAuthModalOpen = async (page: any) => {
+    const modal = page.getByTestId("auth-modal");
+    const isVisible = await modal.isVisible();
+    if (!isVisible) {
+      await page.getByTestId("btn-auth-trigger").click();
+    }
+    await expect(modal).toBeVisible();
+  };
+
   test.describe("1. Cadastro de Usuário (Sign Up)", () => {
     test("Fluxo Feliz: Deve cadastrar um novo usuário com sucesso e atualizar o cabeçalho", async ({ page }) => {
-      // 1. Abrir o modal de autenticação
-      await page.getByTestId("btn-auth-trigger").click();
-      await expect(page.getByTestId("auth-modal")).toBeVisible();
+      // 1. Abrir/verificar o modal de autenticação
+      await ensureAuthModalOpen(page);
 
       // 2. Mudar para a aba de Cadastro
       await page.getByTestId("tab-register").click();
@@ -39,7 +47,7 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
     });
 
     test("Estado de Falha: Deve rejeitar cadastro com campos em branco", async ({ page }) => {
-      await page.getByTestId("btn-auth-trigger").click();
+      await ensureAuthModalOpen(page);
       await page.getByTestId("tab-register").click();
 
       // Submeter formulário vazio
@@ -52,7 +60,7 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
     });
 
     test("Estado de Falha: Deve rejeitar cadastro com e-mail inválido", async ({ page }) => {
-      await page.getByTestId("btn-auth-trigger").click();
+      await ensureAuthModalOpen(page);
       await page.getByTestId("tab-register").click();
 
       await page.getByTestId("input-register-name").fill("Coach Silva");
@@ -66,7 +74,7 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
     });
 
     test("Estado de Falha: Deve rejeitar senha menor que 6 caracteres", async ({ page }) => {
-      await page.getByTestId("btn-auth-trigger").click();
+      await ensureAuthModalOpen(page);
       await page.getByTestId("tab-register").click();
 
       await page.getByTestId("input-register-name").fill("Coach Silva");
@@ -80,7 +88,7 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
     });
 
     test("Estado de Falha: Deve rejeitar e-mail duplicado já registrado", async ({ page }) => {
-      await page.getByTestId("btn-auth-trigger").click();
+      await ensureAuthModalOpen(page);
       await page.getByTestId("tab-register").click();
 
       // Usar o e-mail padrão já semeado no sistema
@@ -97,8 +105,7 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
 
   test.describe("2. Login de Usuário", () => {
     test("Fluxo Feliz: Deve autenticar com credenciais corretas e exibir perfil", async ({ page }) => {
-      await page.getByTestId("btn-auth-trigger").click();
-      await expect(page.getByTestId("auth-modal")).toBeVisible();
+      await ensureAuthModalOpen(page);
 
       // Certificar que está na aba de Login
       await page.getByTestId("tab-login").click();
@@ -119,7 +126,7 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
     });
 
     test("Estado de Falha: Deve exibir erro ao tentar logar com senha errada", async ({ page }) => {
-      await page.getByTestId("btn-auth-trigger").click();
+      await ensureAuthModalOpen(page);
       await page.getByTestId("tab-login").click();
 
       await page.getByTestId("input-login-email").fill("demo@montanha.com");
@@ -132,7 +139,7 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
     });
 
     test("Estado de Falha: Deve exibir erro quando o e-mail não existe", async ({ page }) => {
-      await page.getByTestId("btn-auth-trigger").click();
+      await ensureAuthModalOpen(page);
       await page.getByTestId("tab-login").click();
 
       await page.getByTestId("input-login-email").fill("inexistente@montanha.com");
@@ -154,9 +161,9 @@ test.describe("Jornadas de Autenticação (Cadastro, Login, Logout)", () => {
       // Clicar em Sair
       await authenticatedPage.getByTestId("btn-logout").click();
 
-      // Verificar que o perfil sumiu e o botão de login reapareceu
+      // Verificar que o perfil sumiu e o modal de login é exibido exigindo login
       await expect(authenticatedPage.getByTestId("user-profile-badge")).not.toBeVisible();
-      await expect(authenticatedPage.getByTestId("btn-auth-trigger")).toBeVisible();
+      await expect(authenticatedPage.getByTestId("auth-modal")).toBeVisible();
     });
   });
 });

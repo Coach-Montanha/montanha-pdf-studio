@@ -144,14 +144,28 @@ function Index() {
   }, []);
 
   // User Auth & PRO Subscription State
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    if (typeof window === "undefined") return null;
+    return getCurrentUser();
+  });
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return !getCurrentUser();
+  });
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    setCurrentUser(getCurrentUser());
+    const user = getCurrentUser();
+    setCurrentUser(user);
+    if (!user) {
+      setIsAuthModalOpen(true);
+    }
     const handleAuthSync = () => {
-      setCurrentUser(getCurrentUser());
+      const updatedUser = getCurrentUser();
+      setCurrentUser(updatedUser);
+      if (!updatedUser) {
+        setIsAuthModalOpen(true);
+      }
     };
     window.addEventListener("montanha-auth-changed", handleAuthSync);
     return () => window.removeEventListener("montanha-auth-changed", handleAuthSync);
@@ -1147,8 +1161,12 @@ function Index() {
       {/* Modals & Dialogs */}
       <AuthModal
         isOpen={isAuthModalOpen}
-        canClose={true}
-        onClose={() => setIsAuthModalOpen(false)}
+        canClose={Boolean(currentUser)}
+        onClose={() => {
+          if (currentUser) {
+            setIsAuthModalOpen(false);
+          }
+        }}
         onSuccess={(u) => {
           setCurrentUser(u);
           setIsAuthModalOpen(false);
