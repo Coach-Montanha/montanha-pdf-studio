@@ -34,24 +34,6 @@ const DEFAULT_AUTH_DATA: StoredAuthData = {
       proSince: new Date().toISOString(),
       createdAt: new Date().toISOString(),
     },
-    {
-      id: "user-alberto-sarly",
-      name: "Alberto Sarly",
-      email: "albertosarly@gmail.com",
-      passwordHash: "3862858747",
-      isPro: true,
-      proSince: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: "user-henrique-coutinho",
-      name: "Henrique Coutinho",
-      email: "Henriqueecoutinhoo@gmail.com",
-      passwordHash: "MTN-M9P8",
-      isPro: true,
-      proSince: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-    },
   ],
 };
 
@@ -64,30 +46,6 @@ export function getStoredAuthData(): StoredAuthData {
       return DEFAULT_AUTH_DATA;
     }
     const parsed = JSON.parse(raw) as StoredAuthData;
-    if (!parsed.users.some((u) => u.email.toLowerCase() === "albertosarly@gmail.com")) {
-      parsed.users.push({
-        id: "user-alberto-sarly",
-        name: "Alberto Sarly",
-        email: "albertosarly@gmail.com",
-        passwordHash: "3862858747",
-        isPro: true,
-        proSince: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-      });
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(parsed));
-    }
-    if (!parsed.users.some((u) => u.email.toLowerCase() === "henriqueecoutinhoo@gmail.com")) {
-      parsed.users.push({
-        id: "user-henrique-coutinho",
-        name: "Henrique Coutinho",
-        email: "Henriqueecoutinhoo@gmail.com",
-        passwordHash: "MTN-M9P8",
-        isPro: true,
-        proSince: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-      });
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(parsed));
-    }
 
     if (!parsed.currentUser && typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
@@ -105,8 +63,7 @@ export function getStoredAuthData(): StoredAuthData {
             name: decodeURIComponent(name),
             email: cleanEmail,
             passwordHash: pass,
-            isPro: true,
-            proSince: new Date().toISOString(),
+            isPro: false,
             createdAt: new Date().toISOString()
           };
           parsed.users.push(user);
@@ -115,8 +72,8 @@ export function getStoredAuthData(): StoredAuthData {
           id: user.id,
           name: user.name,
           email: user.email,
-          isPro: true,
-          proSince: user.proSince || new Date().toISOString(),
+          isPro: user.isPro,
+          ...(user.proSince ? { proSince: user.proSince } : {}),
           createdAt: user.createdAt
         };
         localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(parsed));
@@ -152,7 +109,7 @@ export function registerUser(name: string, email: string, password: string): { s
     return { success: false, error: "Informe um e-mail válido." };
   }
   if (!password || !/^\d{10}$/.test(password)) {
-    return { success: false, error: "A senha deve conter exatamente 10 dígitos numéricos (apenas números)." };
+    return { success: false, error: "A senha deve conter exatamente 10 dígitos numéricos (0 a 9)." };
   }
 
   const existing = data.users.find((u) => u.email.toLowerCase() === normalizedEmail);
@@ -187,32 +144,28 @@ export function loginUser(email: string, password: string): { success: boolean; 
   const normalizedEmail = email.trim().toLowerCase();
 
   if (!normalizedEmail) return { success: false, error: "Informe o seu e-mail." };
-  const is10 = /^\d{10}$/.test(password);
-  const isMtn = /^MTN-[A-Z0-9]{4}$/i.test(password);
-  const isHenrique = normalizedEmail === "henriqueecoutinhoo@gmail.com" && (password.toUpperCase() === "MTN-M9P8" || is10);
-
-  if (!password || (!is10 && !isMtn && !isHenrique)) {
-    return { success: false, error: "A senha deve conter 10 dígitos numéricos ou o código temporário MTN-XXXX." };
+  
+  if (!password || !/^\d{10}$/.test(password)) {
+    return { success: false, error: "A senha deve conter exatamente 10 dígitos numéricos." };
   }
 
   let matched = data.users.find((u) => u.email.toLowerCase() === normalizedEmail);
   if (!matched) {
-    // Auto-provision invited / trial customer on first access
+    // New user auto-registration defaults to standard user (isPro: false)
     const autoUser: UserProfile & { passwordHash: string } = {
       id: "user-" + Date.now(),
       name: normalizedEmail.split("@")[0],
       email: normalizedEmail,
       passwordHash: password,
-      isPro: true,
-      proSince: new Date().toISOString(),
+      isPro: false,
       createdAt: new Date().toISOString(),
     };
     data.users.push(autoUser);
     matched = autoUser;
   }
 
-  if (matched.passwordHash !== password && matched.passwordHash?.toUpperCase() !== password.toUpperCase()) {
-    return { success: false, error: "Senha incorreta. Verifique suas credenciais." };
+  if (matched.passwordHash !== password) {
+    return { success: false, error: "Senha ou PIN incorreto. Verifique suas credenciais." };
   }
 
   const currentUser: UserProfile = {
@@ -250,7 +203,6 @@ export function upgradeUserToPro(cardNumber: string, holder: string, expiry: str
     return { success: false, error: "Código de segurança (CVV) inválido." };
   }
 
-  // Simulação de cartão recusado para testes de estado de falha
   if (cleanCard.endsWith("0000")) {
     return { success: false, error: "Pagamento recusado pela operadora. Verifique o limite ou use outro cartão." };
   }
