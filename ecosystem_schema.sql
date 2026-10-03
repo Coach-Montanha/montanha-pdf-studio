@@ -49,17 +49,56 @@ CREATE TABLE IF NOT EXISTS public.ecosystem_subscriptions (
     UNIQUE(email, project_id)
 );
 
+-- 5. ECOSYSTEM MAGAZINE PROJECTS TABLE
+CREATE TABLE IF NOT EXISTS public.ecosystem_magazine_projects (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_email TEXT NOT NULL,
+    code TEXT DEFAULT 'MONTANHA',
+    title TEXT,
+    project_data JSONB NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    UNIQUE(user_email, code)
+);
+
+-- 6. ECOSYSTEM ARCHIVED EDITIONS TABLE
+CREATE TABLE IF NOT EXISTS public.ecosystem_archived_editions (
+    id TEXT PRIMARY KEY,
+    user_email TEXT NOT NULL,
+    edition_number TEXT NOT NULL,
+    title TEXT,
+    edition_data JSONB NOT NULL,
+    approved_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 7. ECOSYSTEM EBOOK PROJECTS TABLE
+CREATE TABLE IF NOT EXISTS public.ecosystem_ebook_projects (
+    id TEXT PRIMARY KEY,
+    user_email TEXT NOT NULL,
+    title TEXT NOT NULL,
+    ebook_data JSONB NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
 -- INDEXES FOR PERFORMANCE
 CREATE INDEX IF NOT EXISTS idx_ecosystem_guest_lockout_email ON public.ecosystem_guest_lockout(email);
 CREATE INDEX IF NOT EXISTS idx_ecosystem_otp_tokens_email_token ON public.ecosystem_otp_tokens(email, token);
 CREATE INDEX IF NOT EXISTS idx_ecosystem_subscriptions_email_project ON public.ecosystem_subscriptions(email, project_id);
 CREATE INDEX IF NOT EXISTS idx_ecosystem_subscriptions_user_project ON public.ecosystem_subscriptions(user_id, project_id);
+CREATE INDEX IF NOT EXISTS idx_ecosystem_magazine_projects_email ON public.ecosystem_magazine_projects(user_email);
+CREATE INDEX IF NOT EXISTS idx_ecosystem_archived_editions_email ON public.ecosystem_archived_editions(user_email);
+CREATE INDEX IF NOT EXISTS idx_ecosystem_ebook_projects_email ON public.ecosystem_ebook_projects(user_email);
 
 -- ROW LEVEL SECURITY (RLS) POLICIES
 ALTER TABLE public.ecosystem_users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.ecosystem_guest_lockout ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.ecosystem_otp_tokens ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.ecosystem_subscriptions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.ecosystem_magazine_projects ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.ecosystem_archived_editions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.ecosystem_ebook_projects ENABLE ROW LEVEL SECURITY;
 
 -- 1. ecosystem_users: Restricted by auth.uid() or service_role
 DROP POLICY IF EXISTS "Public select ecosystem_users" ON public.ecosystem_users;
@@ -98,3 +137,13 @@ CREATE POLICY "Users read own subscriptions" ON public.ecosystem_subscriptions F
 CREATE POLICY "Service role manages subscriptions insert" ON public.ecosystem_subscriptions FOR INSERT WITH CHECK (auth.role() = 'service_role' OR auth.uid() = user_id);
 CREATE POLICY "Service role manages subscriptions update" ON public.ecosystem_subscriptions FOR UPDATE USING (auth.role() = 'service_role' OR auth.uid() = user_id);
 CREATE POLICY "Service role manages subscriptions delete" ON public.ecosystem_subscriptions FOR DELETE USING (auth.role() = 'service_role');
+
+-- 5. ecosystem_magazine_projects: Permissive policies for user projects
+CREATE POLICY "Manage magazine projects" ON public.ecosystem_magazine_projects FOR ALL USING (true) WITH CHECK (true);
+
+-- 6. ecosystem_archived_editions: Permissive policies for archived editions
+CREATE POLICY "Manage archived editions" ON public.ecosystem_archived_editions FOR ALL USING (true) WITH CHECK (true);
+
+-- 7. ecosystem_ebook_projects: Permissive policies for ebook projects
+CREATE POLICY "Manage ebook projects" ON public.ecosystem_ebook_projects FOR ALL USING (true) WITH CHECK (true);
+

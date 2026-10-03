@@ -62,7 +62,7 @@ const DISPOSABLE_EMAIL_DOMAINS = new Set([
   'inboxalias.com'
 ]);
 
-function getSupabaseClient(): SupabaseClient | null {
+export function getSupabaseClient(): SupabaseClient | null {
   try {
     const url =
       (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_URL) ||

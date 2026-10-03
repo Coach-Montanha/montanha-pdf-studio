@@ -1,6 +1,8 @@
 import { MagazineProject, Article } from "../types/magazine";
 import { INITIAL_MAGAZINE_PROJECT } from "./sample-data";
 import { calculateMagazineTotalPages, countWords } from "./magazine-utils";
+import { getSupabaseClient } from "../services/ecosystem-auth-service";
+import { getCurrentUser } from "./auth-state";
 
 export interface ArchivedEdition {
   id: string;
@@ -57,18 +59,45 @@ export function getArchivedEditions(): ArchivedEdition[] {
 
   try {
     const raw = localStorage.getItem(ARCHIVE_STORAGE_KEY);
-    if (!raw) {
-      const initialList = [createInitialSampleEdition()];
-      localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(initialList));
-      return initialList;
+    let list: ArchivedEdition[] = [];
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        list = parsed;
+      }
     }
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+    if (list.length === 0) {
+      list = [createInitialSampleEdition()];
+      localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(list));
     }
-    const initialList = [createInitialSampleEdition()];
-    localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(initialList));
-    return initialList;
+
+    // Busca assíncrona no Supabase para manter acervo sincronizado
+    const supabase = getSupabaseClient();
+    const activeUser = getCurrentUser();
+    if (supabase && activeUser?.email) {
+      supabase
+        .from("ecosystem_archived_editions")
+        .select("*")
+        .eq("user_email", activeUser.email)
+        .then(({ data, error }) => {
+          if (!error && Array.isArray(data) && data.length > 0) {
+            const fetched = data.map((r: any) => r.edition_data as ArchivedEdition).filter(Boolean);
+            if (fetched.length > 0) {
+              const mergedMap = new Map<string, ArchivedEdition>();
+              list.forEach((e) => mergedMap.set(e.id, e));
+              fetched.forEach((e) => mergedMap.set(e.id, e));
+              const mergedList = Array.from(mergedMap.values());
+              if (mergedList.length !== list.length) {
+                localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(mergedList));
+                window.dispatchEvent(new CustomEvent("montanha-archive-changed"));
+              }
+            }
+          }
+        })
+        .catch(() => {});
+    }
+
+    return list;
   } catch (err) {
     console.error("Erro ao ler arquivo de edições:", err);
     return [createInitialSampleEdition()];
@@ -85,6 +114,25 @@ function saveArchivedList(list: ArchivedEdition[]): void {
     window.dispatchEvent(new CustomEvent("montanha-archive-changed"));
   } catch (err) {
     console.error("Erro ao salvar arquivo de edições:", err);
+  }
+
+  const supabase = getSupabaseClient();
+  const activeUser = getCurrentUser();
+  const userEmail = activeUser?.email || "albertosarly@gmail.com";
+  if (supabase) {
+    try {
+      const records = list.map((item) => ({
+        id: item.id,
+        user_email: userEmail,
+        edition_number: item.editionNumber,
+        title: item.title,
+        edition_data: item,
+        approved_at: item.approvedAt || new Date().toISOString(),
+      }));
+      supabase.from("ecosystem_archived_editions").upsert(records).then(() => {}).catch(() => {});
+    } catch (sbErr) {
+      console.warn("Aviso ao sincronizar edições arquivadas com Supabase:", sbErr);
+    }
   }
 }
 

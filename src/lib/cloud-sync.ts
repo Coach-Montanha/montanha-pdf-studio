@@ -5,6 +5,8 @@ import {
   fetchProjectFromGoogleDrive,
   getValidGoogleAccessToken,
 } from "./google-drive-sync";
+import { getSupabaseClient } from "../services/ecosystem-auth-service";
+import { getCurrentUser } from "./auth-state";
 
 const LOCAL_STORAGE_KEY = "montanha_magazine_project";
 const LOCAL_STORAGE_TIMESTAMP_KEY = "montanha_last_saved_at";
@@ -36,6 +38,28 @@ export async function syncProjectToCloud(
     ...project,
     updatedAt: now,
   };
+
+  // 0. Sincronização em Nuvem via Supabase (banco de dados real do usuário)
+  const supabase = getSupabaseClient();
+  const activeUser = getCurrentUser();
+  const userEmail = activeUser?.email || "albertosarly@gmail.com";
+
+  if (supabase) {
+    try {
+      await supabase.from("ecosystem_magazine_projects").upsert(
+        {
+          user_email: userEmail,
+          code,
+          title: projectWithTimestamp.title,
+          project_data: projectWithTimestamp,
+          updated_at: now,
+        },
+        { onConflict: "user_email,code" }
+      );
+    } catch (sbErr) {
+      console.warn("Aviso ao salvar no Supabase:", sbErr);
+    }
+  }
 
   // 1. Salvar no localStorage local (Local-First instantâneo)
   if (typeof window !== "undefined") {
@@ -139,6 +163,34 @@ export async function syncProjectToCloud(
 export async function fetchProjectFromCloud(code?: string): Promise<{ project: MagazineProject; syncedAt: string; code: string } | null> {
   const targetCode = (code || (typeof window !== "undefined" ? localStorage.getItem(LOCAL_STORAGE_SYNC_CODE_KEY) : null) || "MONTANHA").trim().toUpperCase();
 
+  // 0. Tentar via Supabase Database
+  const supabase = getSupabaseClient();
+  if (supabase) {
+    try {
+      const activeUser = getCurrentUser();
+      const userEmail = activeUser?.email;
+
+      let query = supabase.from("ecosystem_magazine_projects").select("*").eq("code", targetCode);
+      if (userEmail) {
+        query = supabase.from("ecosystem_magazine_projects").select("*").eq("user_email", userEmail);
+      }
+
+      const { data, error } = await query.order("updated_at", { ascending: false }).limit(1).maybeSingle();
+
+      if (!error && data?.project_data && Array.isArray(data.project_data.articles)) {
+        const fullProj = normalizeProject(data.project_data);
+        saveToLocalCache(fullProj, targetCode);
+        return {
+          project: fullProj,
+          syncedAt: data.updated_at || new Date().toISOString(),
+          code: targetCode,
+        };
+      }
+    } catch (sbErr) {
+      console.warn("Aviso ao buscar do Supabase:", sbErr);
+    }
+  }
+
   // 1. Tentar via servidor /api/project
   try {
     const res = await fetch(`/api/project?code=${encodeURIComponent(targetCode)}`, {
@@ -190,7 +242,7 @@ export async function fetchProjectFromCloud(code?: string): Promise<{ project: M
 }
 
 /**
- * Busca a versão mais recente do projeto (URL ?sync_code > URL ?sync_data > Cache Local > Padrão)
+ * Busca a versão mais recente do projeto (URL ?sync_code > URL ?sync_data > Supabase DB > Cache Local > Padrão)
  */
 export async function loadLatestProject(): Promise<MagazineProject> {
   if (typeof window === "undefined") {
@@ -225,7 +277,42 @@ export async function loadLatestProject(): Promise<MagazineProject> {
     return urlProject;
   }
 
-  // 3. Prioridade 3: Sincronização em Nuvem com Google Drive (se conectado)
+  // 3. Prioridade 3: Banco de Dados Supabase (sincronização do usuário logado)
+  const supabase = getSupabaseClient();
+  const activeUser = getCurrentUser();
+  if (supabase && activeUser?.email) {
+    try {
+      const { data, error } = await supabase
+        .from("ecosystem_magazine_projects")
+        .select("*")
+        .eq("user_email", activeUser.email)
+        .order("updated_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (!error && data?.project_data && Array.isArray(data.project_data.articles)) {
+        const sbProj = normalizeProject(data.project_data);
+        const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+        let localTimestamp = 0;
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            localTimestamp = new Date(parsed.updatedAt || 0).getTime();
+          } catch {}
+        }
+        const sbTimestamp = new Date(data.updated_at || sbProj.updatedAt || 0).getTime();
+
+        if (sbTimestamp >= localTimestamp) {
+          saveToLocalCache(sbProj, data.code || "MONTANHA");
+          return sbProj;
+        }
+      }
+    } catch (sbErr) {
+      console.warn("Aviso ao carregar do Supabase no boot:", sbErr);
+    }
+  }
+
+  // 4. Prioridade 4: Sincronização em Nuvem com Google Drive (se conectado)
   const gdToken = getValidGoogleAccessToken();
   if (gdToken) {
     try {

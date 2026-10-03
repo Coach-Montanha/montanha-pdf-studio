@@ -1,4 +1,6 @@
 import { EbookProject, EbookPresetStyle } from "../types/ebook";
+import { getSupabaseClient } from "../services/ecosystem-auth-service";
+import { getCurrentUser } from "./auth-state";
 
 export const EBOOK_PRESETS_INFO: Record<EbookPresetStyle, { name: string; description: string; badge: string; icon: string }> = {
   "practical-guide": {
@@ -113,12 +115,46 @@ export function getStoredEbooks(): EbookProject[] {
   if (typeof window === "undefined") return [INITIAL_EBOOK_PROJECT];
   try {
     const raw = localStorage.getItem(getEbookStorageKey());
-    if (!raw) {
-      localStorage.setItem(getEbookStorageKey(), JSON.stringify([INITIAL_EBOOK_PROJECT]));
-      return [INITIAL_EBOOK_PROJECT];
+    let list: EbookProject[] = [];
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        list = parsed;
+      }
     }
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : [INITIAL_EBOOK_PROJECT];
+
+    if (list.length === 0) {
+      list = [INITIAL_EBOOK_PROJECT];
+      localStorage.setItem(getEbookStorageKey(), JSON.stringify(list));
+    }
+
+    // Busca no Supabase
+    const supabase = getSupabaseClient();
+    const activeUser = getCurrentUser();
+    if (supabase && activeUser?.email) {
+      supabase
+        .from("ecosystem_ebook_projects")
+        .select("*")
+        .eq("user_email", activeUser.email)
+        .then(({ data, error }) => {
+          if (!error && Array.isArray(data) && data.length > 0) {
+            const fetched = data.map((r: any) => r.ebook_data as EbookProject).filter(Boolean);
+            if (fetched.length > 0) {
+              const mergedMap = new Map<string, EbookProject>();
+              list.forEach((e) => mergedMap.set(e.id, e));
+              fetched.forEach((e) => mergedMap.set(e.id, e));
+              const mergedList = Array.from(mergedMap.values());
+              if (mergedList.length !== list.length) {
+                localStorage.setItem(getEbookStorageKey(), JSON.stringify(mergedList));
+                window.dispatchEvent(new Event("montanha-ebooks-changed"));
+              }
+            }
+          }
+        })
+        .catch(() => {});
+    }
+
+    return list;
   } catch {
     return [INITIAL_EBOOK_PROJECT];
   }
@@ -126,10 +162,10 @@ export function getStoredEbooks(): EbookProject[] {
 
 export function saveEbookProject(project: EbookProject): void {
   if (typeof window === "undefined") return;
+  const updatedProject = { ...project, updatedAt: new Date().toISOString() };
   try {
     const existing = getStoredEbooks();
     const index = existing.findIndex((p) => p.id === project.id);
-    const updatedProject = { ...project, updatedAt: new Date().toISOString() };
     if (index >= 0) {
       existing[index] = updatedProject;
     } else {
@@ -139,5 +175,27 @@ export function saveEbookProject(project: EbookProject): void {
     window.dispatchEvent(new Event("montanha-ebooks-changed"));
   } catch (err) {
     console.warn("Falha ao salvar E-book no localStorage:", err);
+  }
+
+  // Sincronização em nuvem via Supabase
+  const supabase = getSupabaseClient();
+  const activeUser = getCurrentUser();
+  const userEmail = activeUser?.email || "albertosarly@gmail.com";
+  if (supabase) {
+    try {
+      supabase
+        .from("ecosystem_ebook_projects")
+        .upsert({
+          id: updatedProject.id,
+          user_email: userEmail,
+          title: updatedProject.title,
+          ebook_data: updatedProject,
+          updated_at: updatedProject.updatedAt,
+        })
+        .then(() => {})
+        .catch(() => {});
+    } catch (sbErr) {
+      console.warn("Aviso ao salvar e-book no Supabase:", sbErr);
+    }
   }
 }
