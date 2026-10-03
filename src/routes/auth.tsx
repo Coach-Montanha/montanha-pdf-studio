@@ -282,22 +282,17 @@ function AuthPage() {
         </nav>
 
         {/* B) FLOATING HERO CARD */}
-        <div className="w-full md:w-80 relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-[#eab308]/25 p-6 md:p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-800/80">
-          <div aria-hidden className="absolute -top-24 -left-24 w-64 h-64 bg-[#eab308]/25 rounded-full blur-3xl pointer-events-none" />
+        <div className="w-full md:w-80 relative overflow-hidden bg-slate-950/90 p-6 md:p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-800">
+          <div aria-hidden className="absolute -top-24 -left-24 w-64 h-64 bg-[#eab308]/20 rounded-full blur-3xl pointer-events-none" />
           
           <div className="relative z-10 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#eab308]/20 border border-[#eab308]/40 text-[#eab308] text-xs font-bold">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>EDITORIAL GOLD • PDF</span>
-            </div>
-
             {view === "signin" ? (
               <div className="space-y-3 animate-in fade-in">
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
                   Montanha PDF Studio
                 </h2>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Diagramação Editorial &amp; Publicações Digitais com Inteligência Artificial de Alto Nível.
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Diagramação editorial &amp; publicações digitais com inteligência artificial de alto nível.
                 </p>
               </div>
             ) : (
@@ -305,7 +300,7 @@ function AuthPage() {
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
                   Crie E-books &amp; Revistas em Minutos
                 </h2>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed">
                   Padrão editorial profissional, exportação em alta resolução e IA assistente.
                 </p>
               </div>
@@ -313,22 +308,14 @@ function AuthPage() {
           </div>
 
           <div className="relative z-10 pt-6 border-t border-slate-800/80 space-y-3">
-            <div className="flex items-center gap-2 text-xs text-slate-400">
-              <CheckCircle2 className="h-4 w-4 text-[#eab308]" />
-              <span>PIN de 10 Dígitos Padronizado</span>
+            <div className="flex items-center gap-2.5 text-xs text-slate-300 font-medium">
+              <CheckCircle2 className="h-4 w-4 text-[#eab308] flex-shrink-0" />
+              <span>Autenticação rápida e segura por PIN</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-slate-400">
-              <CheckCircle2 className="h-4 w-4 text-[#eab308]" />
-              <span>Exportação PDF/A Editorial</span>
+            <div className="flex items-center gap-2.5 text-xs text-slate-300 font-medium">
+              <CheckCircle2 className="h-4 w-4 text-[#eab308] flex-shrink-0" />
+              <span>Exportação PDF/A editorial em alta resolução</span>
             </div>
-            <a
-              href="#terms"
-              onClick={(e) => { e.preventDefault(); }}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#eab308] hover:underline pt-2"
-            >
-              <span>Termos &amp; Segurança do Ecossistema</span>
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
           </div>
         </div>
 
