@@ -22,6 +22,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { getCurrentUser, UserProfile, registerUser } from '@/lib/auth-state';
 import { checkAndLockGuestDemo, validateEmailMx, checkProjectAccess } from '@/services/ecosystem-auth-service';
+import { EbookStudioModal } from '@/components/ebook/EbookStudioModal';
+import { BookOpen } from 'lucide-react';
 
 export const Route = createFileRoute('/create')({
   component: CreateStudioPage,
@@ -67,6 +69,7 @@ function CreateStudioPage() {
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => getCurrentUser());
   const [docTitle, setDocTitle] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState('ficha-treino');
+  const [isEbookModalOpen, setIsEbookModalOpen] = useState(false);
 
   // Demo Guest Validation State
   const [demoEmail, setDemoEmail] = useState('');
@@ -303,6 +306,30 @@ function CreateStudioPage() {
         </div>
       )}
 
+      {/* BANNER DE DESTAQUE: GERADOR AUTOMÁTICO DE E-BOOKS IA */}
+      <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/40 border-2 border-amber-500/40 shadow-[0_0_50px_rgba(245,158,11,0.15)] space-y-4 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="space-y-2 text-center md:text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-mono text-[10px] font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span>NOVO MÓDULO — ECOSSISTEMA MONTANHA</span>
+          </div>
+          <h2 className="text-xl md:text-2xl font-black text-white">
+            Criador Automático de E-books & Manuais Digitais
+          </h2>
+          <p className="text-xs md:text-sm text-slate-300 max-w-xl">
+            Construa livros digitais, guias práticos e iscas comerciais em formato PDF Mobile/Tablet com 3 presets editoriais e inteligência artificial.
+          </p>
+        </div>
+
+        <Button
+          onClick={() => setIsEbookModalOpen(true)}
+          className="h-12 px-6 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg border border-amber-400 shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-[1.02]"
+        >
+          <BookOpen className="w-4 h-4" />
+          <span>Gerar E-book com IA</span>
+        </Button>
+      </div>
+
       {/* Templates Showcase Grid */}
       <div className="space-y-4">
         <div>
@@ -345,6 +372,12 @@ function CreateStudioPage() {
           ))}
         </div>
       </div>
+
+      {/* Modal do Gerador de E-books com IA */}
+      <EbookStudioModal
+        isOpen={isEbookModalOpen}
+        onClose={() => setIsEbookModalOpen(false)}
+      />
     </div>
   );
 }

@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getCurrentUser, UserProfile } from '@/lib/auth-state';
+import { getStoredEbooks } from '@/lib/ebook-templates';
+import { BookOpen } from 'lucide-react';
 
 export const Route = createFileRoute('/eco')({
   component: EcoPage,
@@ -306,6 +308,51 @@ function EcoPage() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* E-books Criados no Ecossistema */}
+      <div className="space-y-4 pt-4 border-t border-slate-800">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-black tracking-tight text-white flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-amber-400" />
+              E-books & Manuais Digitais do Ecossistema
+            </h2>
+            <p className="text-xs text-muted-foreground">
+              Livros digitais gerados com IA e sincronizados entre as plataformas do ecossistema.
+            </p>
+          </div>
+
+          <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer">
+            <Link to="/create">
+              <Sparkles className="w-3.5 h-3.5 mr-1" /> Criar Novo E-book
+            </Link>
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {getStoredEbooks().map((eb) => (
+            <div key={eb.id} className="p-5 rounded-2xl bg-slate-900/80 border border-amber-500/30 space-y-3 flex flex-col justify-between">
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase">
+                    {eb.presetStyle}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono">
+                    {eb.chapters.length} Capítulos
+                  </span>
+                </div>
+                <h3 className="font-extrabold text-base text-white">{eb.title}</h3>
+                <p className="text-xs text-slate-300 line-clamp-2">{eb.subtitle}</p>
+              </div>
+
+              <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                <span>Autor: <strong className="text-amber-400">{eb.authorName}</strong></span>
+                <span className="text-[10px] font-mono">{new Date(eb.createdAt).toLocaleDateString("pt-BR")}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

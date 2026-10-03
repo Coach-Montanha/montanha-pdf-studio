@@ -124,11 +124,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!/^\d{10}$/.test(loginPassword)) {
-      setErrorMessage("A senha deve conter exatamente 10 dígitos numéricos.");
-      return;
-    }
-
     const mx = await validateEmailMx(loginEmail);
     if (!mx.valid) {
       setErrorMessage(mx.reason || "E-mail inválido.");
@@ -157,10 +152,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
-    if (!/^\d{10}$/.test(registerPassword)) {
-      setErrorMessage("A senha deve conter exatamente 10 dígitos numéricos.");
-      return;
-    }
     const res = registerUser(registerName, registerEmail, registerPassword);
     if (!res.success) {
       setErrorMessage(res.error || "Falha no cadastro.");
@@ -299,14 +290,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </div>
               <Input
                 type="password"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                maxLength={10}
                 data-testid="input-login-password"
                 value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value.replace(/\D/g, "").slice(0, 10))}
-                placeholder="•••••••••• (10 dígitos)"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs font-mono tracking-widest rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
+                onChange={(e) => setLoginPassword(e.target.value)}
+                placeholder="••••••••"
+                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
               />
             </div>
 
@@ -389,23 +377,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
 
             <div className="space-y-1">
-              <div className="flex items-center justify-between">
-                <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Senha (10 dígitos numéricos)</span>
-                </Label>
-                <span className="text-[10px] text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/30">10 números</span>
-              </div>
+              <Label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-amber-400" />
+                <span>Senha (Mínimo 6 caracteres)</span>
+              </Label>
               <Input
                 type="password"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                maxLength={10}
                 data-testid="input-register-password"
                 value={registerPassword}
-                onChange={(e) => setRegisterPassword(e.target.value.replace(/\D/g, "").slice(0, 10))}
-                placeholder="•••••••••• (10 dígitos)"
-                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs font-mono tracking-widest rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
+                onChange={(e) => setRegisterPassword(e.target.value)}
+                placeholder="••••••••"
+                className="bg-slate-900/90 border-slate-800 text-slate-100 placeholder:text-slate-500 text-xs rounded-xl focus:border-amber-500 focus:ring-amber-500/20"
               />
             </div>
 

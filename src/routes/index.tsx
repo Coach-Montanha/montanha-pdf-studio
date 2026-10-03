@@ -21,6 +21,7 @@ import { AiApprovalModal } from "../components/repository/AiApprovalModal";
 import { PdfImportModal } from "../components/repository/PdfImportModal";
 import { AuthModal } from "../components/auth/AuthModal";
 import { SubscriptionModal } from "../components/subscription/SubscriptionModal";
+import { EbookStudioModal } from "../components/ebook/EbookStudioModal";
 import { EditionsArchiveView } from "../components/archive/EditionsArchiveView";
 import { getArchivedEditions } from "../lib/editions-archive";
 import { getCurrentUser, logoutUser, UserProfile } from "../lib/auth-state";
@@ -108,6 +109,7 @@ function Index() {
   const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
   const [layoutMode, setLayoutMode] = useState<MagazineLayoutMode>("print");
   const [isMockupStudioOpen, setIsMockupStudioOpen] = useState<boolean>(false);
+  const [isEbookStudioOpen, setIsEbookStudioOpen] = useState<boolean>(false);
   const [isCloudSyncOpen, setIsCloudSyncOpen] = useState<boolean>(false);
   const [isPdfRouterOpen, setIsPdfRouterOpen] = useState<boolean>(false);
   const [saveStatus, setSaveStatus] = useState<string>("Sincronizado");
@@ -509,6 +511,18 @@ function Index() {
                 {saveStatus}
               </span>
             )}
+          </Button>
+
+          {/* Gerador Automático de E-books com IA */}
+          <Button
+            size="sm"
+            onClick={() => setIsEbookStudioOpen(true)}
+            className="h-8 sm:h-9 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs border-2 border-black flex items-center gap-1.5 shadow-md cursor-pointer"
+            title="Construir livros digitais e guias práticos em formato E-book com IA"
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Criar E-book</span>
+            <span className="sm:hidden">E-book</span>
           </Button>
 
           {/* Gerador de Mockups de Divulgação com IA */}
@@ -1132,13 +1146,9 @@ function Index() {
 
       {/* Modals & Dialogs */}
       <AuthModal
-        isOpen={isAuthModalOpen || !currentUser}
-        canClose={Boolean(currentUser)}
-        onClose={() => {
-          if (currentUser) {
-            setIsAuthModalOpen(false);
-          }
-        }}
+        isOpen={isAuthModalOpen}
+        canClose={true}
+        onClose={() => setIsAuthModalOpen(false)}
         onSuccess={(u) => {
           setCurrentUser(u);
           setIsAuthModalOpen(false);
@@ -1268,6 +1278,12 @@ function Index() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Modal do Gerador de E-books com IA */}
+      <EbookStudioModal
+        isOpen={isEbookStudioOpen}
+        onClose={() => setIsEbookStudioOpen(false)}
+      />
 
       {/* Print-Only Container (Render ONLY active pages without blank sheets) */}
       <div className={`print-only-container ${layoutMode === "mobile" ? "print-layout-mobile" : "print-layout-print"}`}>

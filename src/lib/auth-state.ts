@@ -21,7 +21,7 @@ const DEFAULT_AUTH_DATA: StoredAuthData = {
       id: "demo-user-1",
       name: "Coach Montanha Demo",
       email: "demo@montanha.com",
-      passwordHash: "1234567890",
+      passwordHash: "senha123",
       isPro: false,
       createdAt: new Date().toISOString(),
     },
@@ -29,7 +29,7 @@ const DEFAULT_AUTH_DATA: StoredAuthData = {
       id: "demo-pro-user",
       name: "Assinante PRO",
       email: "pro@montanha.com",
-      passwordHash: "1234567890",
+      passwordHash: "senha123",
       isPro: true,
       proSince: new Date().toISOString(),
       createdAt: new Date().toISOString(),
@@ -108,8 +108,8 @@ export function registerUser(name: string, email: string, password: string): { s
   if (!normalizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
     return { success: false, error: "Informe um e-mail válido." };
   }
-  if (!password || !/^\d{10}$/.test(password)) {
-    return { success: false, error: "A senha deve conter exatamente 10 dígitos numéricos (0 a 9)." };
+  if (!password || password.length < 6) {
+    return { success: false, error: "A senha deve conter no mínimo 6 caracteres." };
   }
 
   const existing = data.users.find((u) => u.email.toLowerCase() === normalizedEmail);
@@ -144,28 +144,17 @@ export function loginUser(email: string, password: string): { success: boolean; 
   const normalizedEmail = email.trim().toLowerCase();
 
   if (!normalizedEmail) return { success: false, error: "Informe o seu e-mail." };
-  
-  if (!password || !/^\d{10}$/.test(password)) {
-    return { success: false, error: "A senha deve conter exatamente 10 dígitos numéricos." };
+  if (!password || password.length < 6) {
+    return { success: false, error: "Senha incorreta. Verifique suas credenciais." };
   }
 
-  let matched = data.users.find((u) => u.email.toLowerCase() === normalizedEmail);
+  const matched = data.users.find((u) => u.email.toLowerCase() === normalizedEmail);
   if (!matched) {
-    // New user auto-registration defaults to standard user (isPro: false)
-    const autoUser: UserProfile & { passwordHash: string } = {
-      id: "user-" + Date.now(),
-      name: normalizedEmail.split("@")[0],
-      email: normalizedEmail,
-      passwordHash: password,
-      isPro: false,
-      createdAt: new Date().toISOString(),
-    };
-    data.users.push(autoUser);
-    matched = autoUser;
+    return { success: false, error: "Nenhuma conta cadastrada com este e-mail." };
   }
 
   if (matched.passwordHash !== password) {
-    return { success: false, error: "Senha ou PIN incorreto. Verifique suas credenciais." };
+    return { success: false, error: "Senha incorreta. Verifique suas credenciais." };
   }
 
   const currentUser: UserProfile = {

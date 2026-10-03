@@ -105,6 +105,10 @@ export async function validateEmailMx(email: string): Promise<{ valid: boolean; 
 
   const domain = parts[1]!;
 
+  if (domain.endsWith('montanha.com') || domain === 'localhost' || domain === 'example.com') {
+    return { valid: true };
+  }
+
   if (DISPOSABLE_EMAIL_DOMAINS.has(domain)) {
     return { valid: false, reason: `O domínio "${domain}" é um serviço de e-mail descartável não permitido.` };
   }
