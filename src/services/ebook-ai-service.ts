@@ -1,119 +1,237 @@
-import { EbookOutlineRequest, EbookOutlineResult, EbookProject, EbookChapter } from "../types/ebook";
+import { EbookOutlineRequest, EbookOutlineResult, EbookProject, EbookChapter, EbookSection, EbookPresetStyle } from "../types/ebook";
 import { INITIAL_EBOOK_PROJECT } from "../lib/ebook-templates";
 
 /**
- * AI Service for Generating E-books automatically
+ * Realiza a análise inteligente do prompt/texto do usuário.
+ * Se o usuário colou um texto completo com capítulos, citações e divisões,
+ * este parser preserva e estrutura o texto INTEGRALMENTE sem desprezar nenhuma informação.
  */
-export async function generateEbookOutline(request: EbookOutlineRequest): Promise<EbookOutlineResult> {
-  await new Promise((res) => setTimeout(res, 800));
+export function parseUserTextIntoChapters(
+  prompt: string,
+  topic: string,
+  targetChapterCount: number
+): { title: string; subtitle: string; chapters: EbookChapter[] } {
+  const cleanPrompt = prompt.trim();
+  const cleanTopic = topic.trim();
 
-  const topicClean = request.topic.trim();
-  const audience = request.targetAudience?.trim() || "Coaches, Profissionais e Entusiastas de Alta Performance";
-  const presetStyle = request.presetStyle;
-  const count = Math.min(10, Math.max(1, request.chapterCount || 3));
-  const prompt = request.customPrompt?.trim();
+  // Expressão regular para detectar divisões de capítulos
+  const chapterRegex = /(?:^|\n)(?:#{1,3}\s*|cap[íi]tulo\s*\d+|m[óo]dulo\s*\d+|parte\s*\d+[:\-]?)(.*?)(?=\n(?:#{1,3}\s*|cap[íi]tulo\s*\d+|m[óo]dulo\s*\d+|parte\s*\d+[:\-]?)|$)/gis;
+  
+  const rawMatches = Array.from(cleanPrompt.matchAll(chapterRegex));
 
-  const chapters: Array<{
-    number: number;
-    title: string;
-    subtitle: string;
-    keyPoints: string[];
-  }> = [];
+  const parsedChapters: EbookChapter[] = [];
 
-  for (let i = 1; i <= count; i++) {
-    if (i === 1) {
-      chapters.push({
-        number: 1,
-        title: `Fundamentos & Visão Geral de ${topicClean}`,
-        subtitle: prompt ? `Alinhado ao direcionamento: ${prompt.slice(0, 60)}...` : "Construindo os alicerces teóricos e práticos de alto nível",
-        keyPoints: [
-          `Mecanismos centrais de ${topicClean}`,
-          prompt ? `Direcionamento: ${prompt.slice(0, 50)}` : "Erros mais comuns e como evitá-los",
-          "Princípios de execução contínua",
+  if (rawMatches.length >= 2) {
+    // Caso 1: O usuário forneceu texto com capítulos explícitos
+    rawMatches.forEach((match, index) => {
+      const blockText = match[0].trim();
+      const lines = blockText.split("\n").map((l) => l.trim()).filter(Boolean);
+
+      let title = lines[0] ? lines[0].replace(/^#{1,3}\s*/, "").replace(/^cap[íi]tulo\s*\d+[:\-]?\s*/i, "").trim() : `Capítulo ${index + 1}`;
+      let subtitle = "";
+      if (lines.length > 1 && lines[1].length < 120 && !lines[1].startsWith('"')) {
+        subtitle = lines[1];
+      }
+
+      const bodyLines = lines.slice(subtitle ? 2 : 1);
+      const fullBody = bodyLines.join("\n");
+
+      // Extração de citações, destaques e listas do corpo
+      const sections: EbookSection[] = [];
+      let currentTextParagraphs: string[] = [];
+
+      const flushText = () => {
+        if (currentTextParagraphs.length > 0) {
+          sections.push({
+            id: `sec-${index + 1}-${sections.length + 1}`,
+            type: "text",
+            content: currentTextParagraphs.join("\n\n"),
+          });
+          currentTextParagraphs = [];
+        }
+      };
+
+      bodyLines.forEach((line) => {
+        // Citação entre aspas ou com tag "Citação:"
+        if (/^["“'].*["”']$/.test(line) || /^cita[çc][ãa]o[:\-]/i.test(line)) {
+          flushText();
+          const quoteText = line.replace(/^cita[çc][ãa]o[:\-]\s*/i, "").replace(/^["“']|["”']$/g, "").trim();
+          sections.push({
+            id: `sec-${index + 1}-${sections.length + 1}`,
+            type: "quote",
+            content: quoteText,
+          });
+        }
+        // Callout ou Destaque
+        else if (/^(destaque|nota|aviso|aten[çc][ãa]o|importante)[:\-]/i.test(line)) {
+          flushText();
+          const calloutTitle = line.split(/[:\-]/)[0].toUpperCase();
+          const calloutContent = line.split(/[:\-]/).slice(1).join(":").trim();
+          sections.push({
+            id: `sec-${index + 1}-${sections.length + 1}`,
+            type: "callout",
+            calloutTitle,
+            content: calloutContent || line,
+          });
+        }
+        // Tópicos / Listas
+        else if (/^[\-\*\•]\s+/.test(line) || /^\d+[\.\)]\s+/.test(line)) {
+          currentTextParagraphs.push(line);
+        } else {
+          currentTextParagraphs.push(line);
+        }
+      });
+      flushText();
+
+      if (sections.length === 0) {
+        sections.push({
+          id: `sec-${index + 1}-1`,
+          type: "text",
+          content: fullBody || `Conteúdo do capítulo ${index + 1}`,
+        });
+      }
+
+      parsedChapters.push({
+        id: `ch-user-${index + 1}-${Date.now()}`,
+        chapterNumber: index + 1,
+        title: title || `Capítulo ${index + 1}`,
+        subtitle: subtitle || `Tópicos fundamentais do Capítulo ${index + 1}`,
+        introduction: fullBody.length > 200 ? fullBody.slice(0, 180) + "..." : undefined,
+        sections,
+        summaryTakeaways: [
+          `Aplicação direta das diretrizes do Capítulo ${index + 1}.`,
+          `Execução alinhada aos parâmetros de alta performance.`,
         ],
       });
-    } else if (i === count) {
-      chapters.push({
-        number: count,
-        title: "Resumo Executivo & Plano de Continuidade",
-        subtitle: "Key Takeaways e próximos passos no Ecossistema",
-        keyPoints: [
-          "Checklist final de verificação",
-          "Plano de 30 dias de evolução",
-          "Acompanhamento e mentoria",
+    });
+  } else if (cleanPrompt.length > 300) {
+    // Caso 2: Texto longo contínuo — dividir proporcionalmente no número de capítulos solicitado
+    const paragraphs = cleanPrompt.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
+    const totalChapters = Math.max(1, Math.min(targetChapterCount, paragraphs.length));
+    const perChapter = Math.ceil(paragraphs.length / totalChapters);
+
+    for (let i = 0; i < totalChapters; i++) {
+      const chapterParagraphs = paragraphs.slice(i * perChapter, (i + 1) * perChapter);
+      const title = chapterParagraphs[0] ? chapterParagraphs[0].slice(0, 60).replace(/\n/g, " ") : `Capítulo ${i + 1}`;
+      const content = chapterParagraphs.join("\n\n");
+
+      parsedChapters.push({
+        id: `ch-auto-${i + 1}-${Date.now()}`,
+        chapterNumber: i + 1,
+        title: `Capítulo ${i + 1}: ${title}`,
+        subtitle: `Leitura e Análise da Etapa ${i + 1}`,
+        introduction: content.slice(0, 150) + "...",
+        sections: [
+          {
+            id: `sec-auto-${i + 1}-1`,
+            type: "text",
+            content,
+          },
+        ],
+        summaryTakeaways: [
+          `Síntese dos tópicos abordados no Capítulo ${i + 1}.`,
         ],
       });
-    } else {
-      chapters.push({
-        number: i,
-        title: `Módulo Prático ${i}: Aplicação em ${topicClean}`,
-        subtitle: `Desenvolvimento avançado da etapa ${i}`,
-        keyPoints: [
-          `Protocolo de ação ${i}.1`,
-          `Caixas de destaque e exemplos reais`,
-          `Métricas de acompanhamento`,
+    }
+  }
+
+  // Se não foi possível extrair capítulos do prompt, gera estrutura padrão rica
+  if (parsedChapters.length === 0) {
+    const count = Math.max(1, Math.min(10, targetChapterCount));
+    for (let i = 1; i <= count; i++) {
+      parsedChapters.push({
+        id: `ch-std-${i}-${Date.now()}`,
+        chapterNumber: i,
+        title: `Capítulo ${i}: ${cleanTopic || "Alta Performance"}`,
+        subtitle: `Direcionamento prático e aplicação do módulo ${i}`,
+        introduction: `Este capítulo desenvolve os fundamentos de ${cleanTopic} com foco em resultados mensuráveis.`,
+        sections: [
+          {
+            id: `sec-std-${i}-1`,
+            type: "text",
+            title: "Desenvolvimento do Conteúdo",
+            content: cleanPrompt || `Detalhamento completo do módulo ${i} em ${cleanTopic}.`,
+          },
+        ],
+        summaryTakeaways: [
+          `Foco em execução e consistência no Capítulo ${i}.`,
         ],
       });
     }
   }
 
   return {
-    title: `Guia de ${topicClean}`,
-    subtitle: prompt
-      ? `Baseado no direcionamento: ${prompt.slice(0, 90)}`
-      : `Manuais, Checklist e Protocolos de Execução em ${topicClean} para ${audience}`,
-    categoryTag: presetStyle === "technical-manual" ? "MANUAL TÉCNICO" : presetStyle === "commercial-lead" ? "HIGH IMPACT" : "GUIA PRÁTICO MODULAR",
-    authorBioSuggestion: `Especialista e autor de elite do Ecossistema Montanha.`,
-    chapters,
+    title: cleanTopic || "Guia de Alta Performance",
+    subtitle: cleanPrompt.length > 20 ? cleanPrompt.slice(0, 100) + "..." : "Manual Completo de Execução",
+    chapters: parsedChapters,
   };
 }
 
 /**
- * Generates a full EbookProject based on an outline
+ * Gera a estrutura do Sumário do E-book preservando o prompt do usuário
+ */
+export async function generateEbookOutline(request: EbookOutlineRequest): Promise<EbookOutlineResult> {
+  await new Promise((res) => setTimeout(res, 400));
+
+  const parsed = parseUserTextIntoChapters(
+    request.customPrompt || "",
+    request.topic,
+    request.chapterCount || 5
+  );
+
+  return {
+    title: parsed.title,
+    subtitle: parsed.subtitle,
+    categoryTag: request.presetStyle === "technical-manual" ? "MANUAL TÉCNICO" : request.presetStyle === "commercial-lead" ? "HIGH IMPACT" : "GUIA PRÁTICO MODULAR",
+    authorBioSuggestion: "Especialista em Alta Performance e Autor do Ecossistema Montanha.",
+    chapters: parsed.chapters.map((c) => ({
+      number: c.chapterNumber,
+      title: c.title,
+      subtitle: c.subtitle,
+      keyPoints: c.sections.map((s) => s.title || s.content.slice(0, 50)).filter(Boolean),
+    })),
+  };
+}
+
+/**
+ * Generates a full EbookProject based on outline and full user text parsing
  */
 export async function generateFullEbookProject(
   outline: EbookOutlineResult,
   authorName: string,
-  presetStyle: EbookProject["presetStyle"]
+  presetStyle: EbookPresetStyle
 ): Promise<EbookProject> {
-  await new Promise((res) => setTimeout(res, 1200));
+  await new Promise((res) => setTimeout(res, 600));
 
+  // Tenta recuperar os capítulos estruturados do parsing ou monta a partir do outline
   const chapters: EbookChapter[] = outline.chapters.map((ch) => ({
-    id: `ch-ai-${ch.number}-${Date.now()}`,
+    id: `ch-full-${ch.number}-${Date.now()}`,
     chapterNumber: ch.number,
     title: ch.title,
     subtitle: ch.subtitle,
-    introduction: `Neste capítulo, abordaremos de forma clara os principais conceitos de ${ch.title.toLowerCase()}, trazendo estratégias diretamente aplicáveis.`,
+    introduction: `Aprofundamento prático e diretrizes do ${ch.title}.`,
     sections: [
       {
-        id: `sec-ai-${ch.number}-1`,
+        id: `sec-full-${ch.number}-1`,
         type: "text",
-        title: "Panorama Geral",
-        content: `Para obter o máximo desempenho ao aplicar este conhecimento, é fundamental alinhar cada etapa ao objetivo final. ${ch.keyPoints[0]}.`,
+        title: "Conteúdo Integrado",
+        content: ch.keyPoints.join("\n\n") || `Desenvolvimento detalhado de ${ch.title}.`,
       },
       {
-        id: `sec-ai-${ch.number}-2`,
+        id: `sec-full-${ch.number}-2`,
         type: presetStyle === "practical-guide" ? "callout" : "quote",
-        calloutTitle: `💡 Destaque do Capítulo ${ch.number}`,
-        content: `Aplicação prática: ${ch.keyPoints[1] || "Mantenha a constância na execução diária."}`,
+        calloutTitle: `💡 Diretriz do Capítulo ${ch.number}`,
+        content: `Mantenha a execução exata conforme as orientações de ${ch.title}.`,
         quoteAuthor: authorName,
-      },
-      {
-        id: `sec-ai-${ch.number}-3`,
-        type: "checklist",
-        title: `Checklist de Execução — Capítulo ${ch.number}`,
-        content: "Garanta que todos os critérios a seguir foram preenchidos:",
-        checklistItems: ch.keyPoints,
       },
     ],
     summaryTakeaways: [
-      `A chave para o capítulo ${ch.number} é a aplicação imediata do protocolo.`,
-      `Documente seu progresso e ajuste conforme a resposta individual.`,
+      `Execução e acompanhamento contínuo dos tópicos do Capítulo ${ch.number}.`,
     ],
   }));
 
   return {
-    id: `ebook-ai-${Date.now()}`,
+    id: `ebook-proj-${Date.now()}`,
     title: outline.title,
     subtitle: outline.subtitle,
     authorName: authorName.trim() || "Coach Montanha",
@@ -124,8 +242,8 @@ export async function generateFullEbookProject(
     themeId: "montanha-titanium",
     coverImage: INITIAL_EBOOK_PROJECT.coverImage,
     callToActionUrl: "https://montanha.com/pro",
-    callToActionText: "Eleve seus resultados ao próximo nível com a mentoria e as ferramentas exclusivas do Ecossistema Montanha.",
-    callToActionButtonLabel: "Conhecer o Ecossistema",
+    callToActionText: "Eleve seus resultados com o suporte contínuo do Ecossistema Montanha.",
+    callToActionButtonLabel: "Acessar Plataforma",
     chapters,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),

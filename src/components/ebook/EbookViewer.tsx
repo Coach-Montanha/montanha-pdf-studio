@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { EbookProject, EbookChapter, EbookSection } from "../../types/ebook";
 import { EBOOK_PRESETS_INFO, saveEbookProject, exportEbookToFile, exportEbookToHtml } from "../../lib/ebook-templates";
+import { downloadEbookAsDirectPdf } from "../../lib/ebook-pdf-exporter";
 import {
   BookOpen,
   CheckCircle2,
@@ -15,6 +16,9 @@ import {
   Download,
   FileCode,
   Image as ImageIcon,
+  FileDown,
+  BookText,
+  Layers,
 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -29,9 +33,29 @@ interface EbookViewerProps {
 export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook: initialEbook, onEdit, onExportPdf }) => {
   const [ebook, setEbook] = useState<EbookProject>(initialEbook);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [activeChapterId, setActiveChapterId] = useState<string | null>(initialEbook.chapters[0]?.id || null);
+  const [viewMode, setViewMode] = useState<"continuous" | "tabs">("continuous");
+  const [activeChapterId, setActiveChapterId] = useState<string | null>(null);
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false);
+  const [pdfStatus, setPdfStatus] = useState<string>("");
 
   const presetInfo = EBOOK_PRESETS_INFO[ebook.presetStyle] || EBOOK_PRESETS_INFO["practical-guide"];
+
+  const handleDownloadDirectPdf = async () => {
+    setIsDownloadingPdf(true);
+    setPdfStatus("Iniciando compilação do PDF...");
+    try {
+      await downloadEbookAsDirectPdf(ebook, (prog) => {
+        setPdfStatus(prog.statusText);
+      });
+    } catch (err) {
+      console.error("Erro ao gerar PDF:", err);
+      alert("Ocorreu um erro ao gerar o PDF. Tentando modo de impressão clássico.");
+      window.print();
+    } finally {
+      setIsDownloadingPdf(false);
+      setPdfStatus("");
+    }
+  };
 
   const handlePrint = () => {
     if (onExportPdf) {
@@ -82,13 +106,13 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook: initialEbook, o
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8 font-sans selection:bg-amber-500 selection:text-black">
-      {/* Header Controls (Estúdio & Visualização & Download) */}
-      <div className="no-print flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/90 border border-amber-500/30 backdrop-blur-xl shadow-lg">
+      {/* Header Controls (Estúdio & Visualização & Download Direct PDF) */}
+      <div className="no-print flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/90 border border-amber-500/30 backdrop-blur-xl shadow-lg">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400">
+          <div className="p-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 shrink-0">
             <BookOpen className="w-5 h-5" />
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase tracking-wider">
                 {presetInfo.badge}
@@ -99,7 +123,45 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook: initialEbook, o
           </div>
         </div>
 
+        {/* CONTROLES DE MODO DE VISUALIZAÇÃO E DOWNLOAD */}
         <div className="flex flex-wrap items-center gap-2">
+          {/* Seletor de Modo de Leitura: Contínuo vs Abas */}
+          <div className="flex items-center p-1 rounded-xl bg-slate-950 border border-slate-800">
+            <button
+              type="button"
+              onClick={() => {
+                setViewMode("continuous");
+                setActiveChapterId(null);
+              }}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 cursor-pointer ${
+                viewMode === "continuous"
+                  ? "bg-amber-500 text-slate-950 shadow"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Exibir todo o e-book em sequência para leitura e PDF"
+            >
+              <BookText className="w-3.5 h-3.5" />
+              <span>Texto Clássico</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setViewMode("tabs");
+                setActiveChapterId(ebook.chapters[0]?.id || null);
+              }}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 cursor-pointer ${
+                viewMode === "tabs"
+                  ? "bg-amber-500 text-slate-950 shadow"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Navegar por abas capítulo por capítulo"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Abas</span>
+            </button>
+          </div>
+
           {isEditing ? (
             <Button
               size="sm"
@@ -117,42 +179,45 @@ export const EbookViewer: React.FC<EbookViewerProps> = ({ ebook: initialEbook, o
               className="h-9 bg-slate-900 border-amber-500/40 text-amber-300 hover:bg-amber-500/10 text-xs px-3.5 rounded-xl flex items-center gap-2 cursor-pointer"
             >
               <Edit3 className="w-4 h-4" />
-              <span>Pós-Produção / Editar</span>
+              <span>Pós-Produção</span>
             </Button>
           )}
 
+          {/* BOTÃO PRINCIPAL DE DOWNLOAD DE PDF DIRETO */}
           <Button
             size="sm"
-            variant="outline"
-            onClick={() => exportEbookToFile(ebook)}
-            className="h-9 bg-slate-900 border-slate-700 text-slate-300 hover:text-white text-xs px-3 rounded-xl flex items-center gap-1.5 cursor-pointer"
-            title="Baixar Backup .JSON"
+            onClick={handleDownloadDirectPdf}
+            disabled={isDownloadingPdf}
+            className="h-9 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs px-4 rounded-xl shadow-md border border-amber-400 flex items-center gap-2 cursor-pointer"
+            title="Baixar arquivo PDF clássico diretamente no computador"
           >
-            <Download className="w-4 h-4 text-amber-400" />
-            <span>.JSON</span>
+            <FileDown className="w-4 h-4" />
+            <span>{isDownloadingPdf ? "Gerando PDF..." : "Baixar PDF (.pdf)"}</span>
           </Button>
 
           <Button
             size="sm"
             variant="outline"
-            onClick={() => exportEbookToHtml(ebook)}
-            className="h-9 bg-slate-900 border-slate-700 text-slate-300 hover:text-white text-xs px-3 rounded-xl flex items-center gap-1.5 cursor-pointer"
-            title="Baixar Arquivo HTML"
-          >
-            <FileCode className="w-4 h-4 text-blue-400" />
-            <span>.HTML</span>
-          </Button>
-
-          <Button
-            size="sm"
             onClick={handlePrint}
-            className="h-9 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 rounded-xl shadow-md border border-amber-400 flex items-center gap-2 cursor-pointer"
+            className="h-9 bg-slate-900 border-slate-700 text-slate-300 hover:text-white text-xs px-3 rounded-xl flex items-center gap-1.5 cursor-pointer"
+            title="Imprimir visualização"
           >
-            <Printer className="w-4 h-4" />
-            <span>Imprimir PDF</span>
+            <Printer className="w-4 h-4 text-amber-400" />
+            <span>Imprimir</span>
           </Button>
         </div>
       </div>
+
+      {/* PAINEL DE STATUS DO DOWNLOAD DO PDF */}
+      {isDownloadingPdf && (
+        <div className="no-print p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold flex items-center gap-3 animate-pulse">
+          <FileDown className="w-5 h-5 text-amber-400 animate-bounce shrink-0" />
+          <div>
+            <p className="font-bold text-white uppercase tracking-wider">Processando Download do E-book em PDF</p>
+            <p className="text-[11px] text-amber-200 font-normal">{pdfStatus || "Compilando páginas e formatação clássica..."}</p>
+          </div>
+        </div>
+      )}
 
       {/* CAPA DO E-BOOK */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-950 border-2 border-amber-500/40 shadow-[0_0_50px_rgba(245,158,11,0.15)] p-8 md:p-12 text-slate-100 min-h-[500px] flex flex-col justify-between">
