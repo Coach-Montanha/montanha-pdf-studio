@@ -23,6 +23,7 @@ import { AuthModal } from "../components/auth/AuthModal";
 import { SubscriptionModal } from "../components/subscription/SubscriptionModal";
 import { EbookStudioModal } from "../components/ebook/EbookStudioModal";
 import { EditionsArchiveView } from "../components/archive/EditionsArchiveView";
+import { StudioSidebar } from "../components/StudioSidebar";
 import { getArchivedEditions } from "../lib/editions-archive";
 import { getCurrentUser, logoutUser, UserProfile } from "../lib/auth-state";
 import { analyzeAndDiagramEditorialText, EditorialAnalysisResult } from "../lib/ai-service";
@@ -131,6 +132,22 @@ function Index() {
 
   // Dual Workspace Mode State (Magazine Studio vs E-books Studio)
   const [workspaceMode, setWorkspaceMode] = useState<"magazine" | "ebooks">("magazine");
+
+  // Sidebar Collapse State
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("montanha_sidebar_collapsed") === "true";
+  });
+
+  const handleToggleSidebar = () => {
+    setIsSidebarCollapsed((prev) => {
+      const next = !prev;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("montanha_sidebar_collapsed", String(next));
+      }
+      return next;
+    });
+  };
 
   const handleRecoverLovableDb = () => {
     const result = recoverLegacyLovableDatabase();
@@ -483,8 +500,31 @@ function Index() {
       data-hydrated={isInitialLoaded ? "true" : "false"}
       className={`min-h-screen flex flex-col font-sans transition-colors duration-200 theme-app-shell ${activeUiTheme.className}`}
     >
+      {/* PAINEL SIDEBAR GLASSMORPHISM */}
+      <StudioSidebar
+        workspaceMode={workspaceMode}
+        onWorkspaceModeChange={setWorkspaceMode}
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
+        articlesCount={project.articles.length}
+        repositoryCount={project.contentRepository?.length || 0}
+        archiveCount={archivedEditionsCount}
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={handleToggleSidebar}
+        onOpenAiStudio={() => setIsAiStudioOpen(true)}
+        onOpenMockupStudio={() => setIsMockupStudioOpen(true)}
+        onOpenPdfRouter={() => setIsPdfRouterOpen(true)}
+        onOpenExportPdf={() => setIsExportModalOpen(true)}
+        onOpenCloudSync={() => setIsCloudSyncOpen(true)}
+        onOpenEbookStudio={() => setIsEbookStudioOpen(true)}
+        onRecoverLegacyDb={handleRecoverLovableDb}
+        onResetToSample={handleResetToSample}
+        saveStatus={saveStatus}
+        isDriveConnected={isDriveConnected}
+      />
+
       {/* Top Application Header / Studio Navbar */}
-      <header className="no-print sticky top-0 z-50 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 transition-colors theme-app-header border-b-2 shadow-sm">
+      <header className="no-print sticky top-0 z-30 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 transition-colors theme-app-header border-b-2 shadow-sm">
         {/* Brand & Issue Title */}
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-amber-500 flex items-center justify-center text-slate-950 font-black shadow-md border-2 border-black">
@@ -505,22 +545,14 @@ function Index() {
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons & Profile */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Cloud Sync Status */}
+          {/* Status Sincronização */}
           <Button
             size="sm"
-            data-testid="btn-open-cloud-sync"
             onClick={() => setIsCloudSyncOpen(true)}
             className="h-8 sm:h-9 px-2.5 theme-app-card hover:opacity-90 border-2 border-current font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer relative"
-            title={
-              isDriveConnected
-                ? `Google Drive Conectado em Tempo Real — ${saveStatus}`
-                : saveStatus
-                ? `Sincronização em Nuvem: ${saveStatus}`
-                : "Sincronização em Nuvem & Compartilhamento"
-            }
-            aria-label="Sincronização em Nuvem"
+            title="Sincronização em Nuvem & Compartilhamento"
           >
             <Cloud className="w-4 h-4 text-amber-500" />
             {isDriveConnected ? (
@@ -535,54 +567,7 @@ function Index() {
             )}
           </Button>
 
-          {/* Gerador Automático de E-books com IA */}
-          <Button
-            size="sm"
-            onClick={() => setIsEbookStudioOpen(true)}
-            className="h-8 sm:h-9 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs border-2 border-black flex items-center gap-1.5 shadow-md cursor-pointer"
-            title="Construir livros digitais e guias práticos em formato E-book com IA"
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Criar E-book</span>
-            <span className="sm:hidden">E-book</span>
-          </Button>
-
-          {/* Gerador de Mockups de Divulgação com IA */}
-          <Button
-            size="sm"
-            onClick={() => setIsMockupStudioOpen(true)}
-            className="h-8 sm:h-9 bg-black text-amber-400 hover:bg-zinc-900 border-2 border-amber-500 font-bold text-xs flex items-center gap-1.5 shadow-sm cursor-pointer"
-            title="Criar mockups comerciais da revista para Instagram e redes sociais com IA"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden sm:inline">Mockups com IA</span>
-            <span className="sm:hidden">Mockup</span>
-          </Button>
-
-          {/* Importação Inteligente de PDFs com Router */}
-          <Button
-            size="sm"
-            data-testid="btn-header-pdf-import"
-            onClick={() => setIsPdfRouterOpen(true)}
-            className="h-8 sm:h-9 bg-zinc-950 text-amber-400 hover:bg-zinc-900 border-2 border-amber-400 font-bold text-xs flex items-center gap-1.5 shadow-sm cursor-pointer"
-            title="Importar PDFs (artigos, revistas, protocolos) com o pdf-conversion-router"
-          >
-            <FileText className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden md:inline">Importar PDF</span>
-            <span className="md:hidden">PDF</span>
-          </Button>
-
-          <Button
-            size="sm"
-            data-testid="btn-export-pdf"
-            onClick={() => setIsExportModalOpen(true)}
-            className="h-8 sm:h-9 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-md border-2 border-black flex items-center gap-1.5 cursor-pointer"
-          >
-            <Printer className="w-3.5 h-3.5" />
-            <span>Exportar PDF</span>
-          </Button>
-
-          {/* User Auth Profile / Login Trigger */}
+          {/* Perfil do Usuário / Botão de Logout */}
           {currentUser ? (
             <div className="flex items-center gap-1.5 sm:gap-2 pl-2 border-l border-current/20">
               <div
@@ -649,182 +634,8 @@ function Index() {
         </div>
       </header>
 
-      {/* Subheader Navigation Tabs & Dual Workspace Switcher */}
-      <div className="no-print px-4 sm:px-6 flex items-center justify-between overflow-x-auto custom-scrollbar transition-colors theme-app-subnav border-b-2 shadow-xs">
-        <div className="flex items-center gap-2 shrink-0">
-          {/* DUAL WORKSPACE MODE BUTTONS */}
-          <div className="flex items-center gap-1.5 pr-3 my-1 border-r border-current/20 shrink-0">
-            <button
-              onClick={() => setWorkspaceMode("magazine")}
-              className={`px-3 py-1.5 rounded-lg font-black text-xs transition flex items-center gap-1.5 cursor-pointer border-2 ${
-                workspaceMode === "magazine"
-                  ? "bg-amber-400 text-slate-950 border-black shadow-xs"
-                  : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-              }`}
-              title="Alternar para a Área de Trabalho da Revista"
-            >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Estúdio da Revista 📰</span>
-            </button>
-
-            <button
-              onClick={() => setWorkspaceMode("ebooks")}
-              className={`px-3 py-1.5 rounded-lg font-black text-xs transition flex items-center gap-1.5 cursor-pointer border-2 ${
-                workspaceMode === "ebooks"
-                  ? "bg-amber-400 text-slate-950 border-black shadow-xs"
-                  : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-              }`}
-              title="Alternar para a Área de Trabalho dos E-books"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-              <span>Estúdio de E-books 📚</span>
-            </button>
-          </div>
-
-          {/* MAGAZINE WORKSPACE TABS */}
-          {workspaceMode === "magazine" && (
-            <div ref={spotlightNavRef} className="relative flex items-center gap-1 sm:gap-2 py-1.5">
-              <span ref={spotlightBarRef} className="pointer-events-none absolute rounded-md bg-amber-500/30 border border-amber-500 shadow-[0_0_8px_rgba(245,158,11,.6)] transition-[left,width,top,height] duration-300 ease-[cubic-bezier(.4,0,.2,1)]" />
-              <button
-                ref={(el) => { spotlightButtonRefs.current["viewer"] = el; }}
-                data-testid="tab-viewer"
-                onClick={() => setActiveTab("viewer")}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-                  activeTab === "viewer"
-                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-                }`}
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>Leitor & Preview Visual</span>
-              </button>
-
-              <button
-                ref={(el) => { spotlightButtonRefs.current["articles"] = el; }}
-                data-testid="tab-articles"
-                onClick={() => setActiveTab("articles")}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-                  activeTab === "articles"
-                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-                }`}
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Matérias & Artigos ({project.articles.length})</span>
-              </button>
-
-              <button
-                ref={(el) => { spotlightButtonRefs.current["repository"] = el; }}
-                data-testid="tab-repository"
-                onClick={() => setActiveTab("repository")}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-                  activeTab === "repository"
-                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-                }`}
-              >
-                <FolderOpen className="w-3.5 h-3.5" />
-                <span>Acervo & Textos ({project.contentRepository?.length || 0})</span>
-              </button>
-
-              <button
-                ref={(el) => { spotlightButtonRefs.current["cover"] = el; }}
-                data-testid="tab-cover"
-                onClick={() => setActiveTab("cover")}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-                  activeTab === "cover"
-                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-                }`}
-              >
-                <Palette className="w-3.5 h-3.5" />
-                <span>Capa & Contracapa</span>
-              </button>
-
-              <button
-                ref={(el) => { spotlightButtonRefs.current["editorial"] = el; }}
-                data-testid="tab-editorial"
-                onClick={() => setActiveTab("editorial")}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-                  activeTab === "editorial"
-                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-                }`}
-              >
-                <Feather className="w-3.5 h-3.5" />
-                <span>Editorial & Páginas</span>
-              </button>
-
-              <button
-                ref={(el) => { spotlightButtonRefs.current["archive"] = el; }}
-                data-testid="tab-archive"
-                onClick={() => setActiveTab("archive")}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-                  activeTab === "archive"
-                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-                }`}
-              >
-                <FolderArchive className="w-3.5 h-3.5 text-amber-500" />
-                <span>Arquivo de Edições ({archivedEditionsCount})</span>
-              </button>
-
-              <button
-                ref={(el) => { spotlightButtonRefs.current["settings"] = el; }}
-                data-testid="tab-settings"
-                onClick={() => setActiveTab("settings")}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-black rounded-lg transition-all border-2 cursor-pointer ${
-                  activeTab === "settings"
-                    ? "bg-amber-400 text-slate-950 border-black shadow-sm"
-                    : "border-transparent opacity-75 hover:opacity-100 hover:bg-black/5"
-                }`}
-              >
-                <Settings className="w-3.5 h-3.5" />
-                <span>Configurações</span>
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Right utility items */}
-        <div className="hidden xl:flex items-center gap-3 text-xs opacity-80 shrink-0 ml-4">
-          <Link
-            to="/create"
-            className="flex items-center gap-1 font-bold text-amber-500 hover:text-amber-400 transition-colors"
-            title="Abrir Estúdio Criador com IA"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-            <span>Criador IA</span>
-          </Link>
-          <button
-            onClick={handleRecoverLovableDb}
-            className="flex items-center gap-1 font-bold text-amber-400 hover:text-amber-300 transition-colors cursor-pointer"
-            title="Resgatar artigos e revistas do banco de dados/versão anterior do navegador"
-          >
-            <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
-            <span>Resgatar Banco Legado 🔄</span>
-          </button>
-          <button
-            onClick={() => setIsCloudSyncOpen(true)}
-            className="flex items-center gap-1 font-bold text-emerald-600 hover:text-emerald-700 cursor-pointer"
-            title="Abrir Central de Sincronização em Nuvem"
-          >
-            <Cloud className="w-3.5 h-3.5" />
-            <span>{saveStatus} ({totalPages} págs)</span>
-          </button>
-          <button
-            onClick={handleResetToSample}
-            className="flex items-center gap-1 font-bold hover:text-amber-600 transition-colors cursor-pointer"
-            title="Recarregar revista modelo"
-          >
-            <RotateCcw className="w-3 h-3" />
-            <span>Restaurar Modelo</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main Workspace Body */}
-      <main className="no-print flex-1 p-4 sm:p-6 max-w-7xl w-full mx-auto">
+      {/* Main Workspace Body ajustado com margem dinâmica da Sidebar */}
+      <main className={`no-print flex-1 p-4 sm:p-6 w-full transition-all duration-300 ${isSidebarCollapsed ? "md:ml-24" : "md:ml-80"}`}>
         {/* WORKSPACE 2: ESTÚDIO DE E-BOOKS */}
         {workspaceMode === "ebooks" && (
           <div className="space-y-6 max-w-5xl mx-auto">
