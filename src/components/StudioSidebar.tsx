@@ -23,8 +23,12 @@ import {
   FileCode,
   Layers,
   LayoutGrid,
+  LogIn,
+  LogOut,
+  User,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { UserProfile } from "../lib/auth-state";
 
 interface StudioSidebarProps {
   workspaceMode: "magazine" | "ebooks";
@@ -46,6 +50,10 @@ interface StudioSidebarProps {
   onResetToSample: () => void;
   saveStatus: string;
   isDriveConnected: boolean;
+  currentUser: UserProfile | null;
+  onOpenAuthModal: () => void;
+  onOpenSubscriptionModal: () => void;
+  onLogout: () => void;
 }
 
 export const StudioSidebar: React.FC<StudioSidebarProps> = ({
@@ -68,6 +76,10 @@ export const StudioSidebar: React.FC<StudioSidebarProps> = ({
   onResetToSample,
   saveStatus,
   isDriveConnected,
+  currentUser,
+  onOpenAuthModal,
+  onOpenSubscriptionModal,
+  onLogout,
 }) => {
   const [isToolsOpen, setIsToolsOpen] = useState<boolean>(true);
   const [isExportOpen, setIsExportOpen] = useState<boolean>(false);
@@ -94,11 +106,13 @@ export const StudioSidebar: React.FC<StudioSidebarProps> = ({
 
       {/* PAINEL SIDEBAR GLASSMORPHISM */}
       <aside
-        className={`no-print fixed top-20 bottom-4 left-4 z-40 flex flex-col font-sans transition-all duration-300 ease-in-out ${
-          isCollapsed ? "w-20" : "w-72"
+        className={`no-print transition-all duration-300 ease-in-out shrink-0 ${
+          isCollapsed ? "w-full md:w-20" : "w-full md:w-72"
         } ${
-          isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } bg-slate-950/85 backdrop-blur-2xl border border-amber-500/30 rounded-[32px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),inset_0_-1px_1px_rgba(255,255,255,0.05),0_20px_50px_rgba(0,0,0,0.6)] p-3 text-slate-100 overflow-hidden selection:bg-amber-500 selection:text-black`}
+          isMobileOpen
+            ? "fixed inset-y-0 left-0 z-50 w-72 flex flex-col"
+            : "hidden md:flex flex-col sticky top-16 h-[calc(100vh-80px)] z-20"
+        } bg-slate-950/90 backdrop-blur-2xl border border-amber-500/30 rounded-3xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),inset_0_-1px_1px_rgba(255,255,255,0.05),0_20px_50px_rgba(0,0,0,0.6)] p-3 text-slate-100 overflow-hidden selection:bg-amber-500 selection:text-black`}
       >
         {/* Cabeçalho da Sidebar & Toggle Collapse */}
         <div className="flex items-center justify-between p-2 pb-3 border-b border-slate-800/80">
@@ -472,6 +486,82 @@ export const StudioSidebar: React.FC<StudioSidebarProps> = ({
               <RotateCcw className="w-4 h-4 shrink-0" />
               {!isCollapsed && <span className="truncate">Restaurar Modelo</span>}
             </button>
+          </div>
+
+          {/* PAINEL DE AUTENTICAÇÃO E ASSINATURA PRO */}
+          <div className="pt-3 border-t border-slate-800/80 space-y-2">
+            {currentUser ? (
+              <div className="space-y-2">
+                <div
+                  data-testid="user-profile-badge"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold"
+                  title={`Logado como ${currentUser.name} (${currentUser.email})`}
+                >
+                  <div className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-black text-xs shrink-0">
+                    {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U"}
+                  </div>
+                  {!isCollapsed && (
+                    <div className="flex-1 min-w-0">
+                      <p className="truncate text-white font-bold">{currentUser.name}</p>
+                      <p className="truncate text-[10px] text-slate-400 font-normal">{currentUser.email}</p>
+                    </div>
+                  )}
+                </div>
+
+                {currentUser.isPro ? (
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-amber-500/20 border border-amber-500/40">
+                    {!isCollapsed && <span className="text-[10px] font-bold text-amber-300">PLANO PRO ATIVO</span>}
+                    <span
+                      data-testid="badge-pro-status"
+                      className="px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 font-black text-[10px] uppercase border border-amber-400"
+                    >
+                      PRO
+                    </span>
+                  </div>
+                ) : (
+                  <Button
+                    size="sm"
+                    data-testid="btn-upgrade-pro"
+                    onClick={() => {
+                      onOpenSubscriptionModal();
+                      if (isMobileOpen) setIsMobileOpen(false);
+                    }}
+                    className="w-full h-8.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs rounded-xl shadow-md border border-amber-400 flex items-center justify-center gap-1.5 cursor-pointer"
+                    title="Upgrade para o plano PRO"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                    {!isCollapsed && <span>Assinar PRO</span>}
+                  </Button>
+                )}
+
+                <button
+                  data-testid="btn-logout"
+                  onClick={() => {
+                    onLogout();
+                    if (isMobileOpen) setIsMobileOpen(false);
+                  }}
+                  className="w-full p-2 rounded-xl text-xs font-bold text-red-400 hover:bg-red-500/10 transition flex items-center justify-center gap-2 cursor-pointer"
+                  title="Desconectar da conta"
+                >
+                  <LogOut className="w-4 h-4 shrink-0 text-red-400" />
+                  {!isCollapsed && <span>Sair da Conta</span>}
+                </button>
+              </div>
+            ) : (
+              <Button
+                size="sm"
+                data-testid="btn-auth-trigger"
+                onClick={() => {
+                  onOpenAuthModal();
+                  if (isMobileOpen) setIsMobileOpen(false);
+                }}
+                className="w-full h-9 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-md border border-amber-400 flex items-center justify-center gap-2 cursor-pointer"
+                title="Fazer Login ou Cadastrar no Montanha PDF Studio"
+              >
+                <LogIn className="w-4 h-4 shrink-0" />
+                {!isCollapsed && <span>Entrar / Cadastrar</span>}
+              </Button>
+            )}
           </div>
         </div>
 

@@ -500,142 +500,129 @@ function Index() {
       data-hydrated={isInitialLoaded ? "true" : "false"}
       className={`min-h-screen flex flex-col font-sans transition-colors duration-200 theme-app-shell ${activeUiTheme.className}`}
     >
-      {/* PAINEL SIDEBAR GLASSMORPHISM */}
-      <StudioSidebar
-        workspaceMode={workspaceMode}
-        onWorkspaceModeChange={setWorkspaceMode}
-        activeTab={activeTab}
-        onSelectTab={setActiveTab}
-        articlesCount={project.articles.length}
-        repositoryCount={project.contentRepository?.length || 0}
-        archiveCount={archivedEditionsCount}
-        isCollapsed={isSidebarCollapsed}
-        onToggleCollapse={handleToggleSidebar}
-        onOpenAiStudio={() => setIsAiStudioOpen(true)}
-        onOpenMockupStudio={() => setIsMockupStudioOpen(true)}
-        onOpenPdfRouter={() => setIsPdfRouterOpen(true)}
-        onOpenExportPdf={() => setIsExportModalOpen(true)}
-        onOpenCloudSync={() => setIsCloudSyncOpen(true)}
-        onOpenEbookStudio={() => setIsEbookStudioOpen(true)}
-        onRecoverLegacyDb={handleRecoverLovableDb}
-        onResetToSample={handleResetToSample}
-        saveStatus={saveStatus}
-        isDriveConnected={isDriveConnected}
-      />
+      {/* Body Flex Wrapper (Sidebar + Main Content sem overflow horizontal) */}
+      <div className="flex-1 flex flex-col md:flex-row w-full max-w-full min-w-0 p-3 sm:p-4 gap-4">
+        {/* PAINEL SIDEBAR GLASSMORPHISM */}
+        <StudioSidebar
+          workspaceMode={workspaceMode}
+          onWorkspaceModeChange={setWorkspaceMode}
+          activeTab={activeTab}
+          onSelectTab={setActiveTab}
+          articlesCount={project.articles.length}
+          repositoryCount={project.contentRepository?.length || 0}
+          archiveCount={archivedEditionsCount}
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapse={handleToggleSidebar}
+          onOpenAiStudio={() => setActiveTab("ai-studio")}
+          onOpenMockupStudio={() => setActiveTab("mockup-studio")}
+          onOpenPdfRouter={() => setActiveTab("pdf-router")}
+          onOpenExportPdf={() => setActiveTab("export-pdf")}
+          onOpenCloudSync={() => setActiveTab("cloud-sync")}
+          onOpenEbookStudio={() => setWorkspaceMode("ebooks")}
+          onRecoverLegacyDb={handleRecoverLovableDb}
+          onResetToSample={handleResetToSample}
+          saveStatus={saveStatus}
+          isDriveConnected={isDriveConnected}
+          currentUser={currentUser}
+          onOpenAuthModal={() => setIsAuthModalOpen(true)}
+          onOpenSubscriptionModal={() => setIsSubscriptionModalOpen(true)}
+          onLogout={() => {
+            logoutUser();
+            setCurrentUser(null);
+          }}
+        />
 
-      {/* Top Application Header / Studio Navbar */}
-      <header className="no-print sticky top-0 z-30 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 transition-colors theme-app-header border-b-2 shadow-sm">
-        {/* Brand & Issue Title */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-amber-500 flex items-center justify-center text-slate-950 font-black shadow-md border-2 border-black">
-            <BookOpen className="w-5 h-5 text-slate-950" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="font-black text-sm sm:text-base tracking-tight uppercase">
-                MONTANHA PDF STUDIO
-              </h1>
-              <span className="bg-amber-400 text-black text-[9px] font-mono font-black px-2 py-0.5 rounded border border-black uppercase hidden sm:inline">
-                {project.editionNumber ? `ED. #${project.editionNumber}` : "VIRTUAL"}
-              </span>
-            </div>
-            <p className="text-[11px] opacity-75 font-semibold">
-              Diagramação Editorial & Publicações de Alto Nível com IA
-            </p>
-          </div>
-        </div>
-
-        {/* Action Buttons & Profile */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Status Sincronização */}
-          <Button
-            size="sm"
-            onClick={() => setIsCloudSyncOpen(true)}
-            className="h-8 sm:h-9 px-2.5 theme-app-card hover:opacity-90 border-2 border-current font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer relative"
-            title="Sincronização em Nuvem & Compartilhamento"
-          >
-            <Cloud className="w-4 h-4 text-amber-500" />
-            {isDriveConnected ? (
-              <span className="flex items-center gap-1 font-mono text-[9px] text-emerald-600 dark:text-emerald-400 font-black uppercase hidden sm:inline-flex">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Drive Conectado
-              </span>
-            ) : (
-              <span className="text-[10px] font-mono hidden md:inline opacity-70">
-                {saveStatus}
-              </span>
-            )}
-          </Button>
-
-          {/* Perfil do Usuário / Botão de Logout */}
-          {currentUser ? (
-            <div className="flex items-center gap-1.5 sm:gap-2 pl-2 border-l border-current/20">
-              <div
-                data-testid="user-profile-badge"
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/5 dark:bg-white/5 border border-current/15 text-xs font-bold"
-                title={`Logado como ${currentUser.name} (${currentUser.email})`}
-              >
-                <div className="w-5 h-5 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-black text-[10px]">
-                  {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U"}
+        {/* Main Workspace Body */}
+        <main className="no-print flex-1 min-w-0 w-full overflow-x-hidden">
+          {/* Inline View: Matéria com IA */}
+          {activeTab === "ai-studio" && (
+            <div className="max-w-5xl mx-auto space-y-4">
+              <div className="theme-app-card p-6 rounded-2xl border-2 shadow-md space-y-4">
+                <div className="flex items-center justify-between border-b pb-3 border-current/20">
+                  <h2 className="text-xl font-black uppercase flex items-center gap-2">
+                    <Wand2 className="w-5 h-5 text-amber-500" />
+                    <span>Gerador & Redator de Matérias com IA</span>
+                  </h2>
+                  <Button size="sm" variant="ghost" onClick={() => setActiveTab("articles")}>
+                    Voltar para Matérias
+                  </Button>
                 </div>
-                <span className="hidden sm:inline max-w-[120px] truncate">{currentUser.name}</span>
+                <AiStudioDialog isOpen={true} onClose={() => setActiveTab("articles")} onAddArticle={handleSaveArticle} />
               </div>
-
-              {currentUser.isPro ? (
-                <span
-                  data-testid="badge-pro-status"
-                  className="px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 font-black text-[10px] tracking-wider uppercase border border-amber-600 shadow-xs"
-                >
-                  PRO
-                </span>
-              ) : (
-                <Button
-                  size="sm"
-                  data-testid="btn-upgrade-pro"
-                  onClick={() => setIsSubscriptionModalOpen(true)}
-                  className="h-8 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs px-2.5 rounded-lg shadow-sm cursor-pointer"
-                  title="Upgrade para o plano PRO"
-                >
-                  <Sparkles className="w-3.5 h-3.5 mr-1" />
-                  <span className="hidden sm:inline">Assinar PRO</span>
-                  <span className="sm:hidden">PRO</span>
-                </Button>
-              )}
-
-              <Button
-                variant="ghost"
-                size="sm"
-                data-testid="btn-logout"
-                onClick={() => {
-                  logoutUser();
-                  setCurrentUser(null);
-                }}
-                className="h-8 px-2 text-xs font-bold text-red-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg cursor-pointer"
-                title="Desconectar da conta"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-                <span className="hidden md:inline ml-1">Sair</span>
-              </Button>
-            </div>
-          ) : (
-            <div className="flex items-center gap-1.5 pl-2 border-l border-current/20">
-              <Button
-                size="sm"
-                data-testid="btn-auth-trigger"
-                onClick={() => setIsAuthModalOpen(true)}
-                className="h-8 sm:h-9 bg-slate-900 hover:bg-slate-800 text-amber-400 border border-amber-500/50 font-bold text-xs px-3 rounded-lg shadow-xs flex items-center gap-1.5 cursor-pointer"
-                title="Fazer Login ou Cadastrar no Montanha PDF Studio"
-              >
-                <LogIn className="w-3.5 h-3.5 text-amber-400" />
-                <span>Entrar</span>
-              </Button>
             </div>
           )}
-        </div>
-      </header>
 
-      {/* Main Workspace Body ajustado com margem dinâmica da Sidebar */}
-      <main className={`no-print flex-1 p-4 sm:p-6 w-full transition-all duration-300 ${isSidebarCollapsed ? "md:ml-24" : "md:ml-80"}`}>
+          {/* Inline View: Mockups com IA */}
+          {activeTab === "mockup-studio" && (
+            <div className="max-w-5xl mx-auto space-y-4">
+              <div className="theme-app-card p-6 rounded-2xl border-2 shadow-md space-y-4">
+                <div className="flex items-center justify-between border-b pb-3 border-current/20">
+                  <h2 className="text-xl font-black uppercase flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-amber-500" />
+                    <span>Criador de Mockups de Divulgação com IA</span>
+                  </h2>
+                  <Button size="sm" variant="ghost" onClick={() => setActiveTab("viewer")}>
+                    Voltar para Revista
+                  </Button>
+                </div>
+                <MockupStudioModal isOpen={true} onClose={() => setActiveTab("viewer")} project={project} theme={currentPublicationTheme} />
+              </div>
+            </div>
+          )}
+
+          {/* Inline View: Importar PDF */}
+          {activeTab === "pdf-router" && (
+            <div className="max-w-5xl mx-auto space-y-4">
+              <div className="theme-app-card p-6 rounded-2xl border-2 shadow-md space-y-4">
+                <div className="flex items-center justify-between border-b pb-3 border-current/20">
+                  <h2 className="text-xl font-black uppercase flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-amber-500" />
+                    <span>Importação Inteligente & Roteamento de PDFs</span>
+                  </h2>
+                  <Button size="sm" variant="ghost" onClick={() => setActiveTab("articles")}>
+                    Voltar para Matérias
+                  </Button>
+                </div>
+                <PdfImportModal isOpen={true} onClose={() => setActiveTab("articles")} project={project} onUpdateProject={(updated) => { setProject(updated); syncProjectToCloud(updated); }} />
+              </div>
+            </div>
+          )}
+
+          {/* Inline View: Exportar PDF */}
+          {activeTab === "export-pdf" && (
+            <div className="max-w-5xl mx-auto space-y-4">
+              <div className="theme-app-card p-6 rounded-2xl border-2 shadow-md space-y-4">
+                <div className="flex items-center justify-between border-b pb-3 border-current/20">
+                  <h2 className="text-xl font-black uppercase flex items-center gap-2">
+                    <Printer className="w-5 h-5 text-amber-500" />
+                    <span>Central de Exportação em PDF</span>
+                  </h2>
+                  <Button size="sm" variant="ghost" onClick={() => setActiveTab("viewer")}>
+                    Voltar para Revista
+                  </Button>
+                </div>
+                <PdfExportModal isOpen={true} onClose={() => setActiveTab("viewer")} project={project} theme={currentPublicationTheme} />
+              </div>
+            </div>
+          )}
+
+          {/* Inline View: Sincronização em Nuvem */}
+          {activeTab === "cloud-sync" && (
+            <div className="max-w-5xl mx-auto space-y-4">
+              <div className="theme-app-card p-6 rounded-2xl border-2 shadow-md space-y-4">
+                <div className="flex items-center justify-between border-b pb-3 border-current/20">
+                  <h2 className="text-xl font-black uppercase flex items-center gap-2">
+                    <Cloud className="w-5 h-5 text-emerald-500" />
+                    <span>Painel de Sincronização em Nuvem & Backup</span>
+                  </h2>
+                  <Button size="sm" variant="ghost" onClick={() => setActiveTab("viewer")}>
+                    Voltar para Revista
+                  </Button>
+                </div>
+                <CloudSyncDialog isOpen={true} onClose={() => setActiveTab("viewer")} project={project} onUpdateProject={(updated) => { setProject(updated); syncProjectToCloud(updated); }} />
+              </div>
+            </div>
+          )}
         {/* WORKSPACE 2: ESTÚDIO DE E-BOOKS */}
         {workspaceMode === "ebooks" && (
           <div className="space-y-6 max-w-5xl mx-auto">
@@ -1062,6 +1049,7 @@ function Index() {
         </>
         )}
       </main>
+      </div>
 
       {/* Modals & Dialogs */}
       <AuthModal
