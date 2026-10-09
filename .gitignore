@@ -42,3 +42,6 @@ test-results/
 *.njsproj
 *.sln
 *.sw?
+
+# Spec Kit agent folder (may contain secrets)
+.agents/

@@ -16,25 +16,7 @@ const AUTH_STORAGE_KEY = "montanha_magazine_auth_state";
 
 const DEFAULT_AUTH_DATA: StoredAuthData = {
   currentUser: null,
-  users: [
-    {
-      id: "demo-user-1",
-      name: "Coach Montanha Demo",
-      email: "demo@montanha.com",
-      passwordHash: "senha123",
-      isPro: false,
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: "demo-pro-user",
-      name: "Assinante PRO",
-      email: "pro@montanha.com",
-      passwordHash: "senha123",
-      isPro: true,
-      proSince: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-    },
-  ],
+  users: [],
 };
 
 export function getStoredAuthData(): StoredAuthData {
