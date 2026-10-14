@@ -53,12 +53,15 @@ Montanha PDF Studio/
 │   ├── routes/              # Rotas
 │   │   ├── __root.tsx       # Head global, SEO, JSON-LD, SplashScreen
 │   │   ├── index.tsx        # Editor principal de diagramação e visualização
+│   │   ├── auth.tsx / login.tsx # Autenticação unificada (PIN 10 dígitos / e-mail)
 │   │   ├── boost.tsx        # Acelerador Booster
 │   │   ├── create.tsx       # Módulo Creator com IA
 │   │   ├── eco.tsx          # Central do Ecossistema Montanha
-│   │   └── master-admin.tsx # Link para o painel Master Admin
+│   │   ├── master-admin.tsx # Link para o painel Master Admin
+│   │   └── api/             # Endpoints serverless (ai.ts, project.ts)
 │   ├── styles.css           # Estilos e temas do estúdio
-├── DEV_GUIDE.md             # ESTE MANUAL TÉCNICO INTERNO
+│   └── database/            # Esquema SQL unificado no repositório canônico: montanha-master-admin/database/ecosystem_schema.sql
+├── DEV_GUIDE.md             # ESTE MANUAL TÉCNICO INTERNO (Atualizado)
 ├── package.json             # Dependências e scripts
 ├── tsconfig.json            # Configurações do compilador
 └── vite.config.ts           # Configuração de build, Nitro e inlining
