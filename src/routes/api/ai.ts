@@ -23,7 +23,7 @@ interface GeminiResponse {
 // In-memory sliding window rate limiter (max 20 requests per minute per client)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
-const MAX_REQUESTS_PER_WINDOW = 20;
+const MAX_REQUESTS_PER_WINDOW = 10;
 
 function checkRateLimit(clientKey: string): boolean {
   const now = Date.now();
@@ -53,6 +53,15 @@ export const Route = createFileRoute("/api/ai")({
   server: {
     handlers: {
       POST: async ({ request }: { request: Request }) => {
+        const origin = request.headers.get("origin") || request.headers.get("referer") || "";
+        const host = request.headers.get("host") || "";
+        if (origin && !origin.includes(host) && !origin.includes("localhost") && !origin.includes("127.0.0.1") && !origin.includes("montanha")) {
+          return new Response(JSON.stringify({ error: "Origem não autorizada para uso da IA." }), {
+            status: 403,
+            headers: { "Content-Type": "application/json" }
+          });
+        }
+
         const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "anonymous";
         if (!checkRateLimit(clientIp)) {
           return new Response(

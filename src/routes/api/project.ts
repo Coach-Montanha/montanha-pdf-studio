@@ -10,10 +10,7 @@ interface SyncedRecord {
 const projectStore = new Map<string, SyncedRecord>();
 let latestRecord: SyncedRecord | null = null;
 
-// ID fixo na nuvem para garantir persistência global entre diferentes nós e bordas
-const CLOUD_FALLBACK_ID = "ff808181a067127101a0798e229d2bfb";
-const CLOUD_API_URL = `https://api.restful-api.dev/objects/${CLOUD_FALLBACK_ID}`;
-
+// Armazenamento seguro de projetos de revista
 export const Route = createFileRoute("/api/project")({
   server: {
     handlers: {
@@ -27,30 +24,6 @@ export const Route = createFileRoute("/api/project")({
           targetRecord = projectStore.get(requestedCode)!;
         } else if (latestRecord) {
           targetRecord = latestRecord;
-        }
-
-        // Se não estiver na memória desta borda, buscar na nuvem persistente
-        if (!targetRecord || (requestedCode && targetRecord.code !== requestedCode)) {
-          try {
-            const res = await fetch(CLOUD_API_URL, {
-              headers: { Accept: "application/json" },
-            });
-            if (res.ok) {
-              const cloudObj = (await res.json()) as any;
-              if (cloudObj?.data?.project) {
-                targetRecord = {
-                  code: cloudObj.data.code || "MONTANHA",
-                  project: cloudObj.data.project,
-                  syncedAt: cloudObj.data.syncedAt || new Date().toISOString(),
-                };
-                // Atualizar cache em memória
-                projectStore.set(targetRecord.code, targetRecord);
-                latestRecord = targetRecord;
-              }
-            }
-          } catch (err) {
-            console.warn("[Cloud API Fetch Warning]:", err);
-          }
         }
 
         if (!targetRecord) {
@@ -105,29 +78,9 @@ export const Route = createFileRoute("/api/project")({
             syncedAt: now,
           };
 
-          // Salvar em memória no servidor
+          // Salvar em memória segura no servidor
           projectStore.set(code, record);
           latestRecord = record;
-
-          // Sincronizar em segundo plano na nuvem persistente (para compartilhamento entre dispositivos)
-          try {
-            await fetch(CLOUD_API_URL, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                name: `Montanha Magazine [${code}]`,
-                data: {
-                  code,
-                  syncedAt: now,
-                  project,
-                },
-              }),
-            });
-          } catch (cloudErr) {
-            console.warn("[Cloud API Put Warning]:", cloudErr);
-          }
 
           return new Response(
             JSON.stringify({
